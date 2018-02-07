@@ -1,8 +1,15 @@
 
 document.addEventListener("DOMContentLoaded", function () {
-    
-    document.querySelector('#newTable').addEventListener("click", function () {
-    
-    });
+    const productForm = document.querySelector("#product-form");
+
+    let productGroupData = {};
+
+    let listProducts = function(products){
+        const pglElement = document.querySelector("#product-group-list");
+
+        for(let pg of productGroups){
+            
+        }
+    }
 
 });
