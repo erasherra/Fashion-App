@@ -8,8 +8,10 @@ package fapp;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
@@ -19,16 +21,18 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Amir Ingher
  */
-@Path("generic")
+@Path("user")
 public class GenericResource {
 
     @Context
     private UriInfo context;
-
+    
     /**
      * Creates a new instance of GenericResource
      */
     public GenericResource() {
+       
+       
     }
 
     /**
@@ -40,6 +44,17 @@ public class GenericResource {
     public String getXml() {
         //TODO return proper representation object
         throw new UnsupportedOperationException();
+    }
+    
+    
+    @POST
+    @Path("sub")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String postTextParam(@FormParam("num") int num){
+        
+        
+        
+        return "This is HTTP POST with param should be saved"+num;
     }
 
     /**
