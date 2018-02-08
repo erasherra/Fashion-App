@@ -18,4 +18,5 @@ body{
     background-color:  black;
     max-height: 90vh;
     max-width: 90vh;
+    border: 1px solid black;
 }
