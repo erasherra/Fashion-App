@@ -1,0 +1,12 @@
+.hidden {
+    display : none;
+}
+
+#list-header{
+    display: flex;
+    justify-content: space-around;
+}
+
+.ib{
+    /*display: inline-block;*/
+}
