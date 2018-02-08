@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="application/javascript" src="js/budgetform.js"></script>
+    <link rel="stylesheet" href="css/budget.css">
 </head>
 
 <body>
@@ -13,38 +14,15 @@
 
     <section id="product-groups">
         <h2>Product groups</h2>
-        <div id="list-header">
-            <div>id</div>
-            <div>Product group</div>
-            <div>Delivery week 1</div>
-            <div>Delivery week 2</div>
-            <div>Delivery week 3</div>
-            <div>Amount of styles</div>
-            <div>Average price</div>
-            <div>Average amount/style</div>
-            <div>Total sale</div>
-            <div>Average cover 50% Total</div>
-        </div>
+        <form>
+            Amount of themes: <input type="number" id="number" required>
+            <input type="button" value="New table" id=new-table>
+        </form>
+
+        <div id="list-header"></div>
         <div id="product-group-list"></div>
     </section>
 
-
-    <section id="add-product-group">
-        <h2>Add product group</h2>
-        <form id="product-form">
-            product group:<input type="text" name="pg" value="">
-            delivery week1:<input type="number" name="dw1" value="">
-            delivery week2:<input type="number" name="dw2" value="">
-            delivery week3:<input type="number" name="dw3" value="">
-            <!--AMOUNT OF STYLES = dw1 + dw2 + dw3-->
-            average price:<input type="number" name="ap" value="">
-            average amount/style:<input type="number" name="aas" value="">
-            <!--TOTAL SALE = amount of styles * average price * average amount/style-->
-            <!--AVERAGE COVER 50% TOTAL = total sale / 2-->
-        </form>
-        <button>Save product group data</button>
-    </section>
-    
 
 
 </body>
