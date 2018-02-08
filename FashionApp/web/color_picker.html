@@ -6,13 +6,30 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>Color and themes</title>
+        <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <link rel="stylesheet" href="../CSS/color.css">
+          <script type="text/javascript" src="JS/color.js"></script>
     </head>
     <body>
-        <h1>Color and themes</h1>
+        <h1>Colors and Themes</h1>
+        <div class="color-container" style="border:1px solid black; height: 80vh;">
+            <div class="add" id="add" style="border:1px solid black; max-height: 50%; max-width: 20%;">
+                <button>   Add Color </button>
+            </div>
+            <div class="other">
+                
+            </div>
+        </div>
         
+        <div class="popup">
+            <form>
+                Color name <input type="text" name="colorName">
+                Color code <input type="number" name="colorCode">
+                <input type="submit">
+            </form>
+        </div>
+      
     </body>
 </html>
