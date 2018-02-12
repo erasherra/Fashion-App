@@ -17,5 +17,6 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div><input type="text" name="net-price" value=${pg.}></div>
                 <div">${pg.}</div>`;
         }
+    
     }
 });

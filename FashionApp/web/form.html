@@ -1,30 +1,54 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>Raw budget form</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="application/javascript" src="js/budgetform.js"></script>
-    <link rel="stylesheet" href="css/budget.css">
-</head>
+    <head>
+        <title>Raw budget form</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script type="application/javascript" src="JS/budgetform.js"></script>
+        <link rel="stylesheet" href="CSS/budget.css">
+    </head>
 
-<body>
-    <h1>Budget planning</h1>
+    <body>
+        <h1>Budget planning</h1>
 
-    <section id="product-groups">
-        <h2>Product groups</h2>
-        <form>
-            Amount of themes: <input type="number" id="number" required>
-            <input type="button" value="New table" id=new-table>
-        </form>
+        <section id="product-groups">
+            <h2>Product groups</h2>
+            <form>
+                Amount of themes: <input type="number" id="number" required>
+                <input type="button" value="New table" id=new-table>
+            </form>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="container">
+                <form method="post" id="product-input">
+                    
+                    
+                    <div class="asd" id="list-header">
+                        <table id="list-table">
 
-        <div id="list-header"></div>
-        <div id="product-group-list"></div>
-    </section>
+                        </table>
+
+                    </div>
+                    
+                    <input type="submit">
+                </form>
+                <button id="addRow">Add Row</button>
+                <div class="is-in-line" id="product-group-list"></div>
+                <br>
+                <br>
+                <br>
+                <br>
+                <p id="sendjson">JSON:</p>
+                <div class="is-in-line" id="final-list"></div>
+
+            </div>
+        </section>
 
 
 
-</body>
+    </body>
 
 </html>

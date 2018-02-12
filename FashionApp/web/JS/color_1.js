@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+alert("hai");
 document.addEventListener("DOMContentLoaded",function(){
 let a = document.getElementById("add");
 a.addEventListener("onclick",function(){
