@@ -8,13 +8,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let show_json = document.querySelector("#sendjson");
     
-    let theme = [];
-    let row = {"ID": 0, "product":"","themes":[],"amountStyles":0,
+    let theme = [{"themeid":0, "amount":0}];
+    let row = {"ID": 0, "product":"","themes":[theme],"amountStyles":0,
         "averagePrice":0,"avarageAmount":0, "totalSale":0,"cover":0};
-    let json_obj = {"rows":[]};
+    let json_obj = {"rows":[row]};
         
-    let AllThemes = [];
-    let Themelist = [];
+    let rowList = [row];
 
     let amount_styles = 0;
     let total_sales = 0;
@@ -58,10 +57,12 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     addbutton.addEventListener("click", function () {
-
+        buildJson();
+        //restoreValues();
         table.innerHTML += addInput();
-
-
+        restoreAllValues(false);
+        
+        
 
     });
 
@@ -91,9 +92,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let addInput = function () {
 
-        let row = "";
+        let rowline = "";
         rowCount++;
-        row += `<tr>
+        rowline += `<tr>
         <td><input type="number"  id="id-input` + rowCount + `"></td>
         
         
@@ -120,10 +121,14 @@ document.addEventListener("DOMContentLoaded", function () {
         <td><p id="cover-input` + rowCount + `">dsa</p></td>
         
             </tr>`;
+        
+        
 
-
-        return row;
-    }
+        return rowline;
+    };
+    
+    
+    
 
     let addFinalInput = function () {
 
@@ -163,7 +168,7 @@ document.addEventListener("DOMContentLoaded", function () {
     productInput.addEventListener("input", function () {
         console.log("works");
 
-        AllStyles();
+        inputToCall();
 
     });
 
@@ -220,53 +225,113 @@ document.addEventListener("DOMContentLoaded", function () {
     };
     
     let buildJson = function(){
-        
+        console.log("###################buildJson##############");
         
         theme = [];
-        row = {"ID": 0, "product":"","themes":[],"amountStyles":0,
+        row = {"ID":0, "product":"","themes":[],"amountStyles":0,
         "averagePrice":0,"avarageAmount":0, "totalSale":0,"cover":0};
-        json_obj = {"rows":[]};
+        json_obj = {"rows":[row]};
+        rowList = [];
         
         let amount = 0;
+        let amountOfStyles = 0;
         for (i = 1; i <= rowCount; i++) {
-            
+            row = {};
             row.ID = i;
             row.product = "no name";
+            if(row.product === null){
+                row.product = "no name";
+            }
+            theme = [];
+            amountOfStyles = 0;
             for (j = 1; j <= number; j++) {
                 amount = 0;
 
-                console.log("theme-" + j + "-row-" + i);
+                
                 amount += document.querySelector("#theme-" + j + "-row-" + i).value * 1;
-                theme.push({"themeid":j, "amount":document.querySelector("#theme-" + j + "-row-" + i).value});
+                theme.push({"themeid":j, "amount":amount});
                 console.log(amount);
+                amountOfStyles += amount;
             }
             
             row.themes = theme;
             
-            row.amountStyles = Number(document.querySelector("#ts-input" + i).textContent);
+            row.amountStyles = amountOfStyles;
+           // document.querySelector("#as-input" + i).textContent = row.amountStyles;
             row.averagePrice = document.querySelector('#ap-input'+i).value;
             row.avarageAmount = document.querySelector('#aa-input'+i).value;
             
             row.totalSale = row.amountStyles * row.avarageAmount * row.averagePrice;
             row.cover = row.totalSale/2;
             
-            json_obj.rows.push(row);
+            console.log("ID is: "+row.ID);
             
+            json_obj.rows.push(row);
+            rowList.push(row);
         }
         show_json.textContent = JSON.stringify(json_obj);
         
     };
+    
+    let restoreAllValues = function(isInput){
+        
+         console.log("##########################restoreAllValue###########################");
+        if(isInput){
+            for (let i = 1; i <= json_obj.rows.length-1; i++) {
+            
+            let correctvalue = i;
+            document.querySelector("#id-input" + (correctvalue)).value = json_obj.rows[i].ID;
+            
+            
+            
+            
+            document.querySelector("#as-input" + (correctvalue)).textContent = json_obj.rows[i].amountStyles;
+            
+            
+            
+            document.querySelector("#ts-input" + (correctvalue)).textContent = json_obj.rows[i].totalSale;
+            document.querySelector("#cover-input" + (correctvalue)).textContent = json_obj.rows[i].cover;
+            
+            }
+            
+        }else{
+            
+        
+        
+        for (let i = 1; i <= json_obj.rows.length-1; i++) {
+            
+            let correctvalue = i;
+            document.querySelector("#id-input" + (correctvalue)).value = json_obj.rows[i].ID;
+            
+            
+            document.querySelector("#pg-input" + (correctvalue)).value = json_obj.rows[i].product;
+            theme = json_obj.rows[i].themes;
+            for (let t = 1; t <= json_obj.rows[i].themes.length; t++) {
+                console.log("amount "+theme[t-1].amount);
+                document.querySelector("#theme-" + t + "-row-" + correctvalue).value = theme[t-1].amount;
+            }
+            
+            document.querySelector("#as-input" + (correctvalue)).textContent = json_obj.rows[i].amountStyles;
+            
+            document.querySelector("#ap-input" + (correctvalue)).value = json_obj.rows[i].averagePrice;
+            document.querySelector("#aa-input" + (correctvalue)).value = json_obj.rows[i].avarageAmount;
+            
+            document.querySelector("#ts-input" + (correctvalue)).textContent = json_obj.rows[i].totalSale;
+            document.querySelector("#cover-input" + (correctvalue)).textContent = json_obj.rows[i].cover;
+            
+            }
+    }
+};
+    inputToCall = function () {
 
-    AllStyles = function () {
-
-        setThemeAmountInRow();
-        setTotalSale();
+        //setThemeAmountInRow();
+       // setTotalSale();
         buildJson();
-
-
+       // restoreValue();
+       restoreAllValues(true);
 
 
     };
 
-
+    
 });
