@@ -10,7 +10,7 @@ and open the template in the editor.
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="CSS/color.css">
-  <script type="text/javascript" src="JS/color_1.js"></script>
+  <script type="text/javascript" src="JS/color_1.js?v=123456"></script>
 </head>
 
 <body class="grid-container">
@@ -21,13 +21,15 @@ and open the template in the editor.
      <form id="open" class="addColor" onsubmit="return false">
        <div class="form-container">
         <label>Color name:</label>
+        <div class="center">
          <input type="text" id="colorName">
        </br>
         <label>Color code:</label>
          <input type="text" id="colorCode">
        </br>
-        <button method="POST" id="submit">Add</button>
+        <button id="submit">Add</button>
       </div>
+        </div>
     </form>
   </div>
 </body>
