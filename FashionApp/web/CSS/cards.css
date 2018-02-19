@@ -7,14 +7,20 @@ body {
     text-align: center;
     display: grid;
 }
+#table {
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
 .aCard {
     display: grid;
+    padding: 1em;
+    background-color: hotpink;
     grid-template-rows: 1fr 1fr 5fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-columns: 2fr 1fr 1fr 1fr;
     grid-template-areas: 
     "article     code           code            code"
     "product     name           name            name"
-    "img         img            img             img"
+    "imgName     img            img             img"
     "buyPrice    buyNumber      buyTotal        buyTotalNumber"
     "sellPrice   sellNumber     sellTotal       sellTotalNumber"
     "pieces      piecesNumber   piecesNumber    piecesNumber"
@@ -22,6 +28,10 @@ body {
     "color       colorNames     colorNames      colorNames"
     "size        sizeValues     sizeValues      sizeValues"
 }
+.aCard > input {
+    width: 60px;
+}
+
 .article {
     grid-area: article;
 }
@@ -34,8 +44,12 @@ body {
 .name {
     grid-area: name;
 }
+.imgName {
+    grid-area: imgName;
+}
 .img {
     grid-area: img;
+    max-width: 100%;
 }
 .buyPrice {
     grid-area: buyPrice;

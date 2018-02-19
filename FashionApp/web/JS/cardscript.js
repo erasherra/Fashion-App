@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="product">product : </div>
                     <input type="text" placeholder="product" class="name">
                     
-
+                    <div class="imgName">Image : </div>
                     <img src="images/johndoe.jpg" class="img">
 
 
