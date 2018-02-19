@@ -12,10 +12,15 @@ body {
     margin-bottom: 2em;
 }
 .aCard {
+    line-height: 150%;
+    font-family: sans-serif;
+    font-size: 0.8em;
     display: grid;
     padding: 1em;
-    background-color: hotpink;
-    grid-template-rows: 1fr 1fr 5fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    color: black;
+    border: solid white;
+    background-color: whitesmoke;
+    /*grid-template-rows: 1fr 1fr 5fr 1fr 1fr 1fr 1fr 1fr 1fr;*/
     grid-template-columns: 2fr 1fr 1fr 1fr;
     grid-template-areas: 
     "article     code           code            code"
@@ -29,7 +34,8 @@ body {
     "size        sizeValues     sizeValues      sizeValues"
 }
 .aCard > input {
-    width: 60px;
+    width: 100%;
+    font-size: 0.8em;
 }
 
 .article {

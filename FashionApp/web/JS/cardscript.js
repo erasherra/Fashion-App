@@ -9,40 +9,40 @@ document.addEventListener("DOMContentLoaded", function () {
                 let v = z.insertCell(colNum);
                 v.innerHTML = "Row-" + rows + "Column-" + colNum + 
                 `<div class="aCard">
-                    <div class="article">article : </div>
-                    <input type="text" placeholder="article" class="code">
+                    <div class="article">Article : </div>
+                    <input type="text" placeholder="Article" class="code">
 
-                    <div class="product">product : </div>
-                    <input type="text" placeholder="product" class="name">
+                    <div class="product">Product : </div>
+                    <input type="text" placeholder="Product" class="name">
                     
                     <div class="imgName">Image : </div>
                     <img src="images/johndoe.jpg" class="img">
 
 
-                    <div class="buyPrice">purchase PRICE / pc : </div>
-                    <input type="text" placeholder="price" class="buyNumber">
+                    <div class="buyPrice">Purchase PRICE / pc : </div>
+                    <input type="text" placeholder="Price" class="buyNumber">
 
                     <div class="buyTotal">Total € : </div>
-                    <input type="text" placeholder="total" class="buyTotalNumber">
+                    <input type="text" placeholder="Total" class="buyTotalNumber">
 
-                    <div class="sellPrice">selling PRICE / pc : </div>
-                    <input type="number" placeholder="price" class="sellNumber">
+                    <div class="sellPrice">Selling PRICE / pc : </div>
+                    <input type="number" placeholder="Price" class="sellNumber">
 
                     <div class="sellTotal">Total € : </div>
-                    <input type="number" placeholder="total" class="sellTotalNumber">
+                    <input type="number" placeholder="Total" class="sellTotalNumber">
 
 
-                    <div class="pieces">PIECES : </div>
-                    <input type="number" placeholder="pieces" class="piecesNumber">
+                    <div class="pieces">Pieces : </div>
+                    <input type="number" placeholder="Pieces" class="piecesNumber">
 
-                    <div class="material">MATERIAL : </div>
-                    <input type="text" placeholder="material" class="materialNames">
+                    <div class="material">Material : </div>
+                    <input type="text" placeholder="Material" class="materialNames">
 
-                    <div class="colors">COLORS : </div>
-                    <input type="text" placeholder="colors" class="colorNames">
+                    <div class="colors">Colors : </div>
+                    <input type="text" placeholder="Colors" class="colorNames">
 
-                    <div class="size">SIZES : </div>
-                    <input type="text" placeholder="sizes" class="sizeValues">
+                    <div class="size">Sizes : </div>
+                    <input type="text" placeholder="Sizes" class="sizeValues">
 
 
                 <div>`;
