@@ -1,12 +1,87 @@
-
 body {
     background-image: url("../images/bg.jpg");
     background-color: black;
     color:whitesmoke;
  }
-
  .container {
     text-align: center;
     display: grid;
-    
+}
+.aCard {
+    display: grid;
+    grid-template-rows: 1fr 1fr 5fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-areas: 
+    "article     code           code            code"
+    "product     name           name            name"
+    "img         img            img             img"
+    "buyPrice    buyNumber      buyTotal        buyTotalNumber"
+    "sellPrice   sellNumber     sellTotal       sellTotalNumber"
+    "pieces      piecesNumber   piecesNumber    piecesNumber"
+    "material    materialNames  materialNames   materialNames"
+    "color       colorNames     colorNames      colorNames"
+    "size        sizeValues     sizeValues      sizeValues"
+}
+.article {
+    grid-area: article;
+}
+.code {
+    grid-area: code;
+}
+.product {
+    grid-area: product;
+}
+.name {
+    grid-area: name;
+}
+.img {
+    grid-area: img;
+}
+.buyPrice {
+    grid-area: buyPrice;
+}
+.buyNumber {
+    grid-area: buyNumber;
+}
+.buyTotal {
+    grid-area: buyTotal;
+}
+.buyTotalNumber {
+    grid-area: buyTotalNumber;
+}
+.sellPrice {
+    grid-area: sellPrice;
+}
+.sellNumber {
+    grid-area: sellNumber;
+}
+.sellTotal {
+    grid-area: sellTotal;
+}
+.sellTotalNumber {
+    grid-area: sellTotalNumber;
+}
+.pieces {
+    grid-area: pieces;
+}
+.piecesNumber {
+    grid-area: piecesNumber;
+}
+.material {
+    grid-area: material;
+}
+.materialNames {
+    grid-area: materialNames;
+}
+.color {
+    grid-area: color;
+}
+.colorNames {
+    grid-area: colorNames;
+}
+.size {
+    grid-area: size;
+}
+.sizeValues {
+    grid-area: sizeValues;
 }
