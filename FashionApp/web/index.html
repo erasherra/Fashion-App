@@ -9,10 +9,28 @@ and open the template in the editor.
         <title>Login page</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="CSS/login.css">
     </head>
-    <body>
-        <div>Login page</div>
-        <a href="home.html">To home page</a>
-        
-    </body>
+<body>
+	<div class="container">
+		<div class="login-box">
+			<div class="box-header">
+				<h2>Log In</h2>
+			</div>
+                    <form>
+			<label for="username">Username</label>
+			<br/>
+			<input type="text" id="username">
+			<br/>
+			<label for="password">Password</label>
+			<br/>
+			<input type="password" id="password">
+			<br/>
+			<input type="submit" value="Sign in">
+                    </form>
+			<br/>
+			<a href="home.html"><p class="small">Forgot your password?</p></a>
+		</div>
+	</div>
+</body>
 </html>
