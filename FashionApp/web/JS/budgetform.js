@@ -41,6 +41,11 @@ document.addEventListener("DOMContentLoaded", function () {
     button.addEventListener("click", function () {
         number = document.getElementById("number").value;
         //let amountOfWeeks = number.getAttribute("value");
+        let element = document.querySelector("#themeAmount");
+        let element2 = document.querySelector(".addButton");
+        element.classList.add("hidden");
+        element2.classList.remove("hidden");
+        
         table.innerHTML +=
                 `<tr>
         <th class="ib" id="id-id">id</th>

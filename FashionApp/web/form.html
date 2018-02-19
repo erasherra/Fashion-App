@@ -5,7 +5,7 @@
         <title>Raw budget form</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script type="application/javascript" src="JS/budgetform.js"></script>
+        <script type="application/javascript" src="JS/budgetform.js?1"></script>
         <link rel="stylesheet" href="CSS/budget.css">
     </head>
 
@@ -16,10 +16,12 @@
 
         <section id="product-groups">
             <h2>Product groups</h2>
-            <form>
+            
+            <form id="themeAmount">
                 Amount of themes: <input type="number" id="number" required>
-                <input type="button" value="New table" id=new-table>
+                <input type="button" value="New table" id="new-table">
             </form>
+            
             <br>
             <br>
             <br>
@@ -37,7 +39,7 @@
                     
                    <!-- <input type="submit"> -->
                 </form>
-                <div class="addButton">
+                <div class="addButton hidden">
                 <button id="addRow">Add Row</button>
                 </div>
                 <div class="is-in-line" id="product-group-list"></div>
