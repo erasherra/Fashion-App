@@ -5,25 +5,25 @@ document.addEventListener("DOMContentLoaded", function () {
         y = 4;
         for (let rows = 0; rows < x; rows++) {
             let z = document.querySelector("table").insertRow(rows);
-            for (let colNum = 0; colNum < y; colNum++) {
-                let v = z.insertCell(colNum);
-                v.innerHTML = "Row-" + rows + "Column-" + colNum + 
-                `<div class="aCard">
+            for (let columns = 0; columns < y; columns++) {
+                let v = z.insertCell(columns);
+                v.innerHTML = "Row-" + rows + "Column-" + columns +
+                    `<div class="aCard">
                     <div class="article">Article : </div>
                     <input type="text" placeholder="Article" class="code">
 
                     <div class="product">Product : </div>
-                    <input type="text" placeholder="Product" class="name">
+                    <input type="text" placeholder="Product code" class="name">
                     
                     <div class="imgName">Image : </div>
                     <img src="images/johndoe.jpg" class="img">
 
 
                     <div class="buyPrice">Purchase PRICE / pc : </div>
-                    <input type="text" placeholder="Price" class="buyNumber">
+                    <input type="number" placeholder="Price" class="buyNumber">
 
                     <div class="buyTotal">Total € : </div>
-                    <input type="text" placeholder="Total" class="buyTotalNumber">
+                    <input type="number" placeholder="Total" class="buyTotalNumber">
 
                     <div class="sellPrice">Selling PRICE / pc : </div>
                     <input type="number" placeholder="Price" class="sellNumber">
@@ -48,6 +48,5 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div>`;
             }
         }
-    
-});
+    });
 });
