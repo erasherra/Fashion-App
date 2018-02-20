@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
             for (let columns = 0; columns < y; columns++) {
                 let v = z.insertCell(columns);
                 v.innerHTML = "Row-" + rows + "Column-" + columns +
-                    `<div class="aCard">
+                    `<div class="aCard" id="card-r${rows}-c${columns}">
                     <div class="article">Article : </div>
                     <input type="text" placeholder="Article" class="code">
 
@@ -44,9 +44,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="size">Sizes : </div>
                     <input type="text" placeholder="Sizes" class="sizeValues">
 
-
+                    <input type="button" value="Open detailed window" class="detailed" id="ib">
+                    
                 <div>`;
             }
         }
+        let iButton = document.querySelector("#ib");
+        iButton.addEventListener("click", function(){
+            
+        });
     });
 });
