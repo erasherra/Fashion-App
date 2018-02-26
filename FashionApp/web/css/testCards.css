@@ -1,0 +1,42 @@
+.aTheme {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(31, 31, 31);
+    padding: 1em;
+    min-height: 100vh;
+    
+}
+
+.aRow {
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+}
+
+.aCard {
+    font-size: 2em;
+    margin: 1em;
+    padding: 3em;
+    background-color: rgb(209, 209, 209);
+}
+
+.aCard:hover {
+    background-color: rgb(112, 112, 112);
+}
+
+body {
+    margin: 0;
+}
+
+.outfit {
+    margin: 1em;
+    padding: 1em;
+    background-color: rgb(100, 100, 100);
+}
+
+.spaceBetween {
+    display: flex;
+    justify-content: space-between;
+}
