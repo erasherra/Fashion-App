@@ -2,30 +2,42 @@
     display: flex;
     flex-direction: column;
     background-color: rgb(31, 31, 31);
-    padding: 1em;
+   
+}
+
+.bg {
+    
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(31, 31, 31);
     min-height: 100vh;
 }
 
 .aRow {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-around;
+    /*justify-content: space-around;*/
 }
 
-.aCard {
-    font-size: 2em;
-    margin: 1em;
+.addCard {
+    margin: 0.5em;
     padding: 3em;
     background-color: rgb(209, 209, 209);
+    border-radius: 0.3em;
 }
 
-.add {
+
+#add {
+    text-align: center;
     font-size: 1em;
     margin: 1em;
     padding: 1em;
     background-color: rgb(209, 209, 209);
+    border-radius: 0.3em;
+    width: 5em;
 }
-.aCard:hover {
+.addCard:hover {
     background-color: rgb(112, 112, 112);
 }
 
@@ -34,9 +46,10 @@ body {
 }
 
 .outfit {
-    margin: 1em;
+    margin: 1em 1em 0em;
     padding: 1em;
     background-color: rgb(100, 100, 100);
+    border-radius: 0.3em;
 }
 
 .spaceBetween {
