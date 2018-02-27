@@ -4,13 +4,26 @@
         <title>Home</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="CSS/main.css">
+        <link rel="stylesheet" href="CSS/main.css?12">
         
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="JS/home.js?123"></script>
     </head>
     <body>
+        <div>
+     <form id="open" class="addColor" onsubmit="return false">
+       <div class="form-container">
+        <label>Name:</label>
+        <div class="center">
+         <input type="text" id="colorName">
+         <br>
+        <button id="submit">Add</button>
+      </div>
+        </div>
+    </form>
+  </div>
         
         <div id="page">
 
@@ -25,16 +38,31 @@
             </div>
             
             <ul>
-                <li><span class="glyphicon glyphicon-plus-sign"></span><a href="form.html">New Project</a></li>
-                <li><span class="glyphicon glyphicon-list-alt"></span>Projects</li>
-                <li><span class="glyphicon glyphicon-file"></span>Cards</li>
+                <li><span class="glyphicon glyphicon-plus-sign"></span><a href="form.html">Budget</a></li>
+                <li><span class="glyphicon glyphicon-list-alt"></span>Collection</li>
+                <li><span class="glyphicon glyphicon-file"></span><a href="cards.html">Cards</a></li>
                 <li><span class="glyphicon glyphicon-eye-open"></span> <a href="color_picker.html">Colors</a></li>
                 <li><span class="glyphicon glyphicon-euro"></span>Statistics</li>
                 <li><span class="glyphicon glyphicon-wrench"></span>Settings</li>
             </ul>
         </nav>
         
-        <main>mainstuf</main>
+        <main>mainstuf
+            <input type="button" value="Add project" id="addProject">
+            <div id="projectbox">
+                
+                
+                <div id="project" class="project-container">project
+                    <a href="form.html">Budget</a>
+                    <a href="color_picker.html">Colors</a>
+                    <a href="cards.html">Cards</a>
+                    
+                    
+                </div>
+                
+            </div>
+        
+        </main>
         
         
         
@@ -45,6 +73,8 @@
         </footer>
         
         </div>
+        
+        
 
     </body>
 </html>

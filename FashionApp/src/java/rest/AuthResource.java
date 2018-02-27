@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fapp;
+package rest;
 
+import controller.SessionBean;
+import javax.ejb.EJB;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Consumes;
@@ -15,28 +18,32 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import model.Auth;
+import model.Contact;
 
 /**
  * REST Web Service
  *
  * @author Amir Ingher
  */
-@Path("user")
-public class GenericResource {
+@Path("Auth")
+public class AuthResource {
 
+    @EJB
+    private SessionBean sb;
+    
     @Context
     private UriInfo context;
-    
+
     /**
-     * Creates a new instance of GenericResource
+     * Creates a new instance of AuthResource
      */
-    public GenericResource() {
-       
-       
+    public AuthResource() {
     }
 
     /**
-     * Retrieves representation of an instance of fapp.GenericResource
+     * Retrieves representation of an instance of rest.AuthResource
      * @return an instance of java.lang.String
      */
     @GET
@@ -47,18 +54,22 @@ public class GenericResource {
     }
     
     
+    @Path("login")
     @POST
-    @Path("sub")
     @Produces(MediaType.TEXT_PLAIN)
-    public String postTextParam(@FormParam("num") int num){
-        
-        
-        
-        return "This is HTTP POST with param should be saved"+num;
+    public String addContact(@FormParam("pw") String pw, @FormParam("un") String un) {
+        //TODO return proper representation object
+        if(sb.checkPassword(pw, un)){
+            
+            return "logged in";
+        }else{
+            
+            return "try again";
+        }
     }
 
     /**
-     * PUT method for updating or creating an instance of GenericResource
+     * PUT method for updating or creating an instance of AuthResource
      * @param content representation for the resource
      */
     @PUT

@@ -17,14 +17,14 @@ and open the template in the editor.
 			<div class="box-header">
 				<h2>Log In</h2>
 			</div>
-                    <form>
+                    <form method="post" action="http://10.114.32.54:8080/FashionApp/ws/Auth/login">
 			<label for="username">Username</label>
 			<br/>
-			<input type="text" id="username">
+			<input type="text" id="un">
 			<br/>
 			<label for="password">Password</label>
 			<br/>
-			<input type="password" id="password">
+			<input type="password" id="pw">
 			<br/>
 			<input type="submit" value="Sign in">
                     </form>
@@ -32,5 +32,7 @@ and open the template in the editor.
 			<a href="home.html"><p class="small">Forgot your password?</p></a>
 		</div>
 	</div>
+    
+    
 </body>
 </html>
