@@ -10,7 +10,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="CSS/login.css">
-        <script src="JS/log.js?123"></script>
+        
     </head>
 <body>
 	<div class="container">
@@ -18,16 +18,16 @@ and open the template in the editor.
 			<div class="box-header">
 				<h2>Log In</h2>
 			</div>
-                    <form >
+                    <form method="post" action="ws/Auth/login">
 			<label for="username">Username</label>
 			<br/>
-			<input type="text" id="un">
+			<input type="text" name="un">
 			<br/>
 			<label for="password">Password</label>
 			<br/>
-			<input type="password" id="pw">
+			<input type="password" name="pw">
 			<br/>
-			<input type="button"  id="addbutton" value="Sign in">
+			<input type="submit"  id="addbutton" value="Sign in">
                     </form>
 			<br/>
 			<a href="home.html"><p class="small">Forgot your password?</p></a>

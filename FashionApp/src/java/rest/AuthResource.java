@@ -54,13 +54,22 @@ public class AuthResource {
     }
     
     
-    @Path("login")
+    
     @POST
+    @Path("login")
     @Produces(MediaType.TEXT_HTML)
-    public String addContact(@FormParam("pw") String pw, @FormParam("un") String un) {
+    public String postTextParam(@FormParam("pw") String pw, @FormParam("un") String un) {
         //TODO return proper representation object
-        sb.checkPassword(un);
-        return "<a href='home.html'><p class='small>Log in from here "+un+"</p></a>";
+        try{
+        Auth a=sb.getByName(un);
+        
+        if(a.getPassword().equals(pw)){
+            return "<div><h1><a href='http://10.114.32.54:8080/FashionApp/home.html'><p class='small'>Log in from here "+un+pw+"</p></a></h1></div>";
+        }else{
+            return "<h1>Username or password is wrong </h1>";
+        }
+        }catch(Exception e){}
+        return "<h1>Username or password is wrong</h1>";
     }
 
     /**

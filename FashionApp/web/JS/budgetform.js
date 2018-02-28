@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", function () {
         for (i = 1; i <= rowCount; i++) {
             row = {};
             row.ID = i;
-            row.product = "no name";
+            row.product = document.querySelector('#"pg-input"'+i).textContent;
             if(row.product === null){
                 row.product = "no name";
             }
