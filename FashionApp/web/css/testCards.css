@@ -25,9 +25,11 @@
     padding: 3em;
     background-color: rgb(209, 209, 209);
     border-radius: 0.3em;
+    border: solid black 2px;
 }
-
-
+.aCard {
+    border: dashed rgb(73, 73, 73) 2px !important;
+}
 #add {
     text-align: center;
     font-size: 1em;
@@ -37,7 +39,7 @@
     border-radius: 0.3em;
     width: 5em;
 }
-.addCard:hover {
+.buttons:hover {
     background-color: rgb(112, 112, 112);
 }
 
@@ -61,6 +63,46 @@ body {
     display: hide;
 }
 
-#add:hover {
+.themeButton {
+    text-align: center;
+    margin-left: 1em;
+    width: 4em;
+    border-radius: 0.3em;
+    padding: 0.5em;
+    background-color: rgb(209, 209, 209);
+}
+
+.themeRow {
+    display: flex;
+}
+
+.plusImg {
+    max-width: 50%;
+}
+
+.plusImg:hover {
     background-color: rgb(112, 112, 112);
+}
+
+#detailedCard {
+    width: 100%;
+    min-height: 450px;
+    background-color: rgb(180, 180, 180);
+    box-sizing: border-box;
+    /*border-radius: 10px;*/
+    padding: 10px;
+}
+
+/*@media (max-width: 1800px)*/
+#detailedCardArea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 84%;
+    z-index: 10;
+    margin-left: 8%;
+    margin-top: 7%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 10px;
 }

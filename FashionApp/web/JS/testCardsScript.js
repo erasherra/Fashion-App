@@ -14,23 +14,26 @@ document.addEventListener("DOMContentLoaded", function () {
                     <button class="remove" id="ob${number}">x</button>
                 </div>
                 <div class="aRow" id="row${number}">
-                    <div class="addCard" id="addCard${number}">+</div>
+                    <div class="addCard aCard buttons" id="addCard${number}">+</div>
                 </div>
             </div>`);
 
         let num = number;
-        document.querySelector(`#ob${num}`).addEventListener("click", function () {
-            document.querySelector(`#outfit${num}`).remove();
-            console.log(`Outfit ${num} removed.`);
-            let setId = 0;
-            let titles = document.querySelectorAll(".title")
-            for (let title of titles) {
-                setId++;
-                title.innerHTML = `Outfit ${setId}`;
+        document.querySelector(`#ob${num}`).addEventListener("click", function (e) {
+            if (!confirm("Do you really want to delete this?")) {
+                e.preventDefault(); //Cancel deleting
+            } else {
+                document.querySelector(`#outfit${num}`).remove();
+                console.log(`Outfit ${num} removed.`);
+                let setId = 0;
+                let titles = document.querySelectorAll(".title")
+                for (let title of titles) {
+                    setId++;
+                    title.innerHTML = `Outfit ${setId}`;
+                }
             }
         });
 
-        
         let addCard = document.querySelector(`#addCard${num}`);
         addCard.addEventListener("click", function () {
             let newCard = document.createElement("div");
@@ -39,12 +42,22 @@ document.addEventListener("DOMContentLoaded", function () {
             let aRow = document.querySelector(`#row${num}`);
             aRow.insertBefore(newCard, addCard);
             console.log("hai");
+            
         });
     });
 
-
-
-
+    let addTheme = document.querySelector(".plusImg");
+    let themeAmount = document.querySelectorAll(".themeButton").length;
+    addTheme.addEventListener("click", function () {
+        themeAmount++;
+        let newTheme = document.createElement("div");
+        newTheme.classList.add("themeButton")
+        newTheme.classList.add("buttons")
+        newTheme.innerHTML = `Theme ${themeAmount}`;
+        let aThemeRow = document.querySelector(".themeRow");
+        aThemeRow.insertBefore(newTheme, addTheme);
+        console.log(`Theme ${themeAmount} added`);
+    });
 
 
 
