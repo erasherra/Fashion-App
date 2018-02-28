@@ -1,24 +1,25 @@
 document.addEventListener("DOMContentLoaded", function () {
     let addButton = document.querySelector("#add");
     let theme = document.querySelector(".aTheme");
-    let number = 0;
+    let uniqueId = 0;
+    let uniqueCardId = 0;
     let addOutfit = addButton.addEventListener("click", function () {
         let outfitNumber = document.querySelectorAll(".outfit").length;
-        number++;
+        uniqueId++;
         outfitNumber++;
         console.log(`Outfit ${outfitNumber} added.`)
         theme.insertAdjacentHTML('beforeend',
-            `<div class="outfit" id="outfit${number}">
+            `<div class="outfit" id="outfit${uniqueId}">
                 <div class="spaceBetween">
                     <div class="title">Outfit ${outfitNumber}</div>
-                    <button class="remove" id="ob${number}">x</button>
+                    <button class="remove" id="ob${uniqueId}">x</button>
                 </div>
-                <div class="aRow" id="row${number}">
-                    <div class="addCard aCard buttons" id="addCard${number}">+</div>
+                <div class="aRow" id="row${uniqueId}">
+                    <div class="addCard aCard buttons" id="addCard${uniqueId}">+</div>
                 </div>
             </div>`);
 
-        let num = number;
+        let num = uniqueId;
         document.querySelector(`#ob${num}`).addEventListener("click", function (e) {
             if (!confirm("Do you really want to delete this?")) {
                 e.preventDefault(); //Cancel deleting
@@ -36,13 +37,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let addCard = document.querySelector(`#addCard${num}`);
         addCard.addEventListener("click", function () {
+            uniqueCardId++;
             let newCard = document.createElement("div");
             newCard.classList.add("addCard")
-            newCard.innerHTML = "hai";
+            newCard.id = `card${uniqueCardId}`;
+            //newCard.innerHTML = uniqueCardId;
+            newCard.classList.add("simpleCard");
+
+            //ADD TEXT
+            let cardText = document.createElement("div");
+            cardText.classList.add("simpleCardName");
+            cardText.textContent = uniqueCardId;
+            newCard.appendChild(cardText);
+
+            //ADD DELETE
+            let deleteCard = document.createElement("button");
+            deleteCard.classList.add("simpleCardDel")
+            deleteCard.textContent = "x";
+            deleteCard.id = `dc${uniqueCardId}`;
+            newCard.appendChild(deleteCard);
+
+
+
             let aRow = document.querySelector(`#row${num}`);
             aRow.insertBefore(newCard, addCard);
             console.log("hai");
-            
+            let cardId = uniqueCardId;
+            document.querySelector(`#dc${cardId}`).addEventListener("click", function () {
+                console.log("asd");
+                document.querySelector(`#card${cardId}`).remove();
+            });
+
         });
     });
 
