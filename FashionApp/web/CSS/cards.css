@@ -34,18 +34,32 @@ body {
     "size        sizeValues     sizeValues      sizeValues"
     "detailed    detailed       detailed        detailed"
 }
-#detailedCard { 
-    background-color: red;
-    position: fixed;
-    width: 1000px;
-    height: 1200px;
-    top: 50%;
-    left: 50%;
-    margin-top: -600px; /* Negative half of height. */
-    margin-left: -500px; /* Negative half of width. */
-    
+#detailedCard {
+    width: 100%;
+    min-height: 450px;
+    background-color: rgb(180, 180, 180);
+    box-sizing: border-box;
+    /*border-radius: 10px;*/
+    padding: 10px;
 }
-.hide {
+
+/*@media (max-width: 1800px)*/
+#detailedCardArea {
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 84%;
+    z-index: 10;
+    margin-left: 8%;
+    margin-top: 7%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+
+.hidden {
     display: none;
 }
 .aCard > input {

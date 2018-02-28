@@ -1,8 +1,9 @@
 document.addEventListener("DOMContentLoaded", function () {
     let button = document.querySelector("#createButton");
+    let dk = document.querySelector("#detailedCard");
     button.addEventListener("click", function () {
-        x = 4;
-        y = 4;
+        x = 2;
+        y = 6;
         for (let rows = 0; rows < x; rows++) {
             let z = document.querySelector("table").insertRow(rows);
             for (let columns = 0; columns < y; columns++) {
@@ -44,14 +45,25 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="size">Sizes : </div>
                     <input type="text" placeholder="Sizes" class="sizeValues">
 
-                    <input type="button" value="Open detailed window" class="detailed" id="ib">
+                    <input type="button" value="Open detailed window" class="detailed" id="detailButton-r${rows}-c${columns}">
                     
                 <div>`;
+                let db = document.querySelector(`#detailButton-r${rows}-c${columns}`);
+                db.addEventListener("click", function(){
+                    dk.classList.remove("hidden");
+                    /*display this card info*/
+                });
             }
         }
+        /*
         let iButton = document.querySelector("#ib");
         iButton.addEventListener("click", function(){
-            
+            dk.classList.remove("hide");
+        });
+        */
+        let cdc = document.querySelector("#closeDetailedCard");
+        cdc.addEventListener("click", function(){
+            dk.classList.add("hidden");
         });
     });
 });
