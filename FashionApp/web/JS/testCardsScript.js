@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
             //ADD DELETE
             let deleteCard = document.createElement("button");
             deleteCard.classList.add("simpleCardDel")
+            deleteCard.classList.add("remove");
             deleteCard.textContent = "x";
             deleteCard.id = `dc${uniqueCardId}`;
             newCard.appendChild(deleteCard);
@@ -63,9 +64,14 @@ document.addEventListener("DOMContentLoaded", function () {
             aRow.insertBefore(newCard, addCard);
             console.log("hai");
             let cardId = uniqueCardId;
-            document.querySelector(`#dc${cardId}`).addEventListener("click", function () {
+            //Listener for delete
+            document.querySelector(`#dc${cardId}`).addEventListener("click", function (e) {
                 console.log("asd");
-                document.querySelector(`#card${cardId}`).remove();
+                if (!confirm("Do you really want to delete this?")) {
+                    e.preventDefault(); //Cancel deleting
+                } else {
+                    document.querySelector(`#card${cardId}`).remove();
+                }
             });
 
         });
