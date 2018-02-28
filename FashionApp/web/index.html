@@ -10,6 +10,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="CSS/login.css">
+        <script src="JS/log.js?123"></script>
     </head>
 <body>
 	<div class="container">
@@ -17,7 +18,7 @@ and open the template in the editor.
 			<div class="box-header">
 				<h2>Log In</h2>
 			</div>
-                    <form method="post" action="http://10.114.32.54:8080/FashionApp/ws/Auth/login">
+                    <form >
 			<label for="username">Username</label>
 			<br/>
 			<input type="text" id="un">
@@ -26,11 +27,13 @@ and open the template in the editor.
 			<br/>
 			<input type="password" id="pw">
 			<br/>
-			<input type="submit" value="Sign in">
+			<input type="button"  id="addbutton" value="Sign in">
                     </form>
 			<br/>
 			<a href="home.html"><p class="small">Forgot your password?</p></a>
 		</div>
+            
+            <h3></h3>
 	</div>
     
     

@@ -33,21 +33,17 @@ public class SessionBean {
         return (Auth) em.createNamedQuery("Auth.findById").setParameter("id", id).getSingleResult();
     }
     
-    public boolean checkPassword(String password, String username) { 
+    
+    
+    public Auth checkPassword(String user) { 
         
-        try{
-         String ap =(String) em.createNamedQuery("Auth.findPasswordById").setParameter("user", username).getSingleResult();
+        
+         return (Auth) em.createNamedQuery("Auth.findPasswordById").setParameter("user", user).getSingleResult();
          
-         if(ap.equals(password)){
-             return true;
-         }else{
+        
+         
              
-             return false;
-         }
-         
-         
-        }catch(Exception e){}
-         return false;
+             
     }
     
     public void update(Contact c) { 

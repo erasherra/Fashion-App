@@ -56,16 +56,11 @@ public class AuthResource {
     
     @Path("login")
     @POST
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_HTML)
     public String addContact(@FormParam("pw") String pw, @FormParam("un") String un) {
         //TODO return proper representation object
-        if(sb.checkPassword(pw, un)){
-            
-            return "logged in";
-        }else{
-            
-            return "try again";
-        }
+        sb.checkPassword(un);
+        return "<a href='home.html'><p class='small>Log in from here "+un+"</p></a>";
     }
 
     /**
