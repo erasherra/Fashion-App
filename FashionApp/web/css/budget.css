@@ -34,8 +34,8 @@ input:hover{
 }
 
 #addRow{
-    font-size: 30px;
-    width: 60%;
+    font-size: 1em;
+    
     
 }
 
@@ -80,7 +80,7 @@ table {
 
 th{
     
-    background-color: #3143ff;
+    background-color: #3186ff;
     color: white;
 }
 td, th {
