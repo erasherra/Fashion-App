@@ -4,6 +4,7 @@ body{
    background-color: #f0f0f0;
    /*color:whitesmoke;*/
    font-family: sans-serif;
+   color: #888;
    
 }
 
@@ -87,8 +88,12 @@ td, th {
     border: 1px solid #dddddd;
     text-align: left;
     padding: 8px;
+    
 }
-
+td{
+    
+    background-color: whitesmoke;
+}
 tr:nth-child {
     background-color: #dddddd;
 }

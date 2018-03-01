@@ -8,7 +8,7 @@
 .bg {
     display: flex;
     flex-direction: column;
-    background-color: #f0f0f0;
+    background-image: url("../images/bg.jpg");
     min-height: 100vh;
 }
 
@@ -225,7 +225,7 @@ body {
 }
 .img {
     grid-area: img;
-    max-width: 100%;
+    max-width: 50%;
 }
 .buyPrice {
     grid-area: buyPrice;
