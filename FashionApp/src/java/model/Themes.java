@@ -14,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -35,15 +36,18 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Themes.findByTheme", query = "SELECT t FROM Themes t WHERE t.theme = :theme")})
 public class Themes implements Serializable {
 
+    @Size(max = 50)
+    @Column(name = "theme")
+    private String theme;
+    @ManyToMany(mappedBy = "themesCollection")
+    private Collection<ColorDB> colorDBCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Size(max = 50)
-    @Column(name = "theme")
-    private String theme;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "themeID")
     private Collection<BudgetForm> budgetFormCollection;
 
@@ -62,13 +66,6 @@ public class Themes implements Serializable {
         this.id = id;
     }
 
-    public String getTheme() {
-        return theme;
-    }
-
-    public void setTheme(String theme) {
-        this.theme = theme;
-    }
 
     @XmlTransient
     public Collection<BudgetForm> getBudgetFormCollection() {
@@ -102,6 +99,24 @@ public class Themes implements Serializable {
     @Override
     public String toString() {
         return "model.Themes[ id=" + id + " ]";
+    }
+
+
+    @XmlTransient
+    public Collection<ColorDB> getColorDBCollection() {
+        return colorDBCollection;
+    }
+
+    public void setColorDBCollection(Collection<ColorDB> colorDBCollection) {
+        this.colorDBCollection = colorDBCollection;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
     }
     
 }

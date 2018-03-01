@@ -41,12 +41,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Form.findByACover", query = "SELECT f FROM Form f WHERE f.aCover = :aCover")})
 public class Form implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -72,6 +66,13 @@ public class Form implements Serializable {
     @NotNull
     @Column(name = "aCover")
     private int aCover;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "formID")
     private Collection<BudgetForm> budgetFormCollection;
 
@@ -98,6 +99,41 @@ public class Form implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+
+    @XmlTransient
+    public Collection<BudgetForm> getBudgetFormCollection() {
+        return budgetFormCollection;
+    }
+
+    public void setBudgetFormCollection(Collection<BudgetForm> budgetFormCollection) {
+        this.budgetFormCollection = budgetFormCollection;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Form)) {
+            return false;
+        }
+        Form other = (Form) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "model.Form[ id=" + id + " ]";
     }
 
     public String getProduct() {
@@ -146,40 +182,6 @@ public class Form implements Serializable {
 
     public void setACover(int aCover) {
         this.aCover = aCover;
-    }
-
-    @XmlTransient
-    public Collection<BudgetForm> getBudgetFormCollection() {
-        return budgetFormCollection;
-    }
-
-    public void setBudgetFormCollection(Collection<BudgetForm> budgetFormCollection) {
-        this.budgetFormCollection = budgetFormCollection;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Form)) {
-            return false;
-        }
-        Form other = (Form) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "model.Form[ id=" + id + " ]";
     }
     
 }

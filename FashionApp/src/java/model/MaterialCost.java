@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -20,6 +23,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -38,12 +42,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "MaterialCost.findByTCosts", query = "SELECT m FROM MaterialCost m WHERE m.tCosts = :tCosts")})
 public class MaterialCost implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private Integer id;
     @Size(max = 100)
     @Column(name = "article")
     private String article;
@@ -55,12 +53,24 @@ public class MaterialCost implements Serializable {
     @NotNull
     @Column(name = "uPrice")
     private float uPrice;
-    @Column(name = "freight")
-    private Integer freight;
     @Basic(optional = false)
     @NotNull
     @Column(name = "tCosts")
     private float tCosts;
+    @JoinTable(name = "materialHolder", joinColumns = {
+        @JoinColumn(name = "mCostID", referencedColumnName = "ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "cardID", referencedColumnName = "ID")})
+    @ManyToMany
+    private Collection<Cards> cardsCollection;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
+    @Column(name = "freight")
+    private Integer freight;
     @JoinColumn(name = "materialID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Materials materialID;
@@ -87,29 +97,6 @@ public class MaterialCost implements Serializable {
         this.id = id;
     }
 
-    public String getArticle() {
-        return article;
-    }
-
-    public void setArticle(String article) {
-        this.article = article;
-    }
-
-    public float getCMeter() {
-        return cMeter;
-    }
-
-    public void setCMeter(float cMeter) {
-        this.cMeter = cMeter;
-    }
-
-    public float getUPrice() {
-        return uPrice;
-    }
-
-    public void setUPrice(float uPrice) {
-        this.uPrice = uPrice;
-    }
 
     public Integer getFreight() {
         return freight;
@@ -119,13 +106,6 @@ public class MaterialCost implements Serializable {
         this.freight = freight;
     }
 
-    public float getTCosts() {
-        return tCosts;
-    }
-
-    public void setTCosts(float tCosts) {
-        this.tCosts = tCosts;
-    }
 
     public Materials getMaterialID() {
         return materialID;
@@ -158,6 +138,45 @@ public class MaterialCost implements Serializable {
     @Override
     public String toString() {
         return "model.MaterialCost[ id=" + id + " ]";
+    }
+    @XmlTransient
+    public Collection<Cards> getCardsCollection() {
+        return cardsCollection;
+    }
+    public void setCardsCollection(Collection<Cards> cardsCollection) {
+        this.cardsCollection = cardsCollection;
+    }
+
+    public String getArticle() {
+        return article;
+    }
+
+    public void setArticle(String article) {
+        this.article = article;
+    }
+
+    public float getCMeter() {
+        return cMeter;
+    }
+
+    public void setCMeter(float cMeter) {
+        this.cMeter = cMeter;
+    }
+
+    public float getUPrice() {
+        return uPrice;
+    }
+
+    public void setUPrice(float uPrice) {
+        this.uPrice = uPrice;
+    }
+
+    public float getTCosts() {
+        return tCosts;
+    }
+
+    public void setTCosts(float tCosts) {
+        this.tCosts = tCosts;
     }
     
 }

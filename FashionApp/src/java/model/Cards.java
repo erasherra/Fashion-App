@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -20,6 +22,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -40,18 +43,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Cards.findByComments", query = "SELECT c FROM Cards c WHERE c.comments = :comments")})
 public class Cards implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Column(name = "mTotCost")
     private int mTotCost;
     @Basic(optional = false)
-    @NotNull
+    @NotNull()
     @Column(name = "extraFCost")
     private int extraFCost;
     @Basic(optional = false)
@@ -73,6 +70,16 @@ public class Cards implements Serializable {
     @Size(max = 100)
     @Column(name = "Comments")
     private String comments;
+    @ManyToMany(mappedBy = "cardsCollection")
+    private Collection<MaterialCost> materialCostCollection;
+    @ManyToMany(mappedBy = "cardsCollection")
+    private Collection<Subcost> subcostCollection;
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
     @JoinColumn(name = "bformID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private BudgetForm bformID;
@@ -100,6 +107,54 @@ public class Cards implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+
+    public BudgetForm getBformID() {
+        return bformID;
+    }
+
+    public void setBformID(BudgetForm bformID) {
+        this.bformID = bformID;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Cards)) {
+            return false;
+        }
+        Cards other = (Cards) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "model.Cards[ id=" + id + " ]";
+    }
+    @XmlTransient
+    public Collection<MaterialCost> getMaterialCostCollection() {
+        return materialCostCollection;
+    }
+    public void setMaterialCostCollection(Collection<MaterialCost> materialCostCollection) {
+        this.materialCostCollection = materialCostCollection;
+    }
+    @XmlTransient
+    public Collection<Subcost> getSubcostCollection() {
+        return subcostCollection;
+    }
+    public void setSubcostCollection(Collection<Subcost> subcostCollection) {
+        this.subcostCollection = subcostCollection;
     }
 
     public int getMTotCost() {
@@ -156,39 +211,6 @@ public class Cards implements Serializable {
 
     public void setComments(String comments) {
         this.comments = comments;
-    }
-
-    public BudgetForm getBformID() {
-        return bformID;
-    }
-
-    public void setBformID(BudgetForm bformID) {
-        this.bformID = bformID;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cards)) {
-            return false;
-        }
-        Cards other = (Cards) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "model.Cards[ id=" + id + " ]";
     }
     
 }

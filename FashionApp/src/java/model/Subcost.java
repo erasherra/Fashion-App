@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,12 +14,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -33,16 +37,22 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Subcost.findByUnitCost", query = "SELECT s FROM Subcost s WHERE s.unitCost = :unitCost")})
 public class Subcost implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "unitCost")
+    private float unitCost;
+    @JoinTable(name = "subholder", joinColumns = {
+        @JoinColumn(name = "subCostID", referencedColumnName = "ID")}, inverseJoinColumns = {
+        @JoinColumn(name = "cardID", referencedColumnName = "ID")})
+    @ManyToMany
+    private Collection<Cards> cardsCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "unitCost")
-    private float unitCost;
     @JoinColumn(name = "typeID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private SubConCostTypes typeID;
@@ -67,13 +77,6 @@ public class Subcost implements Serializable {
         this.id = id;
     }
 
-    public float getUnitCost() {
-        return unitCost;
-    }
-
-    public void setUnitCost(float unitCost) {
-        this.unitCost = unitCost;
-    }
 
     public SubConCostTypes getTypeID() {
         return typeID;
@@ -106,6 +109,24 @@ public class Subcost implements Serializable {
     @Override
     public String toString() {
         return "model.Subcost[ id=" + id + " ]";
+    }
+
+
+    @XmlTransient
+    public Collection<Cards> getCardsCollection() {
+        return cardsCollection;
+    }
+
+    public void setCardsCollection(Collection<Cards> cardsCollection) {
+        this.cardsCollection = cardsCollection;
+    }
+
+    public float getUnitCost() {
+        return unitCost;
+    }
+
+    public void setUnitCost(float unitCost) {
+        this.unitCost = unitCost;
     }
     
 }

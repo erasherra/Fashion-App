@@ -6,17 +6,22 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,18 +37,24 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "ColorDB.findByColorCode", query = "SELECT c FROM ColorDB c WHERE c.colorCode = :colorCode")})
 public class ColorDB implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "colorID")
-    private Integer colorID;
     @Size(max = 30)
     @Column(name = "colorName")
     private String colorName;
     @Size(max = 30)
     @Column(name = "colorCode")
     private String colorCode;
+    @JoinTable(name = "colorHolder", joinColumns = {
+        @JoinColumn(name = "colorid", referencedColumnName = "colorID")}, inverseJoinColumns = {
+        @JoinColumn(name = "themeID", referencedColumnName = "ID")})
+    @ManyToMany
+    private Collection<Themes> themesCollection;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "colorID")
+    private Integer colorID;
 
     public ColorDB() {
     }
@@ -60,21 +71,6 @@ public class ColorDB implements Serializable {
         this.colorID = colorID;
     }
 
-    public String getColorName() {
-        return colorName;
-    }
-
-    public void setColorName(String colorName) {
-        this.colorName = colorName;
-    }
-
-    public String getColorCode() {
-        return colorCode;
-    }
-
-    public void setColorCode(String colorCode) {
-        this.colorCode = colorCode;
-    }
 
     @Override
     public int hashCode() {
@@ -99,6 +95,32 @@ public class ColorDB implements Serializable {
     @Override
     public String toString() {
         return "model.ColorDB[ colorID=" + colorID + " ]";
+    }
+
+
+    @XmlTransient
+    public Collection<Themes> getThemesCollection() {
+        return themesCollection;
+    }
+
+    public void setThemesCollection(Collection<Themes> themesCollection) {
+        this.themesCollection = themesCollection;
+    }
+
+    public String getColorName() {
+        return colorName;
+    }
+
+    public void setColorName(String colorName) {
+        this.colorName = colorName;
+    }
+
+    public String getColorCode() {
+        return colorCode;
+    }
+
+    public void setColorCode(String colorCode) {
+        this.colorCode = colorCode;
     }
     
 }
