@@ -56,7 +56,7 @@ p.small {
 }
 
 .login-box {
-	background-color: white;
+	background-color: whitesmoke;
 	max-width: 340px;
 	margin: 0 auto;
 	position: relative;
@@ -68,11 +68,13 @@ p.small {
 }
 
 .login-box .box-header {
-	background-color: #665851;
+	
 	margin-top: 0;
 	border-radius: 5px 5px 0 0;
 }
-
+.login-box .box-header, .login-box input[type=submit] {
+    background-color: darkcyan ;
+}
 .login-box label {
 	font-weight: 700;
 	font-size: .8em;
@@ -108,7 +110,7 @@ p.small {
 	font-weight: 400;
 	font-size: 0.7em;
 	letter-spacing: 1px;
-	background-color: #665851;
+	/*background-color: #665851;*/
 	cursor:pointer;
 	outline: none;
 }

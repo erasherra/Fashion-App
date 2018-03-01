@@ -2,7 +2,14 @@
 
 body{
     background-image: url("../images/bg.jpg");
-    background-color: black;
+    
+    
+    
+    font-size: 16px;
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+	margin: 0;
+	color: #666;
     
     
 
@@ -90,11 +97,7 @@ span{
 
 button:hover,input:hover{
 
-    border: 2px solid ;
-    border-radius: 2px; 
-    background-color: rgba(0,0,0,0.5);
-    color: white;
-    border-color: whitesmoke;
+    
 
 }
 
@@ -103,9 +106,9 @@ button,input{
     border: 2px solid ;
     border-radius: 2px; 
     background-color: white;
-    color: black;
+    color: white;
     border-color:rgba(0,0,0,0);
-
+    
 
 }
 
@@ -123,13 +126,13 @@ li:hover{list-style-type: none;
 
     border: 2px solid ;
     border-radius: 2px; 
-    background-color: rgba(0,0,0,0.5);
+    background-color: whitesmoke;
     color: white;
     border-color: whitesmoke;
 }
 
 /*/////////color*/
-.addColor{
+.add{
     display: none;
     position: fixed;
     z-index: 1;
@@ -139,21 +142,48 @@ li:hover{list-style-type: none;
     height: 100%;
     overflow:auto;;
     padding-top: 60px;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0,0,0,0.5);
 }
 
 .form-container{
-    background-color: black;
-    margin:  5% auto 15% auto;
-    border: 1px solid rgba(0,0,0,0.9);
+    
+   /* margin:  5% auto 15% auto;
+    border: 1px solid rgba(0,0,0,0.5);
     width:30%;
     text-align: center;
     
-
+*/
 }
 
-#colorName, #colorCode{
+.form-container{
+    
+    
+	max-width: 340px;
+	margin: 0 auto;
+	position: relative;
+	top: 80px;
+	padding-bottom: 30px;
+	border-radius: 5px;
+	box-shadow: 0 5px 50px rgba(0,0,0,0.4);
+	text-align: center;
+}
+
+
+
+.form-container{
+    background-color: whitesmoke;
+}
+#submit{
+    background-color: darkcyan ;
+    color:white;
+}
+
+#colorName{
     width: 90%;
+    border: 1px solid #ccc;
+	border-radius: 2px;
+	font-size: .9em;
+	color: white;
     
 }
 #submit{
@@ -161,4 +191,5 @@ li:hover{list-style-type: none;
     width: 70%;
     
     
+	text-transform: uppercase;
 }

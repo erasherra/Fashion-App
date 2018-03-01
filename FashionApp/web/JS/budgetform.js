@@ -243,7 +243,7 @@ document.addEventListener("DOMContentLoaded", function () {
         for (i = 1; i <= rowCount; i++) {
             row = {};
             row.ID = i;
-            row.product = document.querySelector('#"pg-input"'+i).textContent;
+            row.product = document.querySelector('#pg-input'+i).value;
             if(row.product === null){
                 row.product = "no name";
             }
@@ -288,7 +288,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector("#id-input" + (correctvalue)).value = json_obj.rows[i].ID;
             
             
-            
+            document.querySelector("#pg-input" + (correctvalue)).textContent = json_obj.rows[i].product;
             
             document.querySelector("#as-input" + (correctvalue)).textContent = json_obj.rows[i].amountStyles;
             
