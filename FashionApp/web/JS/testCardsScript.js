@@ -1,6 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
     let addButton = document.querySelector("#add");
     let theme = document.querySelector(".aTheme");
+    let detailedCard = document.querySelector("#detailedCard");
+    let detailedCardArea = document.querySelector("#detailedCardArea");
+    let closeDetailedCard = document.querySelector("#closeDetailedCard");
+    let dark = document.querySelector("#dark");
     let uniqueId = 0;
     let uniqueCardId = 0;
     let addOutfit = addButton.addEventListener("click", function () {
@@ -41,8 +45,14 @@ document.addEventListener("DOMContentLoaded", function () {
             let newCard = document.createElement("div");
             newCard.classList.add("addCard")
             newCard.id = `card${uniqueCardId}`;
-            //newCard.innerHTML = uniqueCardId;
             newCard.classList.add("simpleCard");
+
+            //card on click
+            newCard.addEventListener("click", function () {
+                //remove hidden from detailed card
+                detailedCard.classList.remove("hidden");
+                dark.classList.remove("behind");
+            });
 
             //ADD TEXT
             let cardText = document.createElement("div");
@@ -88,6 +98,11 @@ document.addEventListener("DOMContentLoaded", function () {
         let aThemeRow = document.querySelector(".themeRow");
         aThemeRow.insertBefore(newTheme, addTheme);
         console.log(`Theme ${themeAmount} added`);
+    });
+
+    closeDetailedCard.addEventListener("click", function () {
+        detailedCard.classList.add("hidden");
+        dark.classList.add("behind");
     });
 
 
