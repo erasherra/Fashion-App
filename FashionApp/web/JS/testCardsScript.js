@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <button class="remove" id="ob${uniqueId}">x</button>
                 </div>
                 <div class="aRow" id="row${uniqueId}">
-                    <div class="addCard aCard buttons" id="addCard${uniqueId}">+</div>
+                    <div class="addCard aCard" id="addCard${uniqueId}">+</div>
                 </div>
             </div>`);
 

@@ -1,14 +1,14 @@
 .aTheme {
     display: flex;
     flex-direction: column;
-    background-color: #e5e7ea;
+    background-color: #f0f0f0;
    
 }
 
 .bg {
     display: flex;
     flex-direction: column;
-    background-color: #e5e7ea;
+    background-color: #f0f0f0;
     min-height: 100vh;
 }
 
@@ -28,6 +28,10 @@
     border-radius: 0.3em;
     border: solid rgb(131, 131, 131) 2px;
 }
+
+.addCard:hover {
+    background-color: rgb(224, 224, 224);
+}
 .aCard {
     border: dashed rgb(131, 131, 131) 2px !important;
 }
@@ -38,16 +42,16 @@
     font-size: 1em;
     margin: 1em;
     padding: 1em;
-    background-color: rgb(49, 134, 255);
+    background-color: #B1B1B1;
     border-radius: 0.3em;
     width: 5em;
 }
 
 #add:hover {
-    background-color: rgb(0, 114, 255);
+    background-color: rgb(190, 190, 190);
 }
 .buttons:hover {
-    background-color: rgb(0, 114, 255);
+    background-color: rgb(190, 190, 190);
 }
 
 body {
@@ -78,7 +82,7 @@ body {
     width: 4em;
     border-radius: 0.3em;
     padding: 0.5em;
-    background-color: rgb(49, 134, 255);
+    background-color: #B1B1B1;
 }
 
 .themeRow {
@@ -92,13 +96,13 @@ body {
     text-align: center;
     padding: 0.5em;
     color:white;
-    background-color: rgb(49, 134, 255);
+    background-color: #B1B1B1;
     border-radius: 0.3em;
     margin-left: 0.5em;
 }
 
 .plusImg:hover {
-    background-color: rgb(0, 114, 255);
+    background-color: rgb(190, 190, 190);
 }
 
 #detailedCard {
