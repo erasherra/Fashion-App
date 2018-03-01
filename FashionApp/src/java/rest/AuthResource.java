@@ -64,7 +64,7 @@ public class AuthResource {
         Auth a=sb.getByName(un);
         
         if(a.getPassword().equals(pw)){
-            return "<div><h1><a href='http://10.114.32.54:8080/FashionApp/home.html'><p class='small'>Log in from here "+un+pw+"</p></a></h1></div>";
+            return "<meta http-equiv=\"refresh\" content=\"0; URL='http://10.114.32.54:8080/FashionApp/home.html'\" />";
         }else{
             return "<h1>Username or password is wrong </h1>";
         }
