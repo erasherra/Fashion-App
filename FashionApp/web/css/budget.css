@@ -1,9 +1,9 @@
 
 body{
-   background-image: url("../images/bg.jpg");
-    background-color: black;
-   color:whitesmoke;
-   
+   /*background-image: url("../images/bg.jpg");*/
+   background-color: #f0f0f0;
+   /*color:whitesmoke;*/
+   font-family: sans-serif;
    
 }
 
@@ -14,13 +14,17 @@ body{
 
 
 
-button:hover,input:hover{
+button:hover, input[type=button]:hover{
+background-color: #4E98FF;    
+}
+
+input:hover{
     
-   border: 2px solid ;
+   /*border: 2px solid ;
   border-radius: 2px; 
   background-color: rgba(0,0,0,0.3);
   color: white;
-  border-color: whitesmoke;
+  border-color: whitesmoke;*/
     
 }
 
@@ -35,9 +39,20 @@ button:hover,input:hover{
     
 }
 
-button,input{
+button, input[type=button]{
+  
+  font-family: sans-serif; 
+  background-color: #3186FF;
+  color: white;
+  border-color:rgba(0,0,0,0);
+  border-radius: 0.3em;
+  padding: 0.5em;
     
-   border: 2px solid ;
+}
+
+input{
+    
+  border: 2px solid ;
   border-radius: 2px; 
   background-color: white;
   color: black;
@@ -57,7 +72,7 @@ button,input{
 
 
 table {
-    font-family: arial, sans-serif;
+    font-family: sans-serif;
     border-collapse: collapse;
     width: 100%;
     
@@ -65,7 +80,8 @@ table {
 
 th{
     
-    background-color:rgba(0,0,0,0.5);
+    background-color: #3143ff;
+    color: white;
 }
 td, th {
     border: 1px solid #dddddd;

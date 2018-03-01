@@ -1,8 +1,7 @@
 body {
-	background: url("../images/bg.jpg");
-	
+	background-color: #e9edf5;
 	font-size: 16px;
-	font-family: 'Lato', sans-serif;
+	font-family: sans-serif;
 	font-weight: 300;
 	margin: 0;
 	color: #666;
@@ -73,7 +72,7 @@ p.small {
 	border-radius: 5px 5px 0 0;
 }
 .login-box .box-header, .login-box input[type=submit] {
-    background-color: darkcyan ;
+    background-color: #3186FF;
 }
 .login-box label {
 	font-weight: 700;
@@ -113,6 +112,7 @@ p.small {
 	/*background-color: #665851;*/
 	cursor:pointer;
 	outline: none;
+	background-color: #3186FF;
 }
 
 .login-box button:hover {
