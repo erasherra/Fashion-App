@@ -42,16 +42,16 @@
     font-size: 1em;
     margin: 1em;
     padding: 1em;
-    background-color: #B1B1B1;
+    background-color: #3186FF;
     border-radius: 0.3em;
     width: 5em;
 }
 
 #add:hover {
-    background-color: rgb(190, 190, 190);
+    background-color: rgb(78, 152, 255);
 }
 .buttons:hover {
-    background-color: rgb(190, 190, 190);
+    background-color: rgb(78, 152, 255);
 }
 
 body {
@@ -82,7 +82,7 @@ body {
     width: 4em;
     border-radius: 0.3em;
     padding: 0.5em;
-    background-color: #B1B1B1;
+    background-color: #3186FF;
 }
 
 .themeRow {
@@ -96,13 +96,13 @@ body {
     text-align: center;
     padding: 0.5em;
     color:white;
-    background-color: #B1B1B1;
+    background-color: #3186FF;
     border-radius: 0.3em;
     margin-left: 0.5em;
 }
 
 .plusImg:hover {
-    background-color: rgb(190, 190, 190);
+    background-color: rgb(78, 152, 255);
 }
 
 #detailedCard {
