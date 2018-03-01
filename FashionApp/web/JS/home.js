@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", function () {
         
         let text = "";
         
-        text += `<div id="project`+projectCount+`" class="project-container">project
+        text += `<div id="project`+projectCount+`" class="project-container">`+ document.querySelector("#colorName").value +`
                     <a href="form.html">Budget</a>
                     <a href="color_picker.html">Colors</a>
                     <a href="testCards.html">Cards</a>

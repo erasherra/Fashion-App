@@ -288,7 +288,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector("#id-input" + (correctvalue)).value = json_obj.rows[i].ID;
             
             
-            document.querySelector("#pg-input" + (correctvalue)).textContent = json_obj.rows[i].product;
+            /*document.querySelector("#pg-input" + (correctvalue)).textContent = json_obj.rows[i].product;*/
             
             document.querySelector("#as-input" + (correctvalue)).textContent = json_obj.rows[i].amountStyles;
             
