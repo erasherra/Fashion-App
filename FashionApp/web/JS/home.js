@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
         text += `<div id="project`+projectCount+`" class="project-container">project
                     <a href="form.html">Budget</a>
                     <a href="color_picker.html">Colors</a>
-                    <a href="cards.html">Cards</a>
+                    <a href="testCards.html">Cards</a>
                     
                     
                 </div>`;
