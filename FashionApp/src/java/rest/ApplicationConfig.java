@@ -36,7 +36,7 @@ public class ApplicationConfig extends Application {
         resources.add(rest.ColorDBFacadeREST.class);
         resources.add(rest.ContactFacadeREST.class);
         resources.add(rest.FormFacadeREST.class);
-        resources.add(rest.GenericResource.class);
+
         resources.add(rest.MaterialCostFacadeREST.class);
         resources.add(rest.MaterialsFacadeREST.class);
         resources.add(rest.SubConCostTypesFacadeREST.class);
