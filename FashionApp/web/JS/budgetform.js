@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let tableHeader = document.querySelector("#list-header");
+   // let tableHeader = document.querySelector("#list-header");
     let button = document.querySelector("#new-table");
-    let pgroup = document.querySelector("#product-group-list");
+    //let pgroup = document.querySelector("#product-group-list");
     let flist = document.querySelector("#final-list");
     let table = document.querySelector("#list-table");
     let addbutton = document.querySelector("#addRow");
@@ -9,8 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
     let show_json = document.querySelector("#sendjson");
     
     let theme = [{"themeid":0, "amount":0}];
-    let row = {"ID": 0, "product":"","themes":[theme],"amountStyles":0,
-        "averagePrice":0,"avarageAmount":0, "totalSale":0,"cover":0};
+    
+    let row = {"form":{"product":"","amountStyles":0,
+        "averagePrice":0,"avarageAmount":0, "totalSale":0,"cover":0},
+        "themes":[theme]};
     let json_obj = {"rows":[row]};
         
     let rowList = [row];
@@ -48,7 +50,7 @@ document.addEventListener("DOMContentLoaded", function () {
         
         table.innerHTML +=
                 `<tr>
-        <th class="ib" id="id-id">id</th>
+        
         <th id="p-group">Product group</th>`
                 + addThemes(number) +
                 `<th class="ib id="A-styles">Amount of styles</th>
@@ -100,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let rowline = "";
         rowCount++;
         rowline += `<tr>
-        <td><input type="number"  id="id-input` + rowCount + `"></td>
+        
         
         
         
@@ -138,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let addFinalInput = function () {
 
         flist.innerHTML += `
-        <p id="id-final">id</p>
+        
         
         
         
@@ -171,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     productInput.addEventListener("input", function () {
-        console.log("works");
+        
 
         inputToCall();
 
@@ -233,19 +235,26 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("###################buildJson##############");
         
         theme = [];
-        row = {"ID":0, "product":"","themes":[],"amountStyles":0,
-        "averagePrice":0,"avarageAmount":0, "totalSale":0,"cover":0};
+        row = {"form":{"product":"","amountStyles":0,
+        "averagePrice":0,"avarageAmount":0, "totalSale":0,"cover":0},"themes":[theme]};
         json_obj = {"rows":[row]};
         rowList = [];
+        
+        
+        
         
         let amount = 0;
         let amountOfStyles = 0;
         for (i = 1; i <= rowCount; i++) {
             row = {};
-            row.ID = i;
-            row.product = document.querySelector('#pg-input'+i).value;
-            if(row.product === null){
-                row.product = "no name";
+            theme = [];
+            row = {"form":{"product":"","amountStyles":0,
+            "averagePrice":0,"avarageAmount":0, "totalSale":0,"cover":0},"themes":[theme]};
+            
+            
+            row.form.product = document.querySelector('#pg-input'+i).value;
+            if(row.form.product === null){
+                row.form.product = "no name";
             }
             theme = [];
             amountOfStyles = 0;
@@ -261,15 +270,15 @@ document.addEventListener("DOMContentLoaded", function () {
             
             row.themes = theme;
             
-            row.amountStyles = amountOfStyles;
+            row.form.amountStyles = amountOfStyles;
            // document.querySelector("#as-input" + i).textContent = row.amountStyles;
-            row.averagePrice = document.querySelector('#ap-input'+i).value;
-            row.avarageAmount = document.querySelector('#aa-input'+i).value;
+            row.form.averagePrice = document.querySelector('#ap-input'+i).value;
+            row.form.avarageAmount = document.querySelector('#aa-input'+i).value;
             
-            row.totalSale = row.amountStyles * row.avarageAmount * row.averagePrice;
-            row.cover = row.totalSale/2;
+            row.form.totalSale = row.form.amountStyles * row.form.avarageAmount * row.form.averagePrice;
+            row.form.cover = row.form.totalSale/2;
             
-            console.log("ID is: "+row.ID);
+           
             
             json_obj.rows.push(row);
             rowList.push(row);
@@ -285,17 +294,17 @@ document.addEventListener("DOMContentLoaded", function () {
             for (let i = 1; i <= json_obj.rows.length-1; i++) {
             
             let correctvalue = i;
-            document.querySelector("#id-input" + (correctvalue)).value = json_obj.rows[i].ID;
+            
             
             
             /*document.querySelector("#pg-input" + (correctvalue)).textContent = json_obj.rows[i].product;*/
             
-            document.querySelector("#as-input" + (correctvalue)).textContent = json_obj.rows[i].amountStyles;
+            document.querySelector("#as-input" + (correctvalue)).textContent = json_obj.rows[i].form.amountStyles;
             
             
             
-            document.querySelector("#ts-input" + (correctvalue)).textContent = json_obj.rows[i].totalSale;
-            document.querySelector("#cover-input" + (correctvalue)).textContent = json_obj.rows[i].cover;
+            document.querySelector("#ts-input" + (correctvalue)).textContent = json_obj.rows[i].form.totalSale;
+            document.querySelector("#cover-input" + (correctvalue)).textContent = json_obj.rows[i].form.cover;
             
             }
             
@@ -306,23 +315,23 @@ document.addEventListener("DOMContentLoaded", function () {
         for (let i = 1; i <= json_obj.rows.length-1; i++) {
             
             let correctvalue = i;
-            document.querySelector("#id-input" + (correctvalue)).value = json_obj.rows[i].ID;
             
             
-            document.querySelector("#pg-input" + (correctvalue)).value = json_obj.rows[i].product;
+            
+            document.querySelector("#pg-input" + (correctvalue)).value = json_obj.rows[i].form.product;
             theme = json_obj.rows[i].themes;
             for (let t = 1; t <= json_obj.rows[i].themes.length; t++) {
-                console.log("amount "+theme[t-1].amount);
+                
                 document.querySelector("#theme-" + t + "-row-" + correctvalue).value = theme[t-1].amount;
             }
             
-            document.querySelector("#as-input" + (correctvalue)).textContent = json_obj.rows[i].amountStyles;
+            document.querySelector("#as-input" + (correctvalue)).textContent = json_obj.rows[i].form.amountStyles;
             
-            document.querySelector("#ap-input" + (correctvalue)).value = json_obj.rows[i].averagePrice;
-            document.querySelector("#aa-input" + (correctvalue)).value = json_obj.rows[i].avarageAmount;
+            document.querySelector("#ap-input" + (correctvalue)).value = json_obj.rows[i].form.averagePrice;
+            document.querySelector("#aa-input" + (correctvalue)).value = json_obj.rows[i].form.avarageAmount;
             
-            document.querySelector("#ts-input" + (correctvalue)).textContent = json_obj.rows[i].totalSale;
-            document.querySelector("#cover-input" + (correctvalue)).textContent = json_obj.rows[i].cover;
+            document.querySelector("#ts-input" + (correctvalue)).textContent = json_obj.rows[i].form.totalSale;
+            document.querySelector("#cover-input" + (correctvalue)).textContent = json_obj.rows[i].form.cover;
             
             }
     }
