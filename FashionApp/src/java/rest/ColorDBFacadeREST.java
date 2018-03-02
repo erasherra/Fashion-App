@@ -60,6 +60,7 @@ public class ColorDBFacadeREST extends AbstractFacade<ColorDB> {
     @Produces({ MediaType.APPLICATION_JSON})
     public ColorDB find(@PathParam("id") Integer id) {
         return super.find(id);
+        
     }
 
     @GET
