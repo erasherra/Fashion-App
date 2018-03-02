@@ -38,11 +38,16 @@ b.addEventListener('click',function add(event) {
   }
 };*/
 
-  fetch('color.json',{
+    let color ={
+        colorCode:color,
+        colorName:name
+    };
+
+  fetch('http://10.114.32.54:8080/FashionApp/ws/model.colordb/',{
     method:"POST",
-    body: JSON.stringify({code:code, name:name}),
+    body: JSON.stringify(color),
     headers:{
-      'Accept': 'application/json',
+      //'Accept': 'application/json',
       'Content-type': 'application/json; charset=UTF-8'
   }})
   .then(res => res.json())

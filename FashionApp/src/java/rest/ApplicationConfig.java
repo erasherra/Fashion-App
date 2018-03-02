@@ -30,7 +30,9 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(rest.AuthResource.class);
+        resources.add(rest.ColorDBFacadeREST.class);
         resources.add(rest.GenericResource.class);
+        resources.add(rest.MaterialsFacadeREST.class);
     }
     
 }
