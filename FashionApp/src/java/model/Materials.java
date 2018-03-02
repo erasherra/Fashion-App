@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Amir Ingher
+ * @author Joona Ikonen
  */
 @Entity
 @Table(name = "materials")
@@ -35,16 +35,15 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Materials.findByMaterials", query = "SELECT m FROM Materials m WHERE m.materials = :materials")})
 public class Materials implements Serializable {
 
-    @Size(max = 50)
-    @Column(name = "materials")
-    private String materials;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Size(max = 50)
+    @Column(name = "materials")
+    private String materials;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "materialID")
     private Collection<MaterialCost> materialCostCollection;
 
@@ -63,6 +62,13 @@ public class Materials implements Serializable {
         this.id = id;
     }
 
+    public String getMaterials() {
+        return materials;
+    }
+
+    public void setMaterials(String materials) {
+        this.materials = materials;
+    }
 
     @XmlTransient
     public Collection<MaterialCost> getMaterialCostCollection() {
@@ -96,14 +102,6 @@ public class Materials implements Serializable {
     @Override
     public String toString() {
         return "model.Materials[ id=" + id + " ]";
-    }
-
-    public String getMaterials() {
-        return materials;
-    }
-
-    public void setMaterials(String materials) {
-        this.materials = materials;
     }
     
 }

@@ -37,7 +37,7 @@ public class ThemesFacadeREST extends AbstractFacade<Themes> {
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
+    @Consumes({ MediaType.APPLICATION_JSON})
     public void create(Themes entity) {
         super.create(entity);
     }

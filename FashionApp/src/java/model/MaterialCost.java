@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Amir Ingher
+ * @author Joona Ikonen
  */
 @Entity
 @Table(name = "materialCost")
@@ -38,10 +38,16 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "MaterialCost.findByArticle", query = "SELECT m FROM MaterialCost m WHERE m.article = :article")
     , @NamedQuery(name = "MaterialCost.findByCMeter", query = "SELECT m FROM MaterialCost m WHERE m.cMeter = :cMeter")
     , @NamedQuery(name = "MaterialCost.findByUPrice", query = "SELECT m FROM MaterialCost m WHERE m.uPrice = :uPrice")
-    , @NamedQuery(name = "MaterialCost.findByFreight", query = "SELECT m FROM MaterialCost m WHERE m.freight = :freight")
-    , @NamedQuery(name = "MaterialCost.findByTCosts", query = "SELECT m FROM MaterialCost m WHERE m.tCosts = :tCosts")})
+    , @NamedQuery(name = "MaterialCost.findByTCosts", query = "SELECT m FROM MaterialCost m WHERE m.tCosts = :tCosts")
+    , @NamedQuery(name = "MaterialCost.findByFreight", query = "SELECT m FROM MaterialCost m WHERE m.freight = :freight")})
 public class MaterialCost implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
     @Size(max = 100)
     @Column(name = "article")
     private String article;
@@ -57,20 +63,14 @@ public class MaterialCost implements Serializable {
     @NotNull
     @Column(name = "tCosts")
     private float tCosts;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "freight")
+    private Float freight;
     @JoinTable(name = "materialHolder", joinColumns = {
         @JoinColumn(name = "mCostID", referencedColumnName = "ID")}, inverseJoinColumns = {
         @JoinColumn(name = "cardID", referencedColumnName = "ID")})
     @ManyToMany
     private Collection<Cards> cardsCollection;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private Integer id;
-    @Column(name = "freight")
-    private Integer freight;
     @JoinColumn(name = "materialID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Materials materialID;
@@ -95,56 +95,6 @@ public class MaterialCost implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-
-    public Integer getFreight() {
-        return freight;
-    }
-
-    public void setFreight(Integer freight) {
-        this.freight = freight;
-    }
-
-
-    public Materials getMaterialID() {
-        return materialID;
-    }
-
-    public void setMaterialID(Materials materialID) {
-        this.materialID = materialID;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof MaterialCost)) {
-            return false;
-        }
-        MaterialCost other = (MaterialCost) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "model.MaterialCost[ id=" + id + " ]";
-    }
-    @XmlTransient
-    public Collection<Cards> getCardsCollection() {
-        return cardsCollection;
-    }
-    public void setCardsCollection(Collection<Cards> cardsCollection) {
-        this.cardsCollection = cardsCollection;
     }
 
     public String getArticle() {
@@ -177,6 +127,56 @@ public class MaterialCost implements Serializable {
 
     public void setTCosts(float tCosts) {
         this.tCosts = tCosts;
+    }
+
+    public Float getFreight() {
+        return freight;
+    }
+
+    public void setFreight(Float freight) {
+        this.freight = freight;
+    }
+
+    @XmlTransient
+    public Collection<Cards> getCardsCollection() {
+        return cardsCollection;
+    }
+
+    public void setCardsCollection(Collection<Cards> cardsCollection) {
+        this.cardsCollection = cardsCollection;
+    }
+
+    public Materials getMaterialID() {
+        return materialID;
+    }
+
+    public void setMaterialID(Materials materialID) {
+        this.materialID = materialID;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof MaterialCost)) {
+            return false;
+        }
+        MaterialCost other = (MaterialCost) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "model.MaterialCost[ id=" + id + " ]";
     }
     
 }

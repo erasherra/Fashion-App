@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Amir Ingher
+ * @author Joona Ikonen
  */
 @Entity
 @Table(name = "subcost")
@@ -37,6 +37,12 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Subcost.findByUnitCost", query = "SELECT s FROM Subcost s WHERE s.unitCost = :unitCost")})
 public class Subcost implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Column(name = "unitCost")
@@ -46,13 +52,6 @@ public class Subcost implements Serializable {
         @JoinColumn(name = "cardID", referencedColumnName = "ID")})
     @ManyToMany
     private Collection<Cards> cardsCollection;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private Integer id;
     @JoinColumn(name = "typeID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private SubConCostTypes typeID;
@@ -77,6 +76,22 @@ public class Subcost implements Serializable {
         this.id = id;
     }
 
+    public float getUnitCost() {
+        return unitCost;
+    }
+
+    public void setUnitCost(float unitCost) {
+        this.unitCost = unitCost;
+    }
+
+    @XmlTransient
+    public Collection<Cards> getCardsCollection() {
+        return cardsCollection;
+    }
+
+    public void setCardsCollection(Collection<Cards> cardsCollection) {
+        this.cardsCollection = cardsCollection;
+    }
 
     public SubConCostTypes getTypeID() {
         return typeID;
@@ -109,24 +124,6 @@ public class Subcost implements Serializable {
     @Override
     public String toString() {
         return "model.Subcost[ id=" + id + " ]";
-    }
-
-
-    @XmlTransient
-    public Collection<Cards> getCardsCollection() {
-        return cardsCollection;
-    }
-
-    public void setCardsCollection(Collection<Cards> cardsCollection) {
-        this.cardsCollection = cardsCollection;
-    }
-
-    public float getUnitCost() {
-        return unitCost;
-    }
-
-    public void setUnitCost(float unitCost) {
-        this.unitCost = unitCost;
     }
     
 }

@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Amir Ingher
+ * @author Joona Ikonen
  */
 @Entity
 @Table(name = "form")
@@ -35,12 +35,18 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Form.findById", query = "SELECT f FROM Form f WHERE f.id = :id")
     , @NamedQuery(name = "Form.findByProduct", query = "SELECT f FROM Form f WHERE f.product = :product")
     , @NamedQuery(name = "Form.findByAmountStyles", query = "SELECT f FROM Form f WHERE f.amountStyles = :amountStyles")
-    , @NamedQuery(name = "Form.findByAPrice", query = "SELECT f FROM Form f WHERE f.aPrice = :aPrice")
     , @NamedQuery(name = "Form.findByAAmountStyles", query = "SELECT f FROM Form f WHERE f.aAmountStyles = :aAmountStyles")
-    , @NamedQuery(name = "Form.findByTSales", query = "SELECT f FROM Form f WHERE f.tSales = :tSales")
-    , @NamedQuery(name = "Form.findByACover", query = "SELECT f FROM Form f WHERE f.aCover = :aCover")})
+    , @NamedQuery(name = "Form.findByAvgPrice", query = "SELECT f FROM Form f WHERE f.avgPrice = :avgPrice")
+    , @NamedQuery(name = "Form.findByTotalSales", query = "SELECT f FROM Form f WHERE f.totalSales = :totalSales")
+    , @NamedQuery(name = "Form.findByTotalCover", query = "SELECT f FROM Form f WHERE f.totalCover = :totalCover")})
 public class Form implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -52,27 +58,15 @@ public class Form implements Serializable {
     private int amountStyles;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "aPrice")
-    private int aPrice;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "aAmountStyles")
     private int aAmountStyles;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "tSales")
-    private int tSales;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "aCover")
-    private int aCover;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private Integer id;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "avgPrice")
+    private Float avgPrice;
+    @Column(name = "totalSales")
+    private Float totalSales;
+    @Column(name = "totalCover")
+    private Float totalCover;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "formID")
     private Collection<BudgetForm> budgetFormCollection;
 
@@ -83,14 +77,11 @@ public class Form implements Serializable {
         this.id = id;
     }
 
-    public Form(Integer id, String product, int amountStyles, int aPrice, int aAmountStyles, int tSales, int aCover) {
+    public Form(Integer id, String product, int amountStyles, int aAmountStyles) {
         this.id = id;
         this.product = product;
         this.amountStyles = amountStyles;
-        this.aPrice = aPrice;
         this.aAmountStyles = aAmountStyles;
-        this.tSales = tSales;
-        this.aCover = aCover;
     }
 
     public Integer getId() {
@@ -101,6 +92,53 @@ public class Form implements Serializable {
         this.id = id;
     }
 
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public int getAmountStyles() {
+        return amountStyles;
+    }
+
+    public void setAmountStyles(int amountStyles) {
+        this.amountStyles = amountStyles;
+    }
+
+    public int getAAmountStyles() {
+        return aAmountStyles;
+    }
+
+    public void setAAmountStyles(int aAmountStyles) {
+        this.aAmountStyles = aAmountStyles;
+    }
+
+    public Float getAvgPrice() {
+        return avgPrice;
+    }
+
+    public void setAvgPrice(Float avgPrice) {
+        this.avgPrice = avgPrice;
+    }
+
+    public Float getTotalSales() {
+        return totalSales;
+    }
+
+    public void setTotalSales(Float totalSales) {
+        this.totalSales = totalSales;
+    }
+
+    public Float getTotalCover() {
+        return totalCover;
+    }
+
+    public void setTotalCover(Float totalCover) {
+        this.totalCover = totalCover;
+    }
 
     @XmlTransient
     public Collection<BudgetForm> getBudgetFormCollection() {
@@ -134,54 +172,6 @@ public class Form implements Serializable {
     @Override
     public String toString() {
         return "model.Form[ id=" + id + " ]";
-    }
-
-    public String getProduct() {
-        return product;
-    }
-
-    public void setProduct(String product) {
-        this.product = product;
-    }
-
-    public int getAmountStyles() {
-        return amountStyles;
-    }
-
-    public void setAmountStyles(int amountStyles) {
-        this.amountStyles = amountStyles;
-    }
-
-    public int getAPrice() {
-        return aPrice;
-    }
-
-    public void setAPrice(int aPrice) {
-        this.aPrice = aPrice;
-    }
-
-    public int getAAmountStyles() {
-        return aAmountStyles;
-    }
-
-    public void setAAmountStyles(int aAmountStyles) {
-        this.aAmountStyles = aAmountStyles;
-    }
-
-    public int getTSales() {
-        return tSales;
-    }
-
-    public void setTSales(int tSales) {
-        this.tSales = tSales;
-    }
-
-    public int getACover() {
-        return aCover;
-    }
-
-    public void setACover(int aCover) {
-        this.aCover = aCover;
     }
     
 }

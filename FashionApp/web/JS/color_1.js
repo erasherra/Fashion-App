@@ -37,21 +37,22 @@ b.addEventListener('click',function add(event) {
 
   }
 };*/
-
+    const colorUrl = "http://10.114.32.54:8080/FashionApp/ws/model.colordb/";
     let color ={
-        colorCode:color,
+        colorCode:code,
         colorName:name
     };
 
-  fetch('http://10.114.32.54:8080/FashionApp/ws/model.colordb/',{
-    method:"POST",
-    body: JSON.stringify(color),
-    headers:{
-      //'Accept': 'application/json',
-      'Content-type': 'application/json; charset=UTF-8'
-  }})
-  .then(res => res.json())
-  .then(json => console.log(json));
+  fetch(colorUrl,{
+
+    headers: { "Content-type": "application/json"},
+      body: JSON.stringify(color),
+      method:"POST"
+  })
+  //.then(response => response.json())
+  .catch(error => console.error('Error: ' + error))
+  .then(response => console.log('Success:', response));
+  //.then(json => console.log(json));
 
 });
 

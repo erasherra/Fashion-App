@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Amir Ingher
+ * @author Joona Ikonen
  */
 @Entity
 @Table(name = "colorDB")
@@ -37,6 +37,12 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "ColorDB.findByColorCode", query = "SELECT c FROM ColorDB c WHERE c.colorCode = :colorCode")})
 public class ColorDB implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "colorID")
+    private Integer colorID;
     @Size(max = 30)
     @Column(name = "colorName")
     private String colorName;
@@ -48,13 +54,6 @@ public class ColorDB implements Serializable {
         @JoinColumn(name = "themeID", referencedColumnName = "ID")})
     @ManyToMany
     private Collection<Themes> themesCollection;
-
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "colorID")
-    private Integer colorID;
 
     public ColorDB() {
     }
@@ -71,6 +70,30 @@ public class ColorDB implements Serializable {
         this.colorID = colorID;
     }
 
+    public String getColorName() {
+        return colorName;
+    }
+
+    public void setColorName(String colorName) {
+        this.colorName = colorName;
+    }
+
+    public String getColorCode() {
+        return colorCode;
+    }
+
+    public void setColorCode(String colorCode) {
+        this.colorCode = colorCode;
+    }
+
+    @XmlTransient
+    public Collection<Themes> getThemesCollection() {
+        return themesCollection;
+    }
+
+    public void setThemesCollection(Collection<Themes> themesCollection) {
+        this.themesCollection = themesCollection;
+    }
 
     @Override
     public int hashCode() {
@@ -95,32 +118,6 @@ public class ColorDB implements Serializable {
     @Override
     public String toString() {
         return "model.ColorDB[ colorID=" + colorID + " ]";
-    }
-
-
-    @XmlTransient
-    public Collection<Themes> getThemesCollection() {
-        return themesCollection;
-    }
-
-    public void setThemesCollection(Collection<Themes> themesCollection) {
-        this.themesCollection = themesCollection;
-    }
-
-    public String getColorName() {
-        return colorName;
-    }
-
-    public void setColorName(String colorName) {
-        this.colorName = colorName;
-    }
-
-    public String getColorCode() {
-        return colorCode;
-    }
-
-    public void setColorCode(String colorCode) {
-        this.colorCode = colorCode;
     }
     
 }

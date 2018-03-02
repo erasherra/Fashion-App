@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Amir Ingher
+ * @author Joona Ikonen
  */
 @Entity
 @Table(name = "subConCostTypes")
@@ -35,16 +35,15 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "SubConCostTypes.findByName", query = "SELECT s FROM SubConCostTypes s WHERE s.name = :name")})
 public class SubConCostTypes implements Serializable {
 
-    @Size(max = 50)
-    @Column(name = "name")
-    private String name;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Size(max = 50)
+    @Column(name = "name")
+    private String name;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeID")
     private Collection<Subcost> subcostCollection;
 
@@ -63,6 +62,13 @@ public class SubConCostTypes implements Serializable {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     @XmlTransient
     public Collection<Subcost> getSubcostCollection() {
@@ -96,14 +102,6 @@ public class SubConCostTypes implements Serializable {
     @Override
     public String toString() {
         return "model.SubConCostTypes[ id=" + id + " ]";
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
     
 }

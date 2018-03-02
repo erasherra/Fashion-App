@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Amir Ingher
+ * @author Joona Ikonen
  */
 @Entity
 @Table(name = "budgetForm")
@@ -37,17 +37,16 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "BudgetForm.findByAmount", query = "SELECT b FROM BudgetForm b WHERE b.amount = :amount")})
 public class BudgetForm implements Serializable {
 
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "amount")
-    private int amount;
-
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "amount")
+    private int amount;
     @JoinColumn(name = "themeID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Themes themeID;
@@ -77,6 +76,13 @@ public class BudgetForm implements Serializable {
         this.id = id;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 
     public Themes getThemeID() {
         return themeID;
@@ -126,14 +132,6 @@ public class BudgetForm implements Serializable {
     @Override
     public String toString() {
         return "model.BudgetForm[ id=" + id + " ]";
-    }
-
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
     }
     
 }

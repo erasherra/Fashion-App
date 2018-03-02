@@ -19,14 +19,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Amir Ingher
+ * @author Joona Ikonen
  */
 @Entity
 @Table(name = "cards")
@@ -34,52 +33,44 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Cards.findAll", query = "SELECT c FROM Cards c")
     , @NamedQuery(name = "Cards.findById", query = "SELECT c FROM Cards c WHERE c.id = :id")
-    , @NamedQuery(name = "Cards.findByMTotCost", query = "SELECT c FROM Cards c WHERE c.mTotCost = :mTotCost")
-    , @NamedQuery(name = "Cards.findByExtraFCost", query = "SELECT c FROM Cards c WHERE c.extraFCost = :extraFCost")
-    , @NamedQuery(name = "Cards.findBySubTotCost", query = "SELECT c FROM Cards c WHERE c.subTotCost = :subTotCost")
-    , @NamedQuery(name = "Cards.findByPTotCost", query = "SELECT c FROM Cards c WHERE c.pTotCost = :pTotCost")
-    , @NamedQuery(name = "Cards.findBySTotPrice", query = "SELECT c FROM Cards c WHERE c.sTotPrice = :sTotPrice")
-    , @NamedQuery(name = "Cards.findByCTotPrice", query = "SELECT c FROM Cards c WHERE c.cTotPrice = :cTotPrice")
-    , @NamedQuery(name = "Cards.findByComments", query = "SELECT c FROM Cards c WHERE c.comments = :comments")})
+    , @NamedQuery(name = "Cards.findByComments", query = "SELECT c FROM Cards c WHERE c.comments = :comments")
+    , @NamedQuery(name = "Cards.findByMaterialTotCost", query = "SELECT c FROM Cards c WHERE c.materialTotCost = :materialTotCost")
+    , @NamedQuery(name = "Cards.findByExtFabCost", query = "SELECT c FROM Cards c WHERE c.extFabCost = :extFabCost")
+    , @NamedQuery(name = "Cards.findBySubTotalCost", query = "SELECT c FROM Cards c WHERE c.subTotalCost = :subTotalCost")
+    , @NamedQuery(name = "Cards.findByPurchasePrice", query = "SELECT c FROM Cards c WHERE c.purchasePrice = :purchasePrice")
+    , @NamedQuery(name = "Cards.findBySellPrice", query = "SELECT c FROM Cards c WHERE c.sellPrice = :sellPrice")
+    , @NamedQuery(name = "Cards.findByConsumerPrice", query = "SELECT c FROM Cards c WHERE c.consumerPrice = :consumerPrice")
+    , @NamedQuery(name = "Cards.findByCoverPercent", query = "SELECT c FROM Cards c WHERE c.coverPercent = :coverPercent")})
 public class Cards implements Serializable {
 
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "mTotCost")
-    private int mTotCost;
-    @Basic(optional = false)
-    @NotNull()
-    @Column(name = "extraFCost")
-    private int extraFCost;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "subTotCost")
-    private int subTotCost;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "pTotCost")
-    private int pTotCost;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "sTotPrice")
-    private int sTotPrice;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "cTotPrice")
-    private int cTotPrice;
-    @Size(max = 100)
-    @Column(name = "Comments")
-    private String comments;
-    @ManyToMany(mappedBy = "cardsCollection")
-    private Collection<MaterialCost> materialCostCollection;
-    @ManyToMany(mappedBy = "cardsCollection")
-    private Collection<Subcost> subcostCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Size(max = 100)
+    @Column(name = "Comments")
+    private String comments;
+    // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
+    @Column(name = "materialTotCost")
+    private Float materialTotCost;
+    @Column(name = "extFabCost")
+    private Float extFabCost;
+    @Column(name = "subTotalCost")
+    private Float subTotalCost;
+    @Column(name = "purchasePrice")
+    private Float purchasePrice;
+    @Column(name = "sellPrice")
+    private Float sellPrice;
+    @Column(name = "consumerPrice")
+    private Float consumerPrice;
+    @Column(name = "coverPercent")
+    private Float coverPercent;
+    @ManyToMany(mappedBy = "cardsCollection")
+    private Collection<MaterialCost> materialCostCollection;
+    @ManyToMany(mappedBy = "cardsCollection")
+    private Collection<Subcost> subcostCollection;
     @JoinColumn(name = "bformID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private BudgetForm bformID;
@@ -91,16 +82,6 @@ public class Cards implements Serializable {
         this.id = id;
     }
 
-    public Cards(Integer id, int mTotCost, int extraFCost, int subTotCost, int pTotCost, int sTotPrice, int cTotPrice) {
-        this.id = id;
-        this.mTotCost = mTotCost;
-        this.extraFCost = extraFCost;
-        this.subTotCost = subTotCost;
-        this.pTotCost = pTotCost;
-        this.sTotPrice = sTotPrice;
-        this.cTotPrice = cTotPrice;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -109,6 +90,87 @@ public class Cards implements Serializable {
         this.id = id;
     }
 
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public Float getMaterialTotCost() {
+        return materialTotCost;
+    }
+
+    public void setMaterialTotCost(Float materialTotCost) {
+        this.materialTotCost = materialTotCost;
+    }
+
+    public Float getExtFabCost() {
+        return extFabCost;
+    }
+
+    public void setExtFabCost(Float extFabCost) {
+        this.extFabCost = extFabCost;
+    }
+
+    public Float getSubTotalCost() {
+        return subTotalCost;
+    }
+
+    public void setSubTotalCost(Float subTotalCost) {
+        this.subTotalCost = subTotalCost;
+    }
+
+    public Float getPurchasePrice() {
+        return purchasePrice;
+    }
+
+    public void setPurchasePrice(Float purchasePrice) {
+        this.purchasePrice = purchasePrice;
+    }
+
+    public Float getSellPrice() {
+        return sellPrice;
+    }
+
+    public void setSellPrice(Float sellPrice) {
+        this.sellPrice = sellPrice;
+    }
+
+    public Float getConsumerPrice() {
+        return consumerPrice;
+    }
+
+    public void setConsumerPrice(Float consumerPrice) {
+        this.consumerPrice = consumerPrice;
+    }
+
+    public Float getCoverPercent() {
+        return coverPercent;
+    }
+
+    public void setCoverPercent(Float coverPercent) {
+        this.coverPercent = coverPercent;
+    }
+
+    @XmlTransient
+    public Collection<MaterialCost> getMaterialCostCollection() {
+        return materialCostCollection;
+    }
+
+    public void setMaterialCostCollection(Collection<MaterialCost> materialCostCollection) {
+        this.materialCostCollection = materialCostCollection;
+    }
+
+    @XmlTransient
+    public Collection<Subcost> getSubcostCollection() {
+        return subcostCollection;
+    }
+
+    public void setSubcostCollection(Collection<Subcost> subcostCollection) {
+        this.subcostCollection = subcostCollection;
+    }
 
     public BudgetForm getBformID() {
         return bformID;
@@ -141,76 +203,6 @@ public class Cards implements Serializable {
     @Override
     public String toString() {
         return "model.Cards[ id=" + id + " ]";
-    }
-    @XmlTransient
-    public Collection<MaterialCost> getMaterialCostCollection() {
-        return materialCostCollection;
-    }
-    public void setMaterialCostCollection(Collection<MaterialCost> materialCostCollection) {
-        this.materialCostCollection = materialCostCollection;
-    }
-    @XmlTransient
-    public Collection<Subcost> getSubcostCollection() {
-        return subcostCollection;
-    }
-    public void setSubcostCollection(Collection<Subcost> subcostCollection) {
-        this.subcostCollection = subcostCollection;
-    }
-
-    public int getMTotCost() {
-        return mTotCost;
-    }
-
-    public void setMTotCost(int mTotCost) {
-        this.mTotCost = mTotCost;
-    }
-
-    public int getExtraFCost() {
-        return extraFCost;
-    }
-
-    public void setExtraFCost(int extraFCost) {
-        this.extraFCost = extraFCost;
-    }
-
-    public int getSubTotCost() {
-        return subTotCost;
-    }
-
-    public void setSubTotCost(int subTotCost) {
-        this.subTotCost = subTotCost;
-    }
-
-    public int getPTotCost() {
-        return pTotCost;
-    }
-
-    public void setPTotCost(int pTotCost) {
-        this.pTotCost = pTotCost;
-    }
-
-    public int getSTotPrice() {
-        return sTotPrice;
-    }
-
-    public void setSTotPrice(int sTotPrice) {
-        this.sTotPrice = sTotPrice;
-    }
-
-    public int getCTotPrice() {
-        return cTotPrice;
-    }
-
-    public void setCTotPrice(int cTotPrice) {
-        this.cTotPrice = cTotPrice;
-    }
-
-    public String getComments() {
-        return comments;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
     }
     
 }

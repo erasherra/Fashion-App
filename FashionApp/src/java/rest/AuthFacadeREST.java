@@ -34,7 +34,6 @@ public class AuthFacadeREST extends AbstractFacade<Auth> {
     @EJB
     private SessionBean sb;
     
-    
     @PersistenceContext(unitName = "FashionAppPU")
     private EntityManager em;
 
@@ -48,6 +47,7 @@ public class AuthFacadeREST extends AbstractFacade<Auth> {
     public void create(Auth entity) {
         super.create(entity);
     }
+    
     @POST
     @Path("login")
     @Produces(MediaType.TEXT_HTML)
