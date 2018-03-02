@@ -18,34 +18,34 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import model.ColorDB;
+import model.BudgetForm;
 
 /**
  *
  * @author Joona Ikonen
  */
 @Stateless
-@Path("model.colordb")
-public class ColorDBFacadeREST extends AbstractFacade<ColorDB> {
+@Path("model.budgetform")
+public class BudgetFormFacadeREST extends AbstractFacade<BudgetForm> {
 
     @PersistenceContext(unitName = "FashionAppPU")
     private EntityManager em;
 
-    public ColorDBFacadeREST() {
-        super(ColorDB.class);
+    public BudgetFormFacadeREST() {
+        super(BudgetForm.class);
     }
 
     @POST
     @Override
     @Consumes({ MediaType.APPLICATION_JSON})
-    public void create(ColorDB entity) {
+    public void create(BudgetForm entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({ MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, ColorDB entity) {
+    public void edit(@PathParam("id") Integer id, BudgetForm entity) {
         super.edit(entity);
     }
 
@@ -58,21 +58,21 @@ public class ColorDBFacadeREST extends AbstractFacade<ColorDB> {
     @GET
     @Path("{id}")
     @Produces({ MediaType.APPLICATION_JSON})
-    public ColorDB find(@PathParam("id") Integer id) {
+    public BudgetForm find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({ MediaType.APPLICATION_JSON})
-    public List<ColorDB> findAll() {
+    public List<BudgetForm> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({ MediaType.APPLICATION_JSON})
-    public List<ColorDB> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<BudgetForm> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 

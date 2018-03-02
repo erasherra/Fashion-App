@@ -29,10 +29,19 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(rest.AuthFacadeREST.class);
         resources.add(rest.AuthResource.class);
+        resources.add(rest.BudgetFormFacadeREST.class);
+        resources.add(rest.CardsFacadeREST.class);
         resources.add(rest.ColorDBFacadeREST.class);
+        resources.add(rest.ContactFacadeREST.class);
+        resources.add(rest.FormFacadeREST.class);
         resources.add(rest.GenericResource.class);
+        resources.add(rest.MaterialCostFacadeREST.class);
         resources.add(rest.MaterialsFacadeREST.class);
+        resources.add(rest.SubConCostTypesFacadeREST.class);
+        resources.add(rest.SubcostFacadeREST.class);
+        resources.add(rest.ThemesFacadeREST.class);
     }
     
 }

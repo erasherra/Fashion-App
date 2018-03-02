@@ -18,34 +18,34 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import model.ColorDB;
+import model.Subcost;
 
 /**
  *
  * @author Joona Ikonen
  */
 @Stateless
-@Path("model.colordb")
-public class ColorDBFacadeREST extends AbstractFacade<ColorDB> {
+@Path("model.subcost")
+public class SubcostFacadeREST extends AbstractFacade<Subcost> {
 
     @PersistenceContext(unitName = "FashionAppPU")
     private EntityManager em;
 
-    public ColorDBFacadeREST() {
-        super(ColorDB.class);
+    public SubcostFacadeREST() {
+        super(Subcost.class);
     }
 
     @POST
     @Override
     @Consumes({ MediaType.APPLICATION_JSON})
-    public void create(ColorDB entity) {
+    public void create(Subcost entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({ MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, ColorDB entity) {
+    public void edit(@PathParam("id") Integer id, Subcost entity) {
         super.edit(entity);
     }
 
@@ -58,21 +58,21 @@ public class ColorDBFacadeREST extends AbstractFacade<ColorDB> {
     @GET
     @Path("{id}")
     @Produces({ MediaType.APPLICATION_JSON})
-    public ColorDB find(@PathParam("id") Integer id) {
+    public Subcost find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({ MediaType.APPLICATION_JSON})
-    public List<ColorDB> findAll() {
+    public List<Subcost> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({ MediaType.APPLICATION_JSON})
-    public List<ColorDB> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Subcost> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 
