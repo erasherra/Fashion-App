@@ -19,7 +19,7 @@ body{
     max-width: 90%;
     background-image: url("../images/bg.jpg");
     background-color: black;
-   color:whitesmoke;
+    /* color:whitesmoke;  */
 }
 
 h1{
@@ -69,7 +69,7 @@ button,input{
   border-radius: 2px; 
   background-color: #3186ff;
   color: white;
-  padding: 20px;
+  padding: 10px;
   border-color:rgba(0,0,0,0);
   justify-content: center;
   
@@ -101,7 +101,7 @@ button,input{
     margin:  5% auto 15% auto;
     border: 1px solid rgba(0,0,0,0.9);
     width:30%;
-    text-align: center;
+    /* text-align: center; */
     
 
 }
@@ -113,8 +113,20 @@ button,input{
 #submit{
     width: 30%;
     background-color: #3186ff;
+    margin: auto;
+    margin-bottom: 15px;
     
 }
 
 
+label{
+    float:left;
+    padding: 10px;
+    width: 25%;
+    margin-left:15px;
+}
 
+.center{
+    margin:auto;
+    margin-top:15px;
+}
