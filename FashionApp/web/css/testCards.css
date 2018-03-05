@@ -193,19 +193,20 @@ body {
 
 .detailedCardContent {
     display: grid;
+    grid-gap: 1px;
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
     grid-template-areas: 
-    "name       name        delete"
-    "img        article     code"
-    "img        materials   materialNames"
-    "img        colors      colorNames"
-    "img        sizes       sizeNames"
-    "img        amount      amountNumber"
-    "img        purchase    purPrice"
-    "img        selling     selPrice"
-    "img        consumer    conPrice"
-    "buttons    buttons     buttons"
+    "name           name            delete"
+    "img            article         code"
+    "img            materials       materialNames"
+    "img            colors          colorNames"
+    "img            sizes           sizeNames"
+    "img            amount          amountNumber"
+    "img            purchase        purPrice"
+    "img            selling         selPrice"
+    "img            consumer        conPrice"
+    "empty          loadButton      saveButton"
 }
 /*delete button*/
 #deleteCardArea {
@@ -218,6 +219,7 @@ body {
 /*name*/
 .name {
     grid-area: name;
+    font-size: 30px;
 }
 
 /*image*/
@@ -291,6 +293,25 @@ body {
 }
 
 /*buttons*/
-.buttons {
-    grid-area: buttons;
+.loadButton {
+    float: center;
+    grid-area: loadButton;
+}
+
+.saveButton {
+    grid-area: saveButton;
+}
+
+.save {
+    float: right;
+    color: white;
+    text-align: center;
+    border-radius: 0.3em;
+    padding: 0.5em;
+    width: 5em;
+    margin-top: 0.5em;
+    background-color: #3186FF; 
+}
+.empty {
+    grid-area: empty;
 }
