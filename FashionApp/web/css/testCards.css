@@ -119,18 +119,6 @@ body {
     border-radius: 10px;
     padding: 0px;
 }
-#colorCardArea{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 30%;
-    z-index: 10;
-    margin-left: 8%;
-    margin-top: 7%;
-    box-sizing: border-box;
-    border-radius: 10px;
-    padding: 0px;
-}
 
 .hidden {
     display: none;
@@ -202,30 +190,23 @@ body {
     border-radius: 10px;
     padding: 10px;
 }
-.colorCard{
-    width: 50%;
-    
-    background-color: rgb(255, 255, 255);
-    box-sizing: border-box;
-    border-radius: 10px;
-    padding: 10px;
-}
 
 .detailedCardContent {
     display: grid;
+    grid-gap: 1px;
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
     grid-template-areas: 
-    "name       name        delete"
-    "img        article     code"
-    "img        materials   materialNames"
-    "img        colors      colorNames"
-    "img        sizes       sizeNames"
-    "img        amount      amountNumber"
-    "img        purchase    purPrice"
-    "img        selling     selPrice"
-    "img        consumer    conPrice"
-    "buttons    buttons     buttons"
+    "name           name            delete"
+    "img            article         code"
+    "img            materials       materialNames"
+    "img            colors          colorNames"
+    "img            sizes           sizeNames"
+    "img            amount          amountNumber"
+    "img            purchase        purPrice"
+    "img            selling         selPrice"
+    "img            consumer        conPrice"
+    "empty          loadButton      saveButton"
 }
 /*delete button*/
 #deleteCardArea {
@@ -238,6 +219,7 @@ body {
 /*name*/
 .name {
     grid-area: name;
+    font-size: 30px;
 }
 
 /*image*/
@@ -311,21 +293,25 @@ body {
 }
 
 /*buttons*/
-.buttons {
-    grid-area: buttons;
+.loadButton {
+    float: center;
+    grid-area: loadButton;
 }
 
-.addColor{
-    text-align: center;
-    color: white;
-    font-size: 1em;
-    margin: 1em;
-    padding: 1em;
-    background-color: #3186FF;
-    border-radius: 0.3em;
-    width: 5em;
-    
+.saveButton {
+    grid-area: saveButton;
 }
-.addColor:hover {
-    background-color: rgb(78, 152, 255);
+
+.save {
+    float: right;
+    color: white;
+    text-align: center;
+    border-radius: 0.3em;
+    padding: 0.5em;
+    width: 5em;
+    margin-top: 0.5em;
+    background-color: #3186FF; 
+}
+.empty {
+    grid-area: empty;
 }
