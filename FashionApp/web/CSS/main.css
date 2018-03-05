@@ -156,7 +156,7 @@ a{
 
 }
 
-.addProject:hover {
+#addProject:hover {
 
     background-color: rgb(78, 152, 255);
 
@@ -165,7 +165,7 @@ a{
 li{list-style-type: none;
 
    padding-top: 10px;
-   
+
 }
 
 li:hover{list-style-type: none;

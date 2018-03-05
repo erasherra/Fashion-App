@@ -175,7 +175,6 @@ body {
     border-radius: 0.3em;
 }
 
-
 .remove:hover {
     background-color: #ea4c00;
     border-color: #ea4c00;
@@ -196,6 +195,7 @@ body {
     display: grid;
     grid-template-columns: 2fr 1fr 1fr 1fr;
     grid-template-areas: 
+    "x           x              x               deleteX"
     "article     code           code            code"
     "product     name           name            name"
     "imgName     img            img             img"
@@ -203,11 +203,16 @@ body {
     "sellPrice   sellNumber     sellTotal       sellTotalNumber"
     "pieces      piecesNumber   piecesNumber    piecesNumber"
     "material    materialNames  materialNames   materialNames"
-    "color       colorNames     colorNames      colorNames"
+    "colorss       colorNames     colorNames      colorNames"
     "size        sizeValues     sizeValues      sizeValues"
     "detailed    detailed       detailed        detailed"
 }
-
+#deleteCardArea {
+    grid-area: deleteX;
+}
+#closeDetailedCard {
+    float: right;
+}
 .article {
     grid-area: article;
 }
@@ -263,8 +268,8 @@ body {
 .materialNames {
     grid-area: materialNames;
 }
-.color {
-    grid-area: color;
+.colorss {
+    grid-area: colorss;
 }
 .colorNames {
     grid-area: colorNames;
