@@ -8,6 +8,39 @@ document.addEventListener("DOMContentLoaded", function(event) {
 let a = document.getElementById('adding');
 a.addEventListener('click',function show() {
   document.getElementById("open").style.display = "block";
+  let dropdown = document.getElementById('collectionDrop');
+  dropdown.length = 0;
+  
+  let defaultOption = document.createElement('option');
+  defaultOption.text = 'Choose collection';
+  
+  dropdown.add(defaultOption);
+  dropdown.selectIndex = 0;
+  
+  const urlCollections = "http://10.114.32.54:8080/FashionApp/ws/model.themes/";
+  
+  
+  fetch(urlCollections)
+    .then(  
+    function(response) {  
+      if (response.status !== 200) {  
+        console.warn('Looks like there was a problem. Status Code: ' + 
+          response.status);  
+        return;  
+      }
+      
+      response.json().then(function(data){
+       let option;
+       for (let i = 0; i < data.length; i++) {
+          option = document.createElement('option');
+      	  option.text = data[i].theme;
+      	  option.value = data[i].id;
+      	  dropdown.add(option);
+    	}
+          
+      })
+  });
+  
 });
 
 
