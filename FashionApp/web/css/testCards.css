@@ -119,6 +119,18 @@ body {
     border-radius: 10px;
     padding: 0px;
 }
+#colorCardArea{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30%;
+    z-index: 10;
+    margin-left: 8%;
+    margin-top: 7%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 0px;
+}
 
 .hidden {
     display: none;
@@ -185,6 +197,14 @@ body {
 #detailedCard {
     width: 100%;
     min-height: 550px;
+    background-color: rgb(255, 255, 255);
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 10px;
+}
+.colorCard{
+    width: 50%;
+    
     background-color: rgb(255, 255, 255);
     box-sizing: border-box;
     border-radius: 10px;
@@ -293,4 +313,19 @@ body {
 /*buttons*/
 .buttons {
     grid-area: buttons;
+}
+
+.addColor{
+    text-align: center;
+    color: white;
+    font-size: 1em;
+    margin: 1em;
+    padding: 1em;
+    background-color: #3186FF;
+    border-radius: 0.3em;
+    width: 5em;
+    
+}
+.addColor:hover {
+    background-color: rgb(78, 152, 255);
 }
