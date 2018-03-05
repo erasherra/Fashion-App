@@ -86,6 +86,7 @@ span{
 .profile{
     text-align: center;
     display: block; 
+    padding-top: 0.5em;
 }
 
 #page {
@@ -149,10 +150,22 @@ a{
     
 }
 
+.navButton:hover {
+
+    background-color: rgb(78, 152, 255);
+
+}
+
+.addProject:hover {
+
+    background-color: rgb(78, 152, 255);
+
+}
 
 li{list-style-type: none;
 
    padding-top: 10px;
+   
 }
 
 li:hover{list-style-type: none;

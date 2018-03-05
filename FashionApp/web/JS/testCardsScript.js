@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
             //Listener for delete
             document.querySelector(`#dc${cardId}`).addEventListener("click", function (e) {
                 console.log("asd");
+                e.stopPropagation();
                 if (!confirm("Do you really want to delete this?")) {
                     e.preventDefault(); //Cancel deleting
                 } else {
