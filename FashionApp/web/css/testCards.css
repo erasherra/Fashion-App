@@ -196,8 +196,8 @@ body {
     grid-template-columns: 2fr 1fr 1fr 1fr;
     grid-template-areas: 
     "x           x              x               deleteX"
-    "article     code           code            code"
     "product     name           name            name"
+    "article     code           code            code"
     "imgName     img            img             img"
     "buyPrice    buyNumber      buyTotal        buyTotalNumber"
     "sellPrice   sellNumber     sellTotal       sellTotalNumber"
