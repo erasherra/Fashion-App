@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let outfitNumber = document.querySelectorAll(".outfit").length;
         uniqueId++;
         outfitNumber++;
-        console.log(`Outfit ${outfitNumber} added.`)
+        console.log(`Outfit ${outfitNumber} added.`);
         theme.insertAdjacentHTML('beforeend',
             `<div class="outfit" id="outfit${uniqueId}">
                 <div class="spaceBetween">
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.querySelector(`#outfit${num}`).remove();
                 console.log(`Outfit ${num} removed.`);
                 let setId = 0;
-                let titles = document.querySelectorAll(".title")
+                let titles = document.querySelectorAll(".title");
                 for (let title of titles) {
                     setId++;
                     title.innerHTML = `Outfit ${setId}`;
@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", function () {
         addCard.addEventListener("click", function () {
             uniqueCardId++;
             let newCard = document.createElement("div");
-            newCard.classList.add("addCard")
+            newCard.classList.add("addCard");
             newCard.id = `card${uniqueCardId}`;
             newCard.classList.add("simpleCard");
 
@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             //ADD DELETE
             let deleteCard = document.createElement("button");
-            deleteCard.classList.add("simpleCardDel")
+            deleteCard.classList.add("simpleCardDel");
             deleteCard.classList.add("remove");
             deleteCard.textContent = "x";
             deleteCard.id = `dc${uniqueCardId}`;
@@ -93,8 +93,8 @@ document.addEventListener("DOMContentLoaded", function () {
     addTheme.addEventListener("click", function () {
         themeAmount++;
         let newTheme = document.createElement("div");
-        newTheme.classList.add("themeButton")
-        newTheme.classList.add("buttons")
+        newTheme.classList.add("themeButton");
+        newTheme.classList.add("buttons");
         newTheme.innerHTML = `Theme ${themeAmount}`;
         let aThemeRow = document.querySelector(".themeRow");
         aThemeRow.insertBefore(newTheme, addTheme);
@@ -106,6 +106,25 @@ document.addEventListener("DOMContentLoaded", function () {
         dark.classList.add("behind");
     });
 
-
-
+/*
+    let saveButton = document.querySelector(".saveButton");
+    saveButton.addEventListener("click", function() {
+        let name = document.querySelector(".name").value;
+        let code = document.querySelector(".code").value;
+        let materialNames = document.querySelector(".materialNames").value;
+        let colorNames = document.querySelector(".colorNames").value;
+        let sizeNames = document.querySelector(".sizeNames").value;
+        let amountNumber = document.querySelector(".amountNumber").value;
+        let purPrice = document.querySelector(".purPrice").value;
+        let selPrice = document.querySelector(".selPrice").value;
+        let conPrice = document.querySelector(".conPrice").value;
+        
+        const cardUrl = "http://10.114.32.54:8080/FashionApp/ws/model.cards/";
+        let card = {
+            code: code,
+            materialNames: name
+            colorNames: 
+        });
+    });
+*/
 });
