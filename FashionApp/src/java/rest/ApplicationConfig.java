@@ -38,9 +38,9 @@ public class ApplicationConfig extends Application {
         resources.add(rest.FormFacadeREST.class);
         resources.add(rest.MaterialCostFacadeREST.class);
         resources.add(rest.MaterialsFacadeREST.class);
+        resources.add(rest.SolutionCardFacadeREST.class);
         resources.add(rest.SubConCostTypesFacadeREST.class);
         resources.add(rest.SubcostFacadeREST.class);
-        resources.add(rest.TestCardsFacadeREST.class);
         resources.add(rest.ThemesFacadeREST.class);
     }
     

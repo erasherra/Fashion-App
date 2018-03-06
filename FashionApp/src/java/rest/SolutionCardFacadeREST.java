@@ -18,61 +18,61 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import model.TestCards;
+import model.SolutionCard;
 
 /**
  *
  * @author Joel Vornanen
  */
 @Stateless
-@Path("model.testcards")
-public class TestCardsFacadeREST extends AbstractFacade<TestCards> {
+@Path("model.solutioncard")
+public class SolutionCardFacadeREST extends AbstractFacade<SolutionCard> {
 
     @PersistenceContext(unitName = "FashionAppPU")
     private EntityManager em;
 
-    public TestCardsFacadeREST() {
-        super(TestCards.class);
+    public SolutionCardFacadeREST() {
+        super(SolutionCard.class);
     }
 
     @POST
     @Override
-    @Consumes({MediaType.APPLICATION_JSON})
-    public void create(TestCards entity) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void create(SolutionCard entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Long id, TestCards entity) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void edit(@PathParam("id") Integer id, SolutionCard entity) {
         super.edit(entity);
     }
 
     @DELETE
     @Path("{id}")
-    public void remove(@PathParam("id") Long id) {
+    public void remove(@PathParam("id") Integer id) {
         super.remove(super.find(id));
     }
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public TestCards find(@PathParam("id") Long id) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public SolutionCard find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
-    @Produces({MediaType.APPLICATION_JSON})
-    public List<TestCards> findAll() {
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<SolutionCard> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
-    @Produces({MediaType.APPLICATION_JSON})
-    public List<TestCards> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<SolutionCard> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 
