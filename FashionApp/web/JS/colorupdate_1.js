@@ -61,12 +61,12 @@ document.addEventListener("DOMContentLoaded", function () {
             newCard.addEventListener("click", function () {
                 //remove hidden from detailed card
 
-                colorCard.innerHTML = `<div class="innerCard" id="innerCard${uniqueCardId}" >
+                colorCard.innerHTML = `<div class="innerCard" id="innerCard${newCard.id}" >
 
                        <div id="deleteCardArea">
                             <button id="closeDetailedCard" class="remove">x</button>
                         </div>
-                        <form id="open color${uniqueCardId}" class="addColorForm" onsubmit="return false">
+                        <form id="open color${newCard.id}" class="addColorForm" onsubmit="return false">
                             <div class="form-container">
                                 <div class="center">
                                     <label>Color name:</label>
@@ -81,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                     </br>
                                 </div>
 
-                                <div class="buttons" id="colorButton${uniqueCardId}"> Add Color </div>
+                                <div class="buttons" id="colorButton${newCard.id}"> Add Color </div>
                                 
                                 
                             </div>
@@ -89,11 +89,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     </div>`;
                 
-                            let closeDetailedCard = document.querySelector("#closeDetailedCard");
-            closeDetailedCard.addEventListener("click", function () {
-                colorCard.classList.add("hidden");
-                dark.classList.add("behind");
-            });
+                let saveColor = document.querySelector(`#colorButton${newCard.id}`);
+                saveColor.addEventListener("click", function (){
+                    
+                   let colorCode = document.querySelector("#colorCode").value;
+                   console.log(`colorbutton${newCard.id}`);
+                   newCard.style.background = "#" + colorCode;
+                   colorCard.classList.add("hidden");
+                    dark.classList.add("behind");
+                    
+                });
+                
+                
+
+                let closeDetailedCard = document.querySelector("#closeDetailedCard");
+                closeDetailedCard.addEventListener("click", function () {
+                    colorCard.classList.add("hidden");
+                    dark.classList.add("behind");
+                });
 
 
                 colorCard.classList.remove("hidden");

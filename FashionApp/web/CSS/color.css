@@ -54,6 +54,14 @@ button:hover,input:hover{
     
 }
 */
+#collectionDrop{
+    border: 2px solid ;
+    border-radius: 2px; 
+    background-color: white;
+    color: #888;
+    border-color:#ccc;
+    width: 55%;
+}
 
 input[type=text]{
     border: 2px solid ;
@@ -61,19 +69,19 @@ input[type=text]{
     background-color: white;
     color: #888;
     border-color:#ccc;
-    
+
 }
 button,input{
     display: flex;
-   border: 2px solid ;
-  border-radius: 2px; 
-  background-color: #3186ff;
-  color: white;
-  padding: 10px;
-  border-color:rgba(0,0,0,0);
-  justify-content: center;
-  
-    
+    border: 2px solid ;
+    border-radius: 2px; 
+    background-color: #3186ff;
+    color: white;
+    padding: 10px;
+    border-color:rgba(0,0,0,0);
+    justify-content: center;
+
+
 }
 
 .color-6{
@@ -102,20 +110,20 @@ button,input{
     border: 1px solid rgba(0,0,0,0.9);
     width:30%;
     /* text-align: center; */
-    
+
 
 }
 
 #colorName, #colorCode{
     width: 50%;
-    
+
 }
 #submit{
     width: 30%;
     background-color: #3186ff;
     margin: auto;
     margin-bottom: 15px;
-    
+
 }
 
 
