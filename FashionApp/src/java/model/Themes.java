@@ -36,15 +36,16 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Themes.findByTheme", query = "SELECT t FROM Themes t WHERE t.theme = :theme")})
 public class Themes implements Serializable {
 
+    @Size(max = 50)
+    @Column(name = "theme")
+    private String theme;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Size(max = 50)
-    @Column(name = "theme")
-    private String theme;
     @ManyToMany(mappedBy = "themesCollection")
     private Collection<ColorDB> colorDBCollection;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "themeID")
@@ -65,13 +66,6 @@ public class Themes implements Serializable {
         this.id = id;
     }
 
-    public String getTheme() {
-        return theme;
-    }
-
-    public void setTheme(String theme) {
-        this.theme = theme;
-    }
 
     @XmlTransient
     public Collection<ColorDB> getColorDBCollection() {
@@ -114,6 +108,14 @@ public class Themes implements Serializable {
     @Override
     public String toString() {
         return "model.Themes[ id=" + id + " ]";
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
     }
     
 }

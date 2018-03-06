@@ -37,17 +37,23 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "BudgetForm.findByAmount", query = "SELECT b FROM BudgetForm b WHERE b.amount = :amount")})
 public class BudgetForm implements Serializable {
 
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "amount")
-    private int amount;
-
-    private static final long serialVersionUID = 1L;
-    @Id
+    @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "amount")
+    private int amount;
+    @OneToMany(mappedBy = "budgetformID")
+    private Collection<Project> projectCollection;
+
+    private static final long serialVersionUID = 1L;
+    /*@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    private Integer id;*/
     @JoinColumn(name = "themeID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Themes themeID;
@@ -128,6 +134,23 @@ public class BudgetForm implements Serializable {
         return "model.BudgetForm[ id=" + id + " ]";
     }
 
+   /* public BudgetForm(Integer id) {
+        this.id = id;
+    }
+
+    public BudgetForm(Integer id, int amount) {
+        this.id = id;
+        this.amount = amount;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }*/
+
     public int getAmount() {
         return amount;
     }
@@ -135,5 +158,39 @@ public class BudgetForm implements Serializable {
     public void setAmount(int amount) {
         this.amount = amount;
     }
-    
+
+    @XmlTransient
+    public Collection<Project> getProjectCollection() {
+        return projectCollection;
+    }
+
+    public void setProjectCollection(Collection<Project> projectCollection) {
+        this.projectCollection = projectCollection;
+    }
+
+  /*  @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (id != null ? id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof BudgetForm)) {
+            return false;
+        }
+        BudgetForm other = (BudgetForm) object;
+        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "model.BudgetForm[ id=" + id + " ]";
+    }
+    */
 }

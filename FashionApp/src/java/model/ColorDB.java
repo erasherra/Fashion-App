@@ -18,6 +18,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -37,18 +38,21 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "ColorDB.findByColorCode", query = "SELECT c FROM ColorDB c WHERE c.colorCode = :colorCode")})
 public class ColorDB implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "colorID")
-    private Integer colorID;
     @Size(max = 30)
     @Column(name = "colorName")
     private String colorName;
     @Size(max = 30)
     @Column(name = "colorCode")
     private String colorCode;
+    @OneToMany(mappedBy = "colorId")
+    private Collection<Project> projectCollection;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "colorID")
+    private Integer colorID;
     @JoinTable(name = "colorHolder", joinColumns = {
         @JoinColumn(name = "colorid", referencedColumnName = "colorID")}, inverseJoinColumns = {
         @JoinColumn(name = "themeID", referencedColumnName = "ID")})
@@ -70,21 +74,6 @@ public class ColorDB implements Serializable {
         this.colorID = colorID;
     }
 
-    public String getColorName() {
-        return colorName;
-    }
-
-    public void setColorName(String colorName) {
-        this.colorName = colorName;
-    }
-
-    public String getColorCode() {
-        return colorCode;
-    }
-
-    public void setColorCode(String colorCode) {
-        this.colorCode = colorCode;
-    }
 
     @XmlTransient
     public Collection<Themes> getThemesCollection() {
@@ -118,6 +107,31 @@ public class ColorDB implements Serializable {
     @Override
     public String toString() {
         return "model.ColorDB[ colorID=" + colorID + " ]";
+    }
+
+    public String getColorName() {
+        return colorName;
+    }
+
+    public void setColorName(String colorName) {
+        this.colorName = colorName;
+    }
+
+    public String getColorCode() {
+        return colorCode;
+    }
+
+    public void setColorCode(String colorCode) {
+        this.colorCode = colorCode;
+    }
+
+    @XmlTransient
+    public Collection<Project> getProjectCollection() {
+        return projectCollection;
+    }
+
+    public void setProjectCollection(Collection<Project> projectCollection) {
+        this.projectCollection = projectCollection;
     }
     
 }

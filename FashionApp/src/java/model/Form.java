@@ -41,12 +41,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Form.findByTotalCover", query = "SELECT f FROM Form f WHERE f.totalCover = :totalCover")})
 public class Form implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
@@ -56,10 +50,15 @@ public class Form implements Serializable {
     @NotNull
     @Column(name = "amountStyles")
     private int amountStyles;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "aAmountStyles")
-    private int aAmountStyles;
+    private Integer aAmountStyles;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "avgPrice")
     private Float avgPrice;
@@ -92,29 +91,6 @@ public class Form implements Serializable {
         this.id = id;
     }
 
-    public String getProduct() {
-        return product;
-    }
-
-    public void setProduct(String product) {
-        this.product = product;
-    }
-
-    public int getAmountStyles() {
-        return amountStyles;
-    }
-
-    public void setAmountStyles(int amountStyles) {
-        this.amountStyles = amountStyles;
-    }
-
-    public int getAAmountStyles() {
-        return aAmountStyles;
-    }
-
-    public void setAAmountStyles(int aAmountStyles) {
-        this.aAmountStyles = aAmountStyles;
-    }
 
     public Float getAvgPrice() {
         return avgPrice;
@@ -172,6 +148,31 @@ public class Form implements Serializable {
     @Override
     public String toString() {
         return "model.Form[ id=" + id + " ]";
+    }
+
+
+    public Integer getAAmountStyles() {
+        return aAmountStyles;
+    }
+
+    public void setAAmountStyles(Integer aAmountStyles) {
+        this.aAmountStyles = aAmountStyles;
+    }
+
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
+
+    public int getAmountStyles() {
+        return amountStyles;
+    }
+
+    public void setAmountStyles(int amountStyles) {
+        this.amountStyles = amountStyles;
     }
     
 }

@@ -42,12 +42,6 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "MaterialCost.findByFreight", query = "SELECT m FROM MaterialCost m WHERE m.freight = :freight")})
 public class MaterialCost implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "ID")
-    private Integer id;
     @Size(max = 100)
     @Column(name = "article")
     private String article;
@@ -63,6 +57,13 @@ public class MaterialCost implements Serializable {
     @NotNull
     @Column(name = "tCosts")
     private float tCosts;
+
+    private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "ID")
+    private Integer id;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "freight")
     private Float freight;
@@ -97,37 +98,6 @@ public class MaterialCost implements Serializable {
         this.id = id;
     }
 
-    public String getArticle() {
-        return article;
-    }
-
-    public void setArticle(String article) {
-        this.article = article;
-    }
-
-    public float getCMeter() {
-        return cMeter;
-    }
-
-    public void setCMeter(float cMeter) {
-        this.cMeter = cMeter;
-    }
-
-    public float getUPrice() {
-        return uPrice;
-    }
-
-    public void setUPrice(float uPrice) {
-        this.uPrice = uPrice;
-    }
-
-    public float getTCosts() {
-        return tCosts;
-    }
-
-    public void setTCosts(float tCosts) {
-        this.tCosts = tCosts;
-    }
 
     public Float getFreight() {
         return freight;
@@ -177,6 +147,38 @@ public class MaterialCost implements Serializable {
     @Override
     public String toString() {
         return "model.MaterialCost[ id=" + id + " ]";
+    }
+
+    public String getArticle() {
+        return article;
+    }
+
+    public void setArticle(String article) {
+        this.article = article;
+    }
+
+    public float getCMeter() {
+        return cMeter;
+    }
+
+    public void setCMeter(float cMeter) {
+        this.cMeter = cMeter;
+    }
+
+    public float getUPrice() {
+        return uPrice;
+    }
+
+    public void setUPrice(float uPrice) {
+        this.uPrice = uPrice;
+    }
+
+    public float getTCosts() {
+        return tCosts;
+    }
+
+    public void setTCosts(float tCosts) {
+        this.tCosts = tCosts;
     }
     
 }

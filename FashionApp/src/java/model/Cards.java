@@ -18,6 +18,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -43,15 +44,18 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Cards.findByCoverPercent", query = "SELECT c FROM Cards c WHERE c.coverPercent = :coverPercent")})
 public class Cards implements Serializable {
 
+    @Size(max = 100)
+    @Column(name = "Comments")
+    private String comments;
+    @OneToMany(mappedBy = "cardID")
+    private Collection<Project> projectCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Size(max = 100)
-    @Column(name = "Comments")
-    private String comments;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "materialTotCost")
     private Float materialTotCost;
@@ -90,13 +94,6 @@ public class Cards implements Serializable {
         this.id = id;
     }
 
-    public String getComments() {
-        return comments;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
 
     public Float getMaterialTotCost() {
         return materialTotCost;
@@ -203,6 +200,23 @@ public class Cards implements Serializable {
     @Override
     public String toString() {
         return "model.Cards[ id=" + id + " ]";
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    @XmlTransient
+    public Collection<Project> getProjectCollection() {
+        return projectCollection;
+    }
+
+    public void setProjectCollection(Collection<Project> projectCollection) {
+        this.projectCollection = projectCollection;
     }
     
 }
