@@ -5,6 +5,8 @@
  */
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -66,6 +68,9 @@ public class Form implements Serializable {
     private Float totalSales;
     @Column(name = "totalCover")
     private Float totalCover;
+    
+    @JsonManagedReference
+     @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "formID")
     private Collection<BudgetForm> budgetFormCollection;
 
