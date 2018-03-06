@@ -18,34 +18,34 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import model.Cards;
+import model.Project;
 
 /**
  *
  * @author saritakhanal
  */
 @Stateless
-@Path("model.cards")
-public class CardsFacadeREST extends AbstractFacade<Cards> {
+@Path("model.project")
+public class ProjectFacadeREST extends AbstractFacade<Project> {
 
     @PersistenceContext(unitName = "FashionAppPU")
     private EntityManager em;
 
-    public CardsFacadeREST() {
-        super(Cards.class);
+    public ProjectFacadeREST() {
+        super(Project.class);
     }
 
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void create(Cards entity) {
+    public void create(Project entity) {
         super.create(entity);
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, Cards entity) {
+    public void edit(@PathParam("id") Integer id, Project entity) {
         super.edit(entity);
     }
 
@@ -58,21 +58,21 @@ public class CardsFacadeREST extends AbstractFacade<Cards> {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public Cards find(@PathParam("id") Integer id) {
+    public Project find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Cards> findAll() {
+    public List<Project> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
-    public List<Cards> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Project> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 
