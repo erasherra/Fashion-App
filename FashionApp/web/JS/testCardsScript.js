@@ -89,14 +89,15 @@ document.addEventListener("DOMContentLoaded", function () {
                         <option value="Yeezys">Yeezys</option>
                     </select>
                 </div>
-                <div class="saveButton" id="sb${uniqueCardId}">
+                <div class="saveButton" id="sb${newCard.id}">
                     <div class="save buttons">Save</div>
                 </div>
                 `;
                 //save card button functionality
-                let saveCard = document.querySelector(`#sb${uniqueCardId}`);
+                let saveCard = document.querySelector(`#sb${newCard.id}`);
                 saveCard.addEventListener("click", function(){
                     //save everything into the database
+                    console.log(`sb${newCard.id}`);
                 });
 
                 //closing detailed card
