@@ -1,12 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
     let addButton = document.querySelector("#add");
+    let editButton = document.querySelector("#edit");
     let theme = document.querySelector(".aTheme");
     let colorCard = document.querySelector(".colorCard");
     let colorCardArea = document.querySelector("#colorCardArea");
-    let closeDetailedCard = document.querySelector("#closeDetailedCard");
+
     let dark = document.querySelector("#dark");
     let uniqueId = 0;
     let uniqueCardId = 0;
+    let innerId = 0;
     let putHere = document.querySelector(".putHere");
     let addColor = document.querySelector('#addColor');
     let addOutfit = addButton.addEventListener("click", function () {
@@ -48,14 +50,52 @@ document.addEventListener("DOMContentLoaded", function () {
             uniqueCardId++;
             let newCard = document.createElement("div");
             newCard.classList.add("addCard");
-            newCard.id = `card${uniqueCardId}`;
+            newCard.id = uniqueCardId;
             newCard.classList.add("simpleCard");
 
-            
+
+
+
 
             //card on click
             newCard.addEventListener("click", function () {
                 //remove hidden from detailed card
+
+                colorCard.innerHTML = `<div class="innerCard" id="innerCard${uniqueCardId}" >
+
+                       <div id="deleteCardArea">
+                            <button id="closeDetailedCard" class="remove">x</button>
+                        </div>
+                        <form id="open color${uniqueCardId}" class="addColorForm" onsubmit="return false">
+                            <div class="form-container">
+                                <div class="center">
+                                    <label>Color name:</label>
+
+                                    <input type="text" id="colorName">
+                                </div>
+                                </br>
+                                <div class="center">
+                                    <label>Color code:</label>
+                                    <input type="text" id="colorCode">
+
+                                    </br>
+                                </div>
+
+                                <div class="buttons" id="colorButton${uniqueCardId}"> Add Color </div>
+                                
+                                
+                            </div>
+                        </form>
+
+                    </div>`;
+                
+                            let closeDetailedCard = document.querySelector("#closeDetailedCard");
+            closeDetailedCard.addEventListener("click", function () {
+                colorCard.classList.add("hidden");
+                dark.classList.add("behind");
+            });
+
+
                 colorCard.classList.remove("hidden");
                 dark.classList.remove("behind");
                 console.log("asdfasdfasdf");
@@ -63,11 +103,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-            //ADD TEXT
-            let cardText = document.createElement("div");
-            cardText.classList.add("simpleCardName");
-            cardText.textContent = uniqueCardId;
-            newCard.appendChild(cardText);
+            /*  //ADD TEXT
+             let cardText = document.createElement("div");
+             cardText.classList.add("simpleCardName");
+             cardText.textContent = uniqueCardId;
+             newCard.appendChild(cardText); */
 
 
 
@@ -99,10 +139,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
-    closeDetailedCard.addEventListener("click", function () {
-        colorCard.classList.add("hidden");
-        dark.classList.add("behind");
-    });
+
 
     /*addColor.addEventListener("click", function () {
      
