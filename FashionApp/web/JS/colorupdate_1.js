@@ -58,6 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 //remove hidden from detailed card
                 colorCard.classList.remove("hidden");
                 dark.classList.remove("behind");
+                console.log("asdfasdfasdf");
             });
 
 
