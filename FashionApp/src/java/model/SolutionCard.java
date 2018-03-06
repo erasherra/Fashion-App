@@ -9,10 +9,7 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -25,73 +22,69 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author Joel Vornanen
  */
 @Entity
-@Table(name = "testCards")
+@Table(name = "solutionCard")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "TestCards.findAll", query = "SELECT t FROM TestCards t")
-    , @NamedQuery(name = "TestCards.findById", query = "SELECT t FROM TestCards t WHERE t.id = :id")
-    , @NamedQuery(name = "TestCards.findByAmount", query = "SELECT t FROM TestCards t WHERE t.amount = :amount")
-    , @NamedQuery(name = "TestCards.findByPPrice", query = "SELECT t FROM TestCards t WHERE t.pPrice = :pPrice")
-    , @NamedQuery(name = "TestCards.findBySPrice", query = "SELECT t FROM TestCards t WHERE t.sPrice = :sPrice")
-    , @NamedQuery(name = "TestCards.findByConPrice", query = "SELECT t FROM TestCards t WHERE t.conPrice = :conPrice")
-    , @NamedQuery(name = "TestCards.findByCovPrice", query = "SELECT t FROM TestCards t WHERE t.covPrice = :covPrice")})
-public class TestCards implements Serializable {
+    @NamedQuery(name = "SolutionCard.findAll", query = "SELECT s FROM SolutionCard s")
+    , @NamedQuery(name = "SolutionCard.findById", query = "SELECT s FROM SolutionCard s WHERE s.id = :id")
+    , @NamedQuery(name = "SolutionCard.findByName", query = "SELECT s FROM SolutionCard s WHERE s.name = :name")
+    , @NamedQuery(name = "SolutionCard.findByComment", query = "SELECT s FROM SolutionCard s WHERE s.comment = :comment")
+    , @NamedQuery(name = "SolutionCard.findByArticlecode", query = "SELECT s FROM SolutionCard s WHERE s.articlecode = :articlecode")
+    , @NamedQuery(name = "SolutionCard.findByAmount", query = "SELECT s FROM SolutionCard s WHERE s.amount = :amount")
+    , @NamedQuery(name = "SolutionCard.findByPprice", query = "SELECT s FROM SolutionCard s WHERE s.pprice = :pprice")
+    , @NamedQuery(name = "SolutionCard.findBySprice", query = "SELECT s FROM SolutionCard s WHERE s.sprice = :sprice")
+    , @NamedQuery(name = "SolutionCard.findByConprice", query = "SELECT s FROM SolutionCard s WHERE s.conprice = :conprice")
+    , @NamedQuery(name = "SolutionCard.findByMaterials", query = "SELECT s FROM SolutionCard s WHERE s.materials = :materials")
+    , @NamedQuery(name = "SolutionCard.findBySizes", query = "SELECT s FROM SolutionCard s WHERE s.sizes = :sizes")
+    , @NamedQuery(name = "SolutionCard.findByImg", query = "SELECT s FROM SolutionCard s WHERE s.img = :img")})
+public class SolutionCard implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @NotNull
     @Column(name = "id")
-    private Long id;
-    @Lob
-    @Size(max = 65535)
+    private Integer id;
+    @Size(max = 50)
     @Column(name = "name")
     private String name;
-    @Lob
-    @Size(max = 65535)
+    @Size(max = 1000)
     @Column(name = "comment")
     private String comment;
-    @Lob
-    @Size(max = 65535)
-    @Column(name = "articleCode")
-    private String articleCode;
+    @Size(max = 50)
+    @Column(name = "articlecode")
+    private String articlecode;
     @Column(name = "amount")
     private Integer amount;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
-    @Column(name = "pPrice")
-    private Float pPrice;
-    @Column(name = "sPrice")
-    private Float sPrice;
-    @Column(name = "conPrice")
-    private Float conPrice;
-    @Column(name = "covPrice")
-    private Float covPrice;
-    @Lob
-    @Size(max = 65535)
+    @Column(name = "pprice")
+    private Float pprice;
+    @Column(name = "sprice")
+    private Float sprice;
+    @Column(name = "conprice")
+    private Float conprice;
+    @Size(max = 100)
     @Column(name = "materials")
     private String materials;
-    @Lob
-    @Size(max = 65535)
+    @Size(max = 30)
     @Column(name = "sizes")
     private String sizes;
-    @Lob
-    @Size(max = 65535)
+    @Size(max = 50)
     @Column(name = "img")
     private String img;
 
-    public TestCards() {
+    public SolutionCard() {
     }
 
-    public TestCards(Long id) {
+    public SolutionCard(Integer id) {
         this.id = id;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -111,12 +104,12 @@ public class TestCards implements Serializable {
         this.comment = comment;
     }
 
-    public String getArticleCode() {
-        return articleCode;
+    public String getArticlecode() {
+        return articlecode;
     }
 
-    public void setArticleCode(String articleCode) {
-        this.articleCode = articleCode;
+    public void setArticlecode(String articlecode) {
+        this.articlecode = articlecode;
     }
 
     public Integer getAmount() {
@@ -127,36 +120,28 @@ public class TestCards implements Serializable {
         this.amount = amount;
     }
 
-    public Float getPPrice() {
-        return pPrice;
+    public Float getPprice() {
+        return pprice;
     }
 
-    public void setPPrice(Float pPrice) {
-        this.pPrice = pPrice;
+    public void setPprice(Float pprice) {
+        this.pprice = pprice;
     }
 
-    public Float getSPrice() {
-        return sPrice;
+    public Float getSprice() {
+        return sprice;
     }
 
-    public void setSPrice(Float sPrice) {
-        this.sPrice = sPrice;
+    public void setSprice(Float sprice) {
+        this.sprice = sprice;
     }
 
-    public Float getConPrice() {
-        return conPrice;
+    public Float getConprice() {
+        return conprice;
     }
 
-    public void setConPrice(Float conPrice) {
-        this.conPrice = conPrice;
-    }
-
-    public Float getCovPrice() {
-        return covPrice;
-    }
-
-    public void setCovPrice(Float covPrice) {
-        this.covPrice = covPrice;
+    public void setConprice(Float conprice) {
+        this.conprice = conprice;
     }
 
     public String getMaterials() {
@@ -193,10 +178,10 @@ public class TestCards implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof TestCards)) {
+        if (!(object instanceof SolutionCard)) {
             return false;
         }
-        TestCards other = (TestCards) object;
+        SolutionCard other = (SolutionCard) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -205,7 +190,7 @@ public class TestCards implements Serializable {
 
     @Override
     public String toString() {
-        return "model.TestCards[ id=" + id + " ]";
+        return "model.SolutionCard[ id=" + id + " ]";
     }
     
 }

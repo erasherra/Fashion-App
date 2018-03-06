@@ -3,7 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
     let theme = document.querySelector(".aTheme");
     let detailedCard = document.querySelector("#detailedCard");
     let detailedCardArea = document.querySelector("#detailedCardArea");
-    let closeDetailedCard = document.querySelector("#closeDetailedCard");
+    let detailedCardContent = document.querySelector("#detailedCardContent");
+
     let dark = document.querySelector("#dark");
     let uniqueId = 0;
     let uniqueCardId = 0;
@@ -30,6 +31,8 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 document.querySelector(`#outfit${num}`).remove();
                 console.log(`Outfit ${num} removed.`);
+
+                //Outfit texts number part
                 let setId = 0;
                 let titles = document.querySelectorAll(".title");
                 for (let title of titles) {
@@ -39,6 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
 
+        //creating the small card
         let addCard = document.querySelector(`#addCard${num}`);
         addCard.addEventListener("click", function () {
             uniqueCardId++;
@@ -52,6 +56,58 @@ document.addEventListener("DOMContentLoaded", function () {
                 //remove hidden from detailed card
                 detailedCard.classList.remove("hidden");
                 dark.classList.remove("behind");
+
+                //adding the content to detailed card
+                detailedCardContent.innerHTML = `
+                <input type="text" class="name" placeholder="Product name">
+                <div id="deleteCardArea">
+                    <button class="delete" id="closeDetailedCard">x</button>
+                </div>
+                <img src="images/cap.jpg" class="img">
+                <div class="article lineHight">Article: </div>
+                <input class="code" placeholder="Article code">
+                <div class="materials lineHight">Materials: </div>
+                <input type="text" class="materialNames" placeholder="Add...">
+                <div class="colors lineHight">Colors: </div>
+                <input type="text" class="colorNames" placeholder="Add...">
+                <div class="sizes lineHight">Sizes: </div>
+                <input type="text" class="sizeNames" placeholder="Add...">
+                <div class="amount lineHight">Amount: </div>
+                <input type="number" class="amountNumber">
+                <div class="purchase lineHight">Purchase price</div>
+                <input type="number" class="purPrice">
+                <div class="selling lineHight">Selling price</div>
+                <input type="number" class="selPrice">
+                <div class="consumer lineHight">Consumer price</div>
+                <input type="number" class="conPrice">
+                <div class="empty"></div>
+                <div class="loadButton">
+                    <select>
+                        <option value="Hat">Hat</option>
+                        <option value="Pants">Pants</option>
+                        <option value="Scarf">Scarf</option>
+                        <option value="Yeezys">Yeezys</option>
+                    </select>
+                </div>
+                <div class="saveButton" id="sb${newCard.id}">
+                    <div class="save buttons">Save</div>
+                </div>
+                `;
+                //save card button functionality
+                let saveCard = document.querySelector(`#sb${newCard.id}`);
+                saveCard.addEventListener("click", function(){
+                    //save everything into the database
+                    console.log(`sb${newCard.id}`);
+                });
+
+                //closing detailed card
+                let closeDetailedCard = document.querySelector("#closeDetailedCard");
+                closeDetailedCard.addEventListener("click", function () {
+                    detailedCard.classList.add("hidden");
+                    dark.classList.add("behind");
+                });
+
+
             });
 
             //ADD TEXT
@@ -68,7 +124,8 @@ document.addEventListener("DOMContentLoaded", function () {
             deleteCard.id = `dc${uniqueCardId}`;
             newCard.appendChild(deleteCard);
 
-
+            //ADD IMAGE
+            //let cardImg = document.createElement("div");
 
             let aRow = document.querySelector(`#row${num}`);
             aRow.insertBefore(newCard, addCard);
@@ -101,30 +158,26 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(`Theme ${themeAmount} added`);
     });
 
-    closeDetailedCard.addEventListener("click", function () {
-        detailedCard.classList.add("hidden");
-        dark.classList.add("behind");
-    });
 
-/*
-    let saveButton = document.querySelector(".saveButton");
-    saveButton.addEventListener("click", function() {
-        let name = document.querySelector(".name").value;
-        let code = document.querySelector(".code").value;
-        let materialNames = document.querySelector(".materialNames").value;
-        let colorNames = document.querySelector(".colorNames").value;
-        let sizeNames = document.querySelector(".sizeNames").value;
-        let amountNumber = document.querySelector(".amountNumber").value;
-        let purPrice = document.querySelector(".purPrice").value;
-        let selPrice = document.querySelector(".selPrice").value;
-        let conPrice = document.querySelector(".conPrice").value;
-        
-        const cardUrl = "http://10.114.32.54:8080/FashionApp/ws/model.cards/";
-        let card = {
-            code: code,
-            materialNames: name
-            colorNames: 
+    /*
+        let saveButton = document.querySelector(".saveButton");
+        saveButton.addEventListener("click", function() {
+            let name = document.querySelector(".name").value;
+            let code = document.querySelector(".code").value;
+            let materialNames = document.querySelector(".materialNames").value;
+            let colorNames = document.querySelector(".colorNames").value;
+            let sizeNames = document.querySelector(".sizeNames").value;
+            let amountNumber = document.querySelector(".amountNumber").value;
+            let purPrice = document.querySelector(".purPrice").value;
+            let selPrice = document.querySelector(".selPrice").value;
+            let conPrice = document.querySelector(".conPrice").value;
+            
+            const cardUrl = "http://10.114.32.54:8080/FashionApp/ws/model.cards/";
+            let card = {
+                code: code,
+                materialNames: name
+                colorNames: 
+            });
         });
-    });
-*/
+    */
 });

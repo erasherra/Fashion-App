@@ -12,11 +12,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -24,26 +24,33 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author saritakhanal
  */
 @Entity
-@Table(name = "auth")
+@Table(name = "project")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Auth.findAll", query = "SELECT a FROM Auth a")
-    , @NamedQuery(name = "Auth.findById", query = "SELECT a FROM Auth a WHERE a.id = :id")})
-public class Auth implements Serializable {
+    @NamedQuery(name = "Project.findAll", query = "SELECT p FROM Project p")
+    , @NamedQuery(name = "Project.findById", query = "SELECT p FROM Project p WHERE p.id = :id")})
+public class Project implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    
+    @Column(name = "ID")
     private Integer id;
-    private String user;
-    private String password;
+    @JoinColumn(name = "cardID", referencedColumnName = "ID")
+    @ManyToOne
+    private Cards cardID;
+    @JoinColumn(name = "colorId", referencedColumnName = "colorID")
+    @ManyToOne
+    private ColorDB colorId;
+    @JoinColumn(name = "BudgetformID", referencedColumnName = "ID")
+    @ManyToOne
+    private BudgetForm budgetformID;
 
-    public Auth() {
+    public Project() {
     }
 
-    public Auth(Integer id) {
+    public Project(Integer id) {
         this.id = id;
     }
 
@@ -55,20 +62,28 @@ public class Auth implements Serializable {
         this.id = id;
     }
 
-    public String getUser() {
-        return user;
+    public Cards getCardID() {
+        return cardID;
     }
 
-    public void setUser(String user) {
-        this.user = user;
+    public void setCardID(Cards cardID) {
+        this.cardID = cardID;
     }
 
-    public String getPassword() {
-        return password;
+    public ColorDB getColorId() {
+        return colorId;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setColorId(ColorDB colorId) {
+        this.colorId = colorId;
+    }
+
+    public BudgetForm getBudgetformID() {
+        return budgetformID;
+    }
+
+    public void setBudgetformID(BudgetForm budgetformID) {
+        this.budgetformID = budgetformID;
     }
 
     @Override
@@ -81,10 +96,10 @@ public class Auth implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Auth)) {
+        if (!(object instanceof Project)) {
             return false;
         }
-        Auth other = (Auth) object;
+        Project other = (Project) object;
         if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
             return false;
         }
@@ -93,7 +108,7 @@ public class Auth implements Serializable {
 
     @Override
     public String toString() {
-        return "model.Auth[ id=" + id + " ]";
+        return "model.Project[ id=" + id + " ]";
     }
     
 }
