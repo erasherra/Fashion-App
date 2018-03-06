@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Joona Ikonen
+ * @author saritakhanal
  */
 @Entity
 @Table(name = "subcost")
