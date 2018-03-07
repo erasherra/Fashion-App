@@ -78,16 +78,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 <input type="text" class="sizeNames" id="sizes${newCard.id}" placeholder="Add...">
                 
                 <div class="amount lineHight">Amount: </div>
-                <input type="number" class="amountNumber">
+                <input type="number" class="amountNumber" id="amount${newCard.id}">
                 
                 <div class="purchase lineHight">Purchase price</div>
-                <input type="number" class="purPrice">
+                <input type="number" class="purPrice" id="pur${newCard.id}">
                 
                 <div class="selling lineHight">Selling price</div>
-                <input type="number" class="selPrice">
+                <input type="number" class="selPrice" id="sel${newCard.id}">
                 
                 <div class="consumer lineHight">Consumer price</div>
-                <input type="number" class="conPrice">
+                <input type="number" class="conPrice" id="con${newCard.id}">
                 
                 <div class="empty"></div>
                 <div class="loadButton">
@@ -99,9 +99,17 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
                 `;
 
-                //setting the card things
+                //setting the detailed card fields
                 let thisName = document.querySelector(`#name${newCard.id}`);
-
+                let thisImg = document.querySelector(`#img${newCard.id}`);
+                let thisCode = document.querySelector(`#code${newCard.id}`);
+                let thisMaterials = document.querySelector(`#materials${newCard.id}`);
+                let thisColors = document.querySelector(`#colors${newCard.id}`);
+                let thisSizes = document.querySelector(`#sizes${newCard.id}`);
+                let thisAmount = document.querySelector(`#amount${newCard.id}`);
+                let thisPurPrice = document.querySelector(`#pur${newCard.id}`);
+                let thisSelPrice = document.querySelector(`#sel${newCard.id}`);
+                let thisConPrice = document.querySelector(`#con${newCard.id}`);
 
 
                 //load button
@@ -137,7 +145,17 @@ document.addEventListener("DOMContentLoaded", function () {
 
                                     dropdown.addEventListener("change", function(){
                                         console.log("jani");
-                                        thisName.value = data[dropdown.value].name;
+                                        let theValue = dropdown.value-1;
+                                        thisName.value = data[theValue].name;
+                                        thisCode.value = data[theValue].articlecode;
+                                        thisMaterials.value = data[theValue].materials;
+                                        thisColors.value = data[theValue].colors;
+                                        thisSizes.value = data[theValue].sizes;
+                                        thisAmount.value = data[theValue].amount;
+                                        thisPurPrice.value = data[theValue].pprice;
+                                        thisSelPrice.value = data[theValue].sprice;
+                                        thisConPrice.value = data[theValue].conprice;
+
                                     });
                             });
                 });
