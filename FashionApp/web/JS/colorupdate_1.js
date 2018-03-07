@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
     let dark = document.querySelector("#dark");
     let uniqueId = 0;
     let uniqueCardId = 0;
-    let innerId = 0;
     let putHere = document.querySelector(".putHere");
     let addColor = document.querySelector('#addColor');
     let addOutfit = addButton.addEventListener("click", function () {
@@ -19,12 +18,16 @@ document.addEventListener("DOMContentLoaded", function () {
         theme.insertAdjacentHTML('beforeend',
                 `<div class="outfit" id="outfit${uniqueId}">
                 <div class="spaceBetween">
-                    <div class="title">Chart ${outfitNumber}</div>
+                    <div class="title"><input type="text" placeholder="Click to edit"></div>
                     <button class="remove" id="ob${uniqueId}">x</button>
                 </div>
                 <div class="aRow" id="row${uniqueId}">
                     <div class="addCard aCard" id="addCard${uniqueId}">+</div>
                 </div>
+        <div class="commands">
+        <div class="buttons" id="saveCollection${uniqueId}">Save collection</div>
+        <div class="buttons" id="deleteCollection${uniqueId}">Delete collection</div>
+        </div>
             </div>`);
 
 
@@ -36,12 +39,12 @@ document.addEventListener("DOMContentLoaded", function () {
             } else {
                 document.querySelector(`#outfit${num}`).remove();
                 console.log(`Outfit ${num} removed.`);
-                let setId = 0;
-                let titles = document.querySelectorAll(".title");
-                for (let title of titles) {
-                    setId++;
-                    title.innerHTML = `Chart ${setId}`;
-                }
+                /* let setId = 0;
+                 let titles = document.querySelectorAll(".title");
+                 for (let title of titles) {
+                 setId++;
+                 title.innerHTML = `Chart ${setId}`;
+                 }*/
             }
         });
 
@@ -50,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function () {
             uniqueCardId++;
             let newCard = document.createElement("div");
             newCard.classList.add("addCard");
-            newCard.id = uniqueCardId;
+            newCard.id = `card${uniqueCardId}`;
             newCard.classList.add("simpleCard");
 
 
@@ -59,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             //card on click
             newCard.addEventListener("click", function () {
-                //remove hidden from detailed card
+                
 
                 colorCard.innerHTML = `<div class="innerCard" id="innerCard${newCard.id}" >
 
@@ -71,14 +74,16 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <div class="center">
                                     <label>Color name:</label>
 
-                                    <input type="text" id="colorName">
+                                    <input type="text" id="colorName${newCard.id}">
                                 </div>
                                 </br>
                                 <div class="center">
                                     <label>Color code:</label>
-                                    <input type="text" id="colorCode">
+                                    <input type="text" id="colorCode${newCard.id}" placeholder="eg. FF0000">
 
                                     </br>
+                
+                                    <input type="color" id="colorMapCode${newCard.id}">
                                 </div>
 
                                 <div class="buttons" id="colorButton${newCard.id}"> Add Color </div>
@@ -88,20 +93,35 @@ document.addEventListener("DOMContentLoaded", function () {
                         </form>
 
                     </div>`;
+                let colorMap = document.querySelector(`#colorMapCode${newCard.id}`);
                 
-                let saveColor = document.querySelector(`#colorButton${newCard.id}`);
-                saveColor.addEventListener("click", function (){
-                    
-                   let colorCode = document.querySelector("#colorCode").value;
-                   console.log(`colorbutton${newCard.id}`);
-                   newCard.style.background = "#" + colorCode;
-                   colorCard.classList.add("hidden");
-                    dark.classList.add("behind");
+                // Update colorcodefield from colormap
+                colorMap.addEventListener("input", function(){
+                    let colorCodeASDF = document.querySelector(`#colorCode${newCard.id}`);
+                    colorCodeASDF.value = colorMap.value;
                     
                 });
                 
-                
+                // Save colorname and code, make box show changes
+                let saveColor = document.querySelector(`#colorButton${newCard.id}`);
+                saveColor.addEventListener("click", function () {
 
+                    let colorCode = document.querySelector(`#colorCode${newCard.id}`).value;
+                    let colorName = document.querySelector(`#colorName${newCard.id}`).value;
+                    console.log(`colorbutton${newCard.id}`);
+                    newCard.style.background = colorCode;
+                    colorCard.classList.add("hidden");
+                    dark.classList.add("behind");
+
+                    let cardText = document.createElement("div");
+                    cardText.classList.add("simpleCardName");
+                    cardText.textContent = colorName;
+                    newCard.appendChild(cardText);
+
+                });
+
+
+                // Close colorcard
                 let closeDetailedCard = document.querySelector("#closeDetailedCard");
                 closeDetailedCard.addEventListener("click", function () {
                     colorCard.classList.add("hidden");
@@ -116,8 +136,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 
-            /*  //ADD TEXT
-             let cardText = document.createElement("div");
+            //ADD TEXT
+            /*  let cardText = document.createElement("div");
              cardText.classList.add("simpleCardName");
              cardText.textContent = uniqueCardId;
              newCard.appendChild(cardText); */
@@ -145,7 +165,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!confirm("Do you really want to delete this?")) {
                     e.preventDefault(); //Cancel deleting
                 } else {
-                    document.querySelector(`#card${cardId}`).remove();
+                    document.querySelector(`#${cardId}`).remove();
                 }
             });
 
