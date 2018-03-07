@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
                                     dropdown.add(option);
                                 }
 
-                            })
+                            });
                         });
 
     });

@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
         outfitNumber++;
         console.log(`Outfit ${outfitNumber} added.`);
         theme.insertAdjacentHTML('beforeend',
-                `<div class="outfit" id="outfit${uniqueId}">
+            `<div class="outfit" id="outfit${uniqueId}">
                 <div class="spaceBetween">
                     <div class="title">Outfit ${outfitNumber}</div>
                     <button class="remove" id="ob${uniqueId}">x</button>
@@ -82,17 +82,50 @@ document.addEventListener("DOMContentLoaded", function () {
                 <input type="number" class="conPrice">
                 <div class="empty"></div>
                 <div class="loadButton">
-                    <select class="load buttons">
-                        <option value="Hat">Hat</option>
-                        <option value="Pants">Pants</option>
-                        <option value="Scarf">Scarf</option>
-                        <option value="Yeezys">Yeezys</option>
+                    <select class="load buttons" id="lb${newCard.id}">
                     </select>
                 </div>
                 <div class="saveButton" id="sb${newCard.id}">
                     <div class="save buttons">Save</div>
                 </div>
                 `;
+
+                //load button
+                
+                let dropdown = document.querySelector(`#lb${newCard.id}`);
+                dropdown.length = 0;
+
+                let defaultOption = document.createElement("option");
+                defaultOption.text = "Choose product...";
+
+                dropdown.add(defaultOption);
+                dropdown.selectedIndex = 0;
+
+                const cardUrl = "http://10.114.32.54:8080/FashionApp/ws/model.solutioncard/";
+
+                fetch(cardUrl)
+                    .then(
+                        function(response){
+                            if (response.status !== 200) {
+                                console.warn('Looks like there was a problem. Status Code: ' +
+                                        response.status);
+                                return;
+                            }
+
+                            response.json().then(function (data) {
+                                let option;
+                                for (let i = 0; i < data.length; i++) {
+                                    option = document.createElement('option');
+                                    option.text = data[i].name;
+                                    option.value = data[i].id;
+                                    dropdown.add(option);
+                                }
+
+                            });
+                });
+
+
+
                 //save card button functionality
                 let saveCard = document.querySelector(`#sb${newCard.id}`);
                 saveCard.addEventListener("click", function () {
@@ -141,12 +174,12 @@ document.addEventListener("DOMContentLoaded", function () {
                         };
 
                         fetch(cardUrl, {
-                            headers: {"Content-type": "application/json"},
+                            headers: { "Content-type": "application/json" },
                             body: JSON.stringify(card),
                             method: "POST"
                         })
-                                .catch(error => console.error('Error: ' + error))
-                                .then(response => console.log('Success:', response));
+                            .catch(error => console.error('Error: ' + error))
+                            .then(response => console.log('Success:', response));
                     });
                 });
 
