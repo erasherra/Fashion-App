@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -41,37 +43,52 @@ public class SolutionCard implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
+    
     @Size(max = 50)
     @Column(name = "name")
     private String name;
+    
     @Size(max = 1000)
     @Column(name = "comment")
     private String comment;
+    
     @Size(max = 50)
     @Column(name = "articlecode")
     private String articlecode;
+    
     @Column(name = "amount")
     private Integer amount;
+    
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "pprice")
     private Float pprice;
+    
     @Column(name = "sprice")
     private Float sprice;
+    
     @Column(name = "conprice")
     private Float conprice;
+    
     @Size(max = 100)
     @Column(name = "materials")
     private String materials;
+    
     @Size(max = 30)
     @Column(name = "sizes")
     private String sizes;
+    
     @Size(max = 50)
     @Column(name = "img")
     private String img;
+    
+    @Size(max = 50)
+    @Column(name = "colors")
+    private String colors;
+    
 
     public SolutionCard() {
     }
@@ -168,6 +185,14 @@ public class SolutionCard implements Serializable {
         this.img = img;
     }
 
+    public String getColors() {
+        return colors;
+    }
+
+    public void setColors(String colors) {
+        this.colors = colors;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
