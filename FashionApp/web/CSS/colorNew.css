@@ -1,0 +1,285 @@
+.aTheme {
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f0f0;
+   
+}
+
+.bg {
+    display: flex;
+    flex-direction: column;
+    background-image: url("../images/bg.jpg");
+    min-height: 100vh;
+}
+
+.aRow {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    /*justify-content: space-around;*/
+}
+
+.addCard {
+    margin: 0.5em;
+    padding: 0.3em;
+    height: 6em;
+    width:6em;
+    background-color: rgb(238, 238, 238);
+    border-radius: 0.3em;
+    border: solid rgb(131, 131, 131) 2px;
+}
+
+.addCard:hover {
+    background-color: rgb(224, 224, 224);
+}
+.aCard {
+    border: dashed rgb(131, 131, 131) 2px !important;
+}
+/*#add {
+    text-align: center;
+    color: white;
+    font-size: 1em;
+    margin: 1em;
+    padding: 1em;
+    background-color: #3186FF;
+    border-radius: 0.3em;
+    width: 5em;
+}*/
+
+#add:hover {
+    background-color: rgb(78, 152, 255);
+}
+.buttons:hover {
+    background-color: rgb(78, 152, 255);
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    background-image: url("../images/bg.jpg");
+}
+
+.outfit {
+    margin: 1em 1em 0em;
+    padding: 1em;
+    background-color: rgb(255, 255, 255);
+    border-radius: 0.3em;
+    border: solid 1px;
+}
+
+.spaceBetween {
+    display: flex;
+    justify-content: space-between;
+}
+
+#hidden {
+    display: hide;
+}
+
+.themeButton {
+    text-align: center;
+    color: white;
+    margin-left: 1em;
+    width: 4em;
+    border-radius: 0.3em;
+    padding: 0.5em;
+    background-color: #3186FF;
+}
+
+.themeRow {
+    display: flex;
+    padding-top: 0.5em;
+}
+
+.plusImg {
+    font-weight: bold;
+    text-align: center;
+    padding: 0.5em;
+    color:white;
+    background-color: #3186FF;
+    border-radius: 0.3em;
+    margin-left: 0.5em;
+}
+
+.plusImg:hover {
+    background-color: rgb(78, 152, 255);
+}
+
+
+
+/*@media (max-width: 1800px)*/
+#detailedCardArea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 84%;
+    z-index: 10;
+    margin-left: 8%;
+    margin-top: 7%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 0px;
+}
+
+.hidden {
+    display: none;
+}
+
+#dark {
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+}
+
+.behind{
+    z-index: -5;
+}
+
+.simpleCard {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 1fr 3fr 1fr;
+    grid-template-areas:
+        "name name delete"
+        "empty image empty2"
+        "colr colr colr"
+}
+
+.simpleCardName {
+    grid-area: empty;
+}
+
+.simpleCardDel {
+    grid-area: delete;
+}
+
+.simpleCardImg{
+    grid-area: image;
+}
+
+.simpleCardColor {
+    grid-area: colr;
+}
+
+.simpleCardEmpty {
+    grid-area: empty;
+}
+
+.simpleCardEmpty2 {
+    grid-area: empty2;
+}
+
+.remove {
+    background-color: #d5d5d5;
+    border-color: #d5d5d5;
+    border-radius: 0.3em;
+    float: right;
+}
+
+.remove:hover {
+    background-color: #ea4c00;
+    border-color: #ea4c00;
+}
+
+
+
+#detailedCard {
+    width: 100%;
+    min-height: 550px;
+    background-color: rgb(255, 255, 255);
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+
+
+.save {
+    float: right;
+    color: white;
+    text-align: center;
+    border-radius: 0.3em;
+    padding: 0.5em;
+    width: 5em;
+    margin-top: 0.5em;
+    background-color: #3186FF; 
+}
+.empty {
+    grid-area: empty;
+}
+
+
+#colorCardArea{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 30%;
+    z-index: 10;
+    margin-left: 8%;
+    margin-top: 7%;
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 0px;
+}
+
+.addColor{
+    text-align: center;
+    color: white;
+    font-size: 1em;
+    margin: 1em;
+    padding: 1em;
+    background-color: #3186FF;
+    border-radius: 0.3em;
+    width: 5em;
+    
+}
+.addColor:hover {
+    background-color: rgb(78, 152, 255);
+}
+
+.colorCard{
+    width: 13%;
+    background-color: rgb(255,255,255);
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 10px;
+    position: fixed;
+    left: 45%;
+        
+    
+}
+.buttons {
+    display: inline-flex;
+    text-align: center;
+    color: white;
+    font-size: 1em;
+    margin: 1em;
+    padding: 1em;
+    background-color: #3186FF;
+    border-radius: 0.3em;
+    width: 5em;
+}
+
+.title input{
+    border-style: none;
+}
+.commands{
+    display:flex;
+    justify-content: center;
+    
+}
+.commands .buttons{
+    width: 7%;
+    font-size: 0.8em;
+}
+.ultimate{
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+}
+input[type="color"]{
+    width: 87%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

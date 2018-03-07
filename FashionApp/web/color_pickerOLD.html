@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+<head>
+  <title>Color and Themes</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="CSS/color.css">
+  <script type="text/javascript" src="JS/color_1.js?v=123456"></script>
+</head>
+
+<body class="grid-container">
+  <h1>Colors and Themes</h1>
+    
+  <div class="flex-container" id="flex"></div>
+  <div>
+     <form id="open" class="addColor" onsubmit="return false">
+       <div class="form-container">
+           <div class="center">
+        <label>Color name:</label>
+        
+         <input type="text" id="colorName">
+           </div>
+       </br>
+       <div class="center">
+        <label>Color code:</label>
+         <input type="text" id="colorCode">
+         
+       </br>
+       </div>
+       <div>
+           <label>Collection:</label>
+           <select id="collectionDrop" name="colorCollection">
+               
+           </select>
+       </div>
+        <button id="submit">Add</button>
+      
+        </div>
+    </form>
+      <button id="adding"> Add color</button>
+  </div>
+</body>
+
