@@ -4,12 +4,15 @@ document.addEventListener("DOMContentLoaded", function () {
     let theme = document.querySelector(".aTheme");
     let colorCard = document.querySelector(".colorCard");
     let colorCardArea = document.querySelector("#colorCardArea");
-
+    let backHome = document.querySelector("#backHome");
     let dark = document.querySelector("#dark");
     let uniqueId = 0;
     let uniqueCardId = 0;
-    let putHere = document.querySelector(".putHere");
-    let addColor = document.querySelector('#addColor');
+
+    backHome.addEventListener("click", function (){
+        window.location.href = "http://10.114.32.54:8080/FashionApp/home.html"
+    })
+
     let addOutfit = addButton.addEventListener("click", function () {
         let outfitNumber = document.querySelectorAll(".outfit").length;
         uniqueId++;
@@ -62,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             //card on click
             newCard.addEventListener("click", function () {
-                
+
 
                 colorCard.innerHTML = `<div class="innerCard" id="innerCard${newCard.id}" >
 
@@ -94,14 +97,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     </div>`;
                 let colorMap = document.querySelector(`#colorMapCode${newCard.id}`);
-                
+
                 // Update colorcodefield from colormap
-                colorMap.addEventListener("input", function(){
+                colorMap.addEventListener("input", function () {
                     let colorCodeASDF = document.querySelector(`#colorCode${newCard.id}`);
                     colorCodeASDF.value = colorMap.value;
-                    
+
                 });
-                
+
                 // Save colorname and code, make box show changes
                 let saveColor = document.querySelector(`#colorButton${newCard.id}`);
                 saveColor.addEventListener("click", function () {
@@ -117,6 +120,23 @@ document.addEventListener("DOMContentLoaded", function () {
                     cardText.classList.add("simpleCardName");
                     cardText.textContent = colorName;
                     newCard.appendChild(cardText);
+
+                    const colorUrl = "http://10.114.32.54:8080/FashionApp/ws/model.colordb/";
+                    let color = {
+                        colorCode: colorCode,
+                        colorName: colorName
+                    };
+
+                    fetch(colorUrl, {
+
+                        headers: {"Content-type": "application/json"},
+                        body: JSON.stringify(color),
+                        method: "POST"
+                    })
+                            //.then(response => response.json())
+                            .catch(error => console.error('Error: ' + error))
+                            .then(response => console.log('Success:', response));
+                    //.then(json => console.log(json));
 
                 });
 
@@ -165,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!confirm("Do you really want to delete this?")) {
                     e.preventDefault(); //Cancel deleting
                 } else {
-                    document.querySelector(`#${cardId}`).remove();
+                    document.querySelector(`#card${cardId}`).remove();
                 }
             });
 
