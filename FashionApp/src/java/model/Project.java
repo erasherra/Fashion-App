@@ -5,6 +5,8 @@
  */
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -43,12 +45,15 @@ public class Project implements Serializable {
     @Size(max = 65535)
     @Column(name = "name")
     private String name;
+    @JsonManagedReference
     @JoinColumn(name = "cardID", referencedColumnName = "ID")
     @ManyToOne
     private Cards cardID;
+    @JsonManagedReference
     @JoinColumn(name = "colorId", referencedColumnName = "colorID")
     @ManyToOne
     private ColorDB colorId;
+    @JsonManagedReference
     @JoinColumn(name = "BudgetformID", referencedColumnName = "ID")
     @ManyToOne
     private BudgetForm budgetformID;

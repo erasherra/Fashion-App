@@ -5,6 +5,8 @@
  */
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -44,6 +46,8 @@ public class ColorDB implements Serializable {
     @Size(max = 30)
     @Column(name = "colorCode")
     private String colorCode;
+    
+    @JsonBackReference
     @OneToMany(mappedBy = "colorId")
     private Collection<Project> projectCollection;
 
@@ -53,6 +57,8 @@ public class ColorDB implements Serializable {
     @Basic(optional = false)
     @Column(name = "colorID")
     private Integer colorID;
+    
+    @JsonBackReference
     @JoinTable(name = "colorHolder", joinColumns = {
         @JoinColumn(name = "colorid", referencedColumnName = "colorID")}, inverseJoinColumns = {
         @JoinColumn(name = "themeID", referencedColumnName = "ID")})
@@ -73,7 +79,6 @@ public class ColorDB implements Serializable {
     public void setColorID(Integer colorID) {
         this.colorID = colorID;
     }
-
 
     @XmlTransient
     public Collection<Themes> getThemesCollection() {
@@ -133,5 +138,5 @@ public class ColorDB implements Serializable {
     public void setProjectCollection(Collection<Project> projectCollection) {
         this.projectCollection = projectCollection;
     }
-    
+
 }

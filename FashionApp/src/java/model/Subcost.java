@@ -5,6 +5,8 @@
  */
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -47,12 +49,15 @@ public class Subcost implements Serializable {
     @NotNull
     @Column(name = "unitCost")
     private float unitCost;
+    @JsonBackReference
     @JoinTable(name = "subholder", joinColumns = {
         @JoinColumn(name = "subCostID", referencedColumnName = "ID")}, inverseJoinColumns = {
         @JoinColumn(name = "cardID", referencedColumnName = "ID")})
     @ManyToMany
     private Collection<Cards> cardsCollection;
+    
     @JoinColumn(name = "typeID", referencedColumnName = "ID")
+    @JsonManagedReference
     @ManyToOne(optional = false)
     private SubConCostTypes typeID;
 

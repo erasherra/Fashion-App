@@ -5,6 +5,8 @@
  */
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -67,11 +69,14 @@ public class MaterialCost implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "freight")
     private Float freight;
+    //@JsonManagedReference
+     @JsonBackReference
     @JoinTable(name = "materialHolder", joinColumns = {
         @JoinColumn(name = "mCostID", referencedColumnName = "ID")}, inverseJoinColumns = {
         @JoinColumn(name = "cardID", referencedColumnName = "ID")})
     @ManyToMany
     private Collection<Cards> cardsCollection;
+    @JsonManagedReference
     @JoinColumn(name = "materialID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Materials materialID;

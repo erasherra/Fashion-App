@@ -68,9 +68,9 @@ public class Form implements Serializable {
     private Float totalSales;
     @Column(name = "totalCover")
     private Float totalCover;
+
     
-    @JsonManagedReference
-     @JsonBackReference
+    @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "formID")
     private Collection<BudgetForm> budgetFormCollection;
 
@@ -95,7 +95,6 @@ public class Form implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-
 
     public Float getAvgPrice() {
         return avgPrice;
@@ -155,7 +154,6 @@ public class Form implements Serializable {
         return "model.Form[ id=" + id + " ]";
     }
 
-
     public Integer getAAmountStyles() {
         return aAmountStyles;
     }
@@ -179,5 +177,5 @@ public class Form implements Serializable {
     public void setAmountStyles(int amountStyles) {
         this.amountStyles = amountStyles;
     }
-    
+
 }

@@ -5,6 +5,8 @@
  */
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -46,8 +48,12 @@ public class Themes implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
+    
+     @JsonManagedReference
     @ManyToMany(mappedBy = "themesCollection")
     private Collection<ColorDB> colorDBCollection;
+    
+     @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "themeID")
     private Collection<BudgetForm> budgetFormCollection;
 

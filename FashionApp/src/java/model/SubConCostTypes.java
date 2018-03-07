@@ -5,6 +5,8 @@
  */
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -44,6 +46,8 @@ public class SubConCostTypes implements Serializable {
     @Size(max = 50)
     @Column(name = "name")
     private String name;
+    
+     @JsonBackReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeID")
     private Collection<Subcost> subcostCollection;
 
