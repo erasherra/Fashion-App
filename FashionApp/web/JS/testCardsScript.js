@@ -59,27 +59,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 //adding the content to detailed card
                 detailedCardContent.innerHTML = `
-                <input type="text" class="name" placeholder="Product name">
+                <input type="text" class="name" id="name${newCard.id}" placeholder="Product name">
                 <div id="deleteCardArea">
                     <button class="delete" id="closeDetailedCard">x</button>
                 </div>
-                <img src="images/cap.jpg" class="img">
+                <img src="images/cap.jpg" class="img" id="img${newCard.id}">
+                
                 <div class="article lineHight">Article: </div>
-                <input class="code" placeholder="Article code">
+                <input class="code" id="code${newCard.id}" placeholder="Article code">
+                
                 <div class="materials lineHight">Materials: </div>
-                <input type="text" class="materialNames" placeholder="Add...">
+                <input type="text" class="materialNames" id="materials${newCard.id}" placeholder="Add...">
+                
                 <div class="colors lineHight">Colors: </div>
-                <input type="text" class="colorNames" placeholder="Add...">
+                <input type="text" class="colorNames" id="colors${newCard.id}" placeholder="Add...">
+                
                 <div class="sizes lineHight">Sizes: </div>
-                <input type="text" class="sizeNames" placeholder="Add...">
+                <input type="text" class="sizeNames" id="sizes${newCard.id}" placeholder="Add...">
+                
                 <div class="amount lineHight">Amount: </div>
-                <input type="number" class="amountNumber">
+                <input type="number" class="amountNumber" id="amount${newCard.id}">
+                
                 <div class="purchase lineHight">Purchase price</div>
-                <input type="number" class="purPrice">
+                <input type="number" class="purPrice" id="pur${newCard.id}">
+                
                 <div class="selling lineHight">Selling price</div>
-                <input type="number" class="selPrice">
+                <input type="number" class="selPrice" id="sel${newCard.id}">
+                
                 <div class="consumer lineHight">Consumer price</div>
-                <input type="number" class="conPrice">
+                <input type="number" class="conPrice" id="con${newCard.id}">
+                
                 <div class="empty"></div>
                 <div class="loadButton">
                     <select class="load buttons" id="lb${newCard.id}">
@@ -90,8 +99,20 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
                 `;
 
+                //setting the detailed card fields
+                let thisName = document.querySelector(`#name${newCard.id}`);
+                let thisImg = document.querySelector(`#img${newCard.id}`);
+                let thisCode = document.querySelector(`#code${newCard.id}`);
+                let thisMaterials = document.querySelector(`#materials${newCard.id}`);
+                let thisColors = document.querySelector(`#colors${newCard.id}`);
+                let thisSizes = document.querySelector(`#sizes${newCard.id}`);
+                let thisAmount = document.querySelector(`#amount${newCard.id}`);
+                let thisPurPrice = document.querySelector(`#pur${newCard.id}`);
+                let thisSelPrice = document.querySelector(`#sel${newCard.id}`);
+                let thisConPrice = document.querySelector(`#con${newCard.id}`);
+
+
                 //load button
-                
                 let dropdown = document.querySelector(`#lb${newCard.id}`);
                 dropdown.length = 0;
 
@@ -118,11 +139,27 @@ document.addEventListener("DOMContentLoaded", function () {
                                     option = document.createElement('option');
                                     option.text = data[i].name;
                                     option.value = data[i].id;
+                                    
                                     dropdown.add(option);
                                 }
 
+                                    dropdown.addEventListener("change", function(){
+                                        console.log("jani");
+                                        let theValue = dropdown.value-1;
+                                        thisName.value = data[theValue].name;
+                                        thisCode.value = data[theValue].articlecode;
+                                        thisMaterials.value = data[theValue].materials;
+                                        thisColors.value = data[theValue].colors;
+                                        thisSizes.value = data[theValue].sizes;
+                                        thisAmount.value = data[theValue].amount;
+                                        thisPurPrice.value = data[theValue].pprice;
+                                        thisSelPrice.value = data[theValue].sprice;
+                                        thisConPrice.value = data[theValue].conprice;
+
+                                    });
                             });
                 });
+
 
 
 
