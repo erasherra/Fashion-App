@@ -87,6 +87,10 @@ body {
 
 .themeRow {
     display: flex;
+}
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
     padding-top: 0.5em;
 }
 
@@ -126,7 +130,7 @@ body {
 
 #dark {
     background-color: rgba(0, 0, 0, 0.7);
-    position: absolute;
+    position: fixed;
     width: 100%;
     height: 100%;
 }
@@ -180,12 +184,14 @@ body {
     border-color: #ea4c00;
 }
 
-
+.lineHeight {
+    line-height: 3em;
+}
 
 #detailedCard {
     width: 100%;
     min-height: 550px;
-    background-color: rgb(255, 255, 255);
+    background-color: whitesmoke;
     box-sizing: border-box;
     border-radius: 10px;
     padding: 10px;
@@ -197,7 +203,7 @@ body {
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
     grid-template-areas: 
-    "name           name            delete"
+    "name           none            delete"
     "img            article         code"
     "img            materials       materialNames"
     "img            colors          colorNames"
@@ -208,6 +214,13 @@ body {
     "img            consumer        conPrice"
     "empty          loadButton      saveButton"
 }
+
+#detailedCardContent input {
+    background-color: whitesmoke;
+    border: 0;
+    border-bottom: solid lightgray 1px;
+}
+
 /*delete button*/
 #deleteCardArea {
     grid-area: delete;
@@ -220,12 +233,15 @@ body {
 .name {
     grid-area: name;
     font-size: 30px;
+    margin-bottom: 0.5em;
+    padding-left: 0.5em;
 }
 
 /*image*/
 .img {
     grid-area: img;
-    max-width: 50%;
+    max-width: 65%;
+    padding-left: 0.5em;
 }
 
 /*article*/
@@ -314,4 +330,17 @@ body {
 }
 .empty {
     grid-area: empty;
+}
+
+#backHome {
+    justify-content: flex-end;
+    text-align: center;
+    padding: 0.5em;
+    color: white;
+    background-color: #3186FF;
+    border-radius: 0.3em;
+    margin-right: 0.5em;
+}
+#backHome:hover {
+    background-color: rgb(78, 152, 255);
 }

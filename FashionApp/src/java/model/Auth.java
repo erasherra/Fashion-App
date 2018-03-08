@@ -29,13 +29,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Auth.findAll", query = "SELECT a FROM Auth a")
     , @NamedQuery(name = "Auth.findById", query = "SELECT a FROM Auth a WHERE a.id = :id")
-    , @NamedQuery(name = "Auth.findPasswordById", query = "SELECT a FROM Auth a WHERE a.user = :user")})
+    , @NamedQuery(name= "Auth.findPasswordById", query = "SELECT a FROM Auth a WHERE a.user = :user")})
 public class Auth implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
+    
     private Integer id;
     private String user;
     private String password;
