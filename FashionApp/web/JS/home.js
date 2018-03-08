@@ -21,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector("#open").style.display = "none";
         });
     });
+    
 
 
     let b = document.getElementById('submit');
@@ -34,7 +35,9 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(projectCount);
 
 
+
         projectCount++;
+
 
         document.getElementById("open").style.display = "none";
     });
@@ -42,6 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let AddNewProject = function () {
 
         let text = "";
+
 
         text += `<div id="project` + projectCount + `" class="project-container">` + document.querySelector("#colorName").value + `
                     <a href="form.html">Budget</a>
