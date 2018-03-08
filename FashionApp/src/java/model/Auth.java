@@ -28,7 +28,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Auth.findAll", query = "SELECT a FROM Auth a")
-    , @NamedQuery(name = "Auth.findById", query = "SELECT a FROM Auth a WHERE a.id = :id")})
+    , @NamedQuery(name = "Auth.findById", query = "SELECT a FROM Auth a WHERE a.id = :id")
+    , @NamedQuery(name= "Auth.findPasswordById", query = "SELECT a FROM Auth a WHERE a.user = :user")})
 public class Auth implements Serializable {
 
     private static final long serialVersionUID = 1L;
