@@ -5,6 +5,8 @@
  */
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -44,6 +46,8 @@ public class Materials implements Serializable {
     @Size(max = 50)
     @Column(name = "materials")
     private String materials;
+    
+     @JsonBackReference(value = "material-cost")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "materialID")
     private Collection<MaterialCost> materialCostCollection;
 

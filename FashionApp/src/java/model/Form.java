@@ -42,14 +42,13 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Form.findByTotalSales", query = "SELECT f FROM Form f WHERE f.totalSales = :totalSales")
     , @NamedQuery(name = "Form.findByTotalCover", query = "SELECT f FROM Form f WHERE f.totalCover = :totalCover")})
 public class Form implements Serializable {
-
+    //@NotNull
     @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "product")
     private String product;
+    //@NotNull
     @Basic(optional = false)
-    @NotNull
     @Column(name = "amountStyles")
     private int amountStyles;
     @Column(name = "aAmountStyles")
@@ -68,9 +67,9 @@ public class Form implements Serializable {
     private Float totalSales;
     @Column(name = "totalCover")
     private Float totalCover;
+
     
-    @JsonManagedReference
-     @JsonBackReference
+    @JsonBackReference(value = "form-budget")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "formID")
     private Collection<BudgetForm> budgetFormCollection;
 
@@ -95,7 +94,6 @@ public class Form implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-
 
     public Float getAvgPrice() {
         return avgPrice;
@@ -155,7 +153,6 @@ public class Form implements Serializable {
         return "model.Form[ id=" + id + " ]";
     }
 
-
     public Integer getAAmountStyles() {
         return aAmountStyles;
     }
@@ -179,5 +176,5 @@ public class Form implements Serializable {
     public void setAmountStyles(int amountStyles) {
         this.amountStyles = amountStyles;
     }
-    
+
 }

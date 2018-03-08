@@ -5,6 +5,7 @@
  */
 package model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -43,12 +44,15 @@ public class Project implements Serializable {
     @Size(max = 65535)
     @Column(name = "name")
     private String name;
+    //@JsonManagedReference(value = "card-project")
     @JoinColumn(name = "cardID", referencedColumnName = "ID")
     @ManyToOne
     private Cards cardID;
+    //@JsonManagedReference(value = "color-project")
     @JoinColumn(name = "colorId", referencedColumnName = "colorID")
     @ManyToOne
     private ColorDB colorId;
+    //@JsonManagedReference(value = "budget-project")
     @JoinColumn(name = "BudgetformID", referencedColumnName = "ID")
     @ManyToOne
     private BudgetForm budgetformID;

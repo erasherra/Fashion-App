@@ -5,6 +5,8 @@
  */
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.Collection;
 import javax.persistence.Basic;
@@ -46,6 +48,8 @@ public class BudgetForm implements Serializable {
     @NotNull
     @Column(name = "amount")
     private int amount;
+    
+    @JsonBackReference(value = "budget-project")
     @OneToMany(mappedBy = "budgetformID")
     private Collection<Project> projectCollection;
 
@@ -54,12 +58,18 @@ public class BudgetForm implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Integer id;*/
+    //@JsonManagedReference(value = "theme-budget")
     @JoinColumn(name = "themeID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Themes themeID;
+    
+    //@JsonManagedReference(value = "form-budget")
     @JoinColumn(name = "formID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Form formID;
+    
+    
+    @JsonBackReference(value = "budget-card")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bformID")
     private Collection<Cards> cardsCollection;
 
@@ -82,7 +92,6 @@ public class BudgetForm implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }
-
 
     public Themes getThemeID() {
         return themeID;
@@ -134,7 +143,7 @@ public class BudgetForm implements Serializable {
         return "model.BudgetForm[ id=" + id + " ]";
     }
 
-   /* public BudgetForm(Integer id) {
+    /* public BudgetForm(Integer id) {
         this.id = id;
     }
 
@@ -150,7 +159,6 @@ public class BudgetForm implements Serializable {
     public void setId(Integer id) {
         this.id = id;
     }*/
-
     public int getAmount() {
         return amount;
     }
@@ -168,7 +176,7 @@ public class BudgetForm implements Serializable {
         this.projectCollection = projectCollection;
     }
 
-  /*  @Override
+    /*  @Override
     public int hashCode() {
         int hash = 0;
         hash += (id != null ? id.hashCode() : 0);
@@ -192,5 +200,5 @@ public class BudgetForm implements Serializable {
     public String toString() {
         return "model.BudgetForm[ id=" + id + " ]";
     }
-    */
+     */
 }
