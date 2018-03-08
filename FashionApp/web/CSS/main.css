@@ -209,7 +209,7 @@ li:hover{list-style-type: none;
 
 .form-container{
     
-    
+         z-index: 2;
 	max-width: 340px;
 	margin: 0 auto;
 	position: relative;

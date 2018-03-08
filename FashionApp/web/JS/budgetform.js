@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let theme = [{"themeid": 0, "amount": 0}];
 
     let row = {"form": {"product": "", "amountStyles": 0,
-            "avgPrice": 0, "aAmountStyles": 0, "totalSales": 0, "totalCover": 0},
+            "avgPrice": 0, "aamountStyles": 0, "totalSales": 0, "totalCover": 0},
         "themes": [theme]};
     let json_obj = {"rows": [row]};
 
@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         theme = [];
         row = {"form": {"product": "", "amountStyles": 0,
-                "averagePrice": 0, "avarageAmount": 0, "totalSale": 0, "cover": 0}, "themes": [theme]};
+                    "avgPrice": 0, "aamountStyles": 0, "totalSales": 0, "totalCover": 0}, "themes": [theme]};
         json_obj = {"rows": [row]};
         rowList = [];
 
@@ -262,7 +262,7 @@ document.addEventListener("DOMContentLoaded", function () {
             row = {};
             theme = [];
             row = {"form": {"product": "", "amountStyles": 0,
-                    "avgPrice": 0, "aAmountStyles": 0, "totalSales": 0, "totalCover": 0}, "themes": [theme]};
+                    "avgPrice": 0, "aamountStyles": 0, "totalSales": 0, "totalCover": 0}, "themes": [theme]};
 
 
             row.form.product = document.querySelector('#pg-input' + i).value;
@@ -285,10 +285,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
             row.form.amountStyles = amountOfStyles;
             // document.querySelector("#as-input" + i).textContent = row.amountStyles;
-            row.form.avgPrice = document.querySelector('#ap-input' + i).value;
-            row.form.aAmountStyles = document.querySelector('#aa-input' + i).value;
+            row.form.avgPrice = parseFloat(document.querySelector('#ap-input' + i).value);
+            row.form.aamountStyles = document.querySelector('#aa-input' + i).value;
 
-            row.form.totalSales = row.form.amountStyles * row.form.aAmountStyles * row.form.avgPrice;
+            row.form.totalSales = row.form.amountStyles * row.form.aamountStyles * row.form.avgPrice;
             row.form.totalCover = row.form.totalSales / 2;
 
 
@@ -341,7 +341,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 document.querySelector("#as-input" + (correctvalue)).textContent = json_obj.rows[i].form.amountStyles;
 
                 document.querySelector("#ap-input" + (correctvalue)).value = json_obj.rows[i].form.avgPrice;
-                document.querySelector("#aa-input" + (correctvalue)).value = json_obj.rows[i].form.aAmountStyles;
+                document.querySelector("#aa-input" + (correctvalue)).value = json_obj.rows[i].form.aamountStyles;
 
                 document.querySelector("#ts-input" + (correctvalue)).textContent = json_obj.rows[i].form.totalSales;
                 document.querySelector("#cover-input" + (correctvalue)).textContent = json_obj.rows[i].form.totalCover;
