@@ -31,6 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
         document.getElementById("open").style.display = "none";
     });
     
+    
     let AddNewProject = function (){
         
         let text = "";
@@ -39,15 +40,38 @@ document.addEventListener("DOMContentLoaded", function () {
                     <a href="form.html">Budget</a>
                     <a href="color_picker.html">Colors</a>
                     <a href="testCards.html">Cards</a>
-                    
-                    
                 </div>`;
         
         return text;
         
     };
-    
-    
+   
+   const projectURL = "http://10.114.32.54:8080/FashionApp/ws/model.project";
+   let Projects;
+
+                fetch(projectURL)
+                        .then(
+                                function (response) {
+                                    if (response.status !== 200) {
+                                        console.warn('Error: Status Code: ' +
+                                                response.status);
+                                        return;
+                                    }
+
+                                    response.json().then(function (data) {
+                                        let row;
+                                        for (let i = 0; i < data.length; i++) {
+                                            row = document.createElement('row');
+                                            row.value = data[i].cards.id;
+                                           
+                                            console.log(row.value);
+                                            Projects.add(row);
+   
+                                        }
+
+                                       
+                });
+       });
     
 });
 
