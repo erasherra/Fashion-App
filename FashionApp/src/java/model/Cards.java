@@ -50,7 +50,7 @@ public class Cards implements Serializable {
     @Column(name = "Comments")
     private String comments;
     
-     @JsonBackReference
+     @JsonBackReference(value = "card-project")
     @OneToMany(mappedBy = "cardID")
     private Collection<Project> projectCollection;
 
@@ -76,15 +76,15 @@ public class Cards implements Serializable {
     @Column(name = "coverPercent")
     private Float coverPercent;
     
-    @JsonManagedReference
+    //@JsonManagedReference(value = "materialcost-card")
     @ManyToMany(mappedBy = "cardsCollection")
     private Collection<MaterialCost> materialCostCollection;
     
-    @JsonManagedReference//@JsonBackReference
+    //@JsonManagedReference(value = "subcost-card")//@JsonBackReference
     @ManyToMany(mappedBy = "cardsCollection")
     private Collection<Subcost> subcostCollection;
     
-    @JsonManagedReference
+    //@JsonManagedReference(value = "budget-card")
     @JoinColumn(name = "bformID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private BudgetForm bformID;

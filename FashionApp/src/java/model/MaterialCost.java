@@ -70,13 +70,13 @@ public class MaterialCost implements Serializable {
     @Column(name = "freight")
     private Float freight;
     //@JsonManagedReference
-     @JsonBackReference
+     @JsonBackReference(value = "materialcost-card")
     @JoinTable(name = "materialHolder", joinColumns = {
         @JoinColumn(name = "mCostID", referencedColumnName = "ID")}, inverseJoinColumns = {
         @JoinColumn(name = "cardID", referencedColumnName = "ID")})
     @ManyToMany
     private Collection<Cards> cardsCollection;
-    @JsonManagedReference
+    //@JsonManagedReference(value = "material-cost")
     @JoinColumn(name = "materialID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Materials materialID;

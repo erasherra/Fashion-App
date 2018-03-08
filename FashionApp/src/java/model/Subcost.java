@@ -49,7 +49,7 @@ public class Subcost implements Serializable {
     @NotNull
     @Column(name = "unitCost")
     private float unitCost;
-    @JsonBackReference
+    @JsonBackReference(value = "subcost-card")
     @JoinTable(name = "subholder", joinColumns = {
         @JoinColumn(name = "subCostID", referencedColumnName = "ID")}, inverseJoinColumns = {
         @JoinColumn(name = "cardID", referencedColumnName = "ID")})
@@ -57,7 +57,7 @@ public class Subcost implements Serializable {
     private Collection<Cards> cardsCollection;
     
     @JoinColumn(name = "typeID", referencedColumnName = "ID")
-    @JsonManagedReference
+    //@JsonManagedReference(value = "subcosttype-subcost")
     @ManyToOne(optional = false)
     private SubConCostTypes typeID;
 

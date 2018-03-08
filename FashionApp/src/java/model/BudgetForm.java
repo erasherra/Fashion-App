@@ -49,7 +49,7 @@ public class BudgetForm implements Serializable {
     @Column(name = "amount")
     private int amount;
     
-    @JsonBackReference
+    @JsonBackReference(value = "budget-project")
     @OneToMany(mappedBy = "budgetformID")
     private Collection<Project> projectCollection;
 
@@ -58,18 +58,18 @@ public class BudgetForm implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     private Integer id;*/
-    @JsonManagedReference
+    //@JsonManagedReference(value = "theme-budget")
     @JoinColumn(name = "themeID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Themes themeID;
     
-    @JsonManagedReference
+    //@JsonManagedReference(value = "form-budget")
     @JoinColumn(name = "formID", referencedColumnName = "ID")
     @ManyToOne(optional = false)
     private Form formID;
     
     
-    @JsonBackReference
+    @JsonBackReference(value = "budget-card")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "bformID")
     private Collection<Cards> cardsCollection;
 

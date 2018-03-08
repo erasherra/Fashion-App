@@ -47,7 +47,7 @@ public class SubConCostTypes implements Serializable {
     @Column(name = "name")
     private String name;
     
-     @JsonBackReference
+     @JsonBackReference(value = "subcosttype-subcost")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "typeID")
     private Collection<Subcost> subcostCollection;
 

@@ -47,7 +47,7 @@ public class ColorDB implements Serializable {
     @Column(name = "colorCode")
     private String colorCode;
     
-    @JsonBackReference
+    @JsonBackReference(value = "color-project")
     @OneToMany(mappedBy = "colorId")
     private Collection<Project> projectCollection;
 
@@ -58,7 +58,7 @@ public class ColorDB implements Serializable {
     @Column(name = "colorID")
     private Integer colorID;
     
-    @JsonBackReference
+    @JsonBackReference(value = "color-theme")
     @JoinTable(name = "colorHolder", joinColumns = {
         @JoinColumn(name = "colorid", referencedColumnName = "colorID")}, inverseJoinColumns = {
         @JoinColumn(name = "themeID", referencedColumnName = "ID")})

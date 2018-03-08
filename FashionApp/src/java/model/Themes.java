@@ -49,11 +49,11 @@ public class Themes implements Serializable {
     @Column(name = "ID")
     private Integer id;
     
-     @JsonManagedReference
+     //@JsonManagedReference(value = "color-theme")
     @ManyToMany(mappedBy = "themesCollection")
     private Collection<ColorDB> colorDBCollection;
     
-     @JsonBackReference
+     @JsonBackReference(value = "theme-budget")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "themeID")
     private Collection<BudgetForm> budgetFormCollection;
 

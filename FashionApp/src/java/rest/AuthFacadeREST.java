@@ -62,7 +62,8 @@ public class AuthFacadeREST extends AbstractFacade<Auth> {
             return "<h1>Username or password is wrong </h1>";
         }
         }catch(Exception e){}
-        return "<h1>Username or password is wrong</h1>";
+        
+        return "<h1>Username or password is wrong!!!</h1>";
     }
 
     @PUT

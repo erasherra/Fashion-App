@@ -37,7 +37,7 @@ public class SessionBean {
     
     public Auth getByName(String user) { 
         
-        
+         
          return (Auth) em.createNamedQuery("Auth.findPasswordById").setParameter("user", user).getSingleResult();
          
         

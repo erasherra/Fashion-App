@@ -47,7 +47,7 @@ public class Materials implements Serializable {
     @Column(name = "materials")
     private String materials;
     
-     @JsonBackReference
+     @JsonBackReference(value = "material-cost")
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "materialID")
     private Collection<MaterialCost> materialCostCollection;
 
