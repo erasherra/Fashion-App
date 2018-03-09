@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
         outfitNumber++;
         console.log(`Outfit ${outfitNumber} added.`);
         theme.insertAdjacentHTML('beforeend',
-                `<div class="outfit" id="outfit${uniqueId}">
+            `<div class="outfit" id="outfit${uniqueId}">
                 <div class="spaceBetween">
                     <div class="title">Outfit ${outfitNumber}</div>
                     <button class="remove" id="ob${uniqueId}">x</button>
@@ -53,6 +53,8 @@ document.addEventListener("DOMContentLoaded", function () {
             newCard.classList.add("addCard");
             newCard.id = `card${uniqueCardId}`;
             newCard.classList.add("simpleCard");
+            let cardText = document.createElement("div");
+            cardText.classList.add("simpleCardName");
 
             //card on click
             newCard.addEventListener("click", function () {
@@ -60,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 detailedCard.classList.remove("hidden");
                 dark.classList.remove("behind");
 
-                //adding the content to detailed card
+                //adding the blank content to detailed card
                 detailedCardContent.innerHTML = `
                 <input type="text" class="name" id="name${newCard.id}" placeholder="Product name">
                 <div id="deleteCardArea">
@@ -68,37 +70,37 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
                 <img src="images/cap.jpg" class="img" id="img${newCard.id}">
                 
-                <div class="article lineHight">Article: </div>
+                <div class="article lineHeight">Article: </div>
                 <input class="code" id="code${newCard.id}" placeholder="Article code">
                 
-                <div class="materials lineHight">Materials: </div>
+                <div class="materials lineHeight">Materials: </div>
                 <input type="text" class="materialNames" id="materials${newCard.id}" placeholder="Add...">
                 
-                <div class="colors lineHight">Colors: </div>
+                <div class="colors lineHeight">Colors: </div>
                 <input type="text" class="colorNames" id="colors${newCard.id}" placeholder="Add...">
                 
-                <div class="sizes lineHight">Sizes: </div>
+                <div class="sizes lineHeight">Sizes: </div>
                 <input type="text" class="sizeNames" id="sizes${newCard.id}" placeholder="Add...">
                 
-                <div class="amount lineHight">Amount: </div>
+                <div class="amount lineHeight">Amount: </div>
                 <input type="number" class="amountNumber" id="amount${newCard.id}">
                 
-                <div class="purchase lineHight">Purchase price</div>
+                <div class="purchase lineHeight">Purchase price</div>
                 <input type="number" class="purPrice" id="pur${newCard.id}">
                 
-                <div class="selling lineHight">Selling price</div>
+                <div class="selling lineHeight">Selling price</div>
                 <input type="number" class="selPrice" id="sel${newCard.id}">
                 
-                <div class="consumer lineHight">Consumer price</div>
+                <div class="consumer lineHeight">Consumer price</div>
                 <input type="number" class="conPrice" id="con${newCard.id}">
                 
                 <div class="empty"></div>
                 <div class="loadButton">
-                    <select class="load buttons" id="lb${newCard.id}">
+                    <select class="load" id="lb${newCard.id}">
                     </select>
                 </div>
-                <div class="saveButton" id="sb${newCard.id}">
-                    <div class="save buttons">Save</div>
+                <div class="saveButton">
+                    <div class="save buttons" id="sb${newCard.id}">Save</div>
                 </div>
                 `;
 
@@ -115,6 +117,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let thisConPrice = document.querySelector(`#con${newCard.id}`);
 
 
+
                 //load button
                 let dropdown = document.querySelector(`#lb${newCard.id}`);
                 dropdown.length = 0;
@@ -128,42 +131,79 @@ document.addEventListener("DOMContentLoaded", function () {
                 const cardUrl = "http://10.114.32.54:8080/FashionApp/ws/model.solutioncard/";
 
                 fetch(cardUrl)
+                    .then(
+                        function (response) {
+                            if (response.status !== 200) {
+                                console.warn('Looks like there was a problem. Status Code: ' +
+                                    response.status);
+                                return;
+                            }
+
+                            response.json().then(function (data) {
+                                let option;
+                                for (let i = 0; i < data.length; i++) {
+                                    option = document.createElement('option');
+                                    option.text = data[i].name;
+                                    option.value = data[i].id;
+
+                                    dropdown.add(option);
+                                }
+
+                                //puts all the info from database to detailed card 
+                                dropdown.addEventListener("change", function () {
+                                    let theValue = dropdown.value - 1;
+                                    thisName.value = data[theValue].name;
+                                    thisCode.value = data[theValue].articlecode;
+                                    thisMaterials.value = data[theValue].materials;
+                                    thisColors.value = data[theValue].colors;
+                                    thisSizes.value = data[theValue].sizes;
+                                    thisAmount.value = data[theValue].amount;
+                                    thisPurPrice.value = data[theValue].pprice;
+                                    thisSelPrice.value = data[theValue].sprice;
+                                    thisConPrice.value = data[theValue].conprice;
+
+                                });
+                            });
+                        });
+
+                //if card name not null, search from database by the name and set all the fields accordingly...
+                if (cardText.textContent.length > 0) {
+                    fetch(cardUrl)
                         .then(
-                                function (response) {
-                                    if (response.status !== 200) {
-                                        console.warn('Looks like there was a problem. Status Code: ' +
-                                                response.status);
-                                        return;
+                            function (response) {
+                                if (response.status !== 200) {
+                                    console.warn('Looks like there was a problem. Status Code: ' +
+                                        response.status);
+                                    return;
+                                }
+                                
+
+                                response.json().then(function (data) {
+                                    for (let i = 0; i < data.length; i++) {
+                                        
+                                        if (data[i].name == cardText.textContent) {
+                                            console.log("no nyt toimii");
+                                            //puts all the info from database to detailed card
+                                            thisName.value = data[i].name;
+                                            thisCode.value = data[i].articlecode;
+                                            thisMaterials.value = data[i].materials;
+                                            thisColors.value = data[i].colors;
+                                            thisSizes.value = data[i].sizes;
+                                            thisAmount.value = data[i].amount;
+                                            thisPurPrice.value = data[i].pprice;
+                                            thisSelPrice.value = data[i].sprice;
+                                            thisConPrice.value = data[i].conprice;
+                                            break;
+                                        }
                                     }
 
-                                    response.json().then(function (data) {
-                                        let option;
-                                        for (let i = 0; i < data.length; i++) {
-                                            option = document.createElement('option');
-                                            option.text = data[i].name;
-                                            option.value = data[i].id;
 
-                                            dropdown.add(option);
-                                        }
 
-                                        dropdown.addEventListener("change", function () {
-                                            console.log("jani");
-                                            let theValue = dropdown.value - 1;
-                                            thisName.value = data[theValue].name;
-                                            thisCode.value = data[theValue].articlecode;
-                                            thisMaterials.value = data[theValue].materials;
-                                            thisColors.value = data[theValue].colors;
-                                            thisSizes.value = data[theValue].sizes;
-                                            thisAmount.value = data[theValue].amount;
-                                            thisPurPrice.value = data[theValue].pprice;
-                                            thisSelPrice.value = data[theValue].sprice;
-                                            thisConPrice.value = data[theValue].conprice;
 
-                                        });
-                                    });
                                 });
+                            });
 
-
+                }
 
 
                 //save card button functionality
@@ -214,12 +254,18 @@ document.addEventListener("DOMContentLoaded", function () {
                         };
 
                         fetch(cardUrl, {
-                            headers: {"Content-type": "application/json"},
+                            headers: { "Content-type": "application/json" },
                             body: JSON.stringify(card),
                             method: "POST"
                         })
-                                .catch(error => console.error('Error: ' + error))
-                                .then(response => console.log('Success:', response));
+                            .catch(error => console.error('Error: ' + error))
+                            .then(response => console.log('Success:', response));
+                        detailedCard.classList.add("hidden");
+                        dark.classList.add("behind");
+
+                        //add name to small card
+                        cardText.textContent = name;
+                        newCard.appendChild(cardText);
                     });
                 });
 
@@ -237,11 +283,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
             });
 
-            //ADD TEXT
-            let cardText = document.createElement("div");
-            cardText.classList.add("simpleCardName");
-            cardText.textContent = uniqueCardId;
-            newCard.appendChild(cardText);
+
 
             //ADD DELETE
             let deleteCard = document.createElement("button");
@@ -253,6 +295,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             //ADD IMAGE
             //let cardImg = document.createElement("div");
+
 
             let aRow = document.querySelector(`#row${num}`);
             aRow.insertBefore(newCard, addCard);
