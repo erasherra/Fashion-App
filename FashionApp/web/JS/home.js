@@ -77,7 +77,7 @@ fetch("http://10.114.32.54:8080/FashionApp/ws/model.project")
   
   for(let i=0; i<project.length; i++){
      
-     let myProject = document.getElementById("project");
+     let myProject = document.getElementById("projectbox");
      myProject.innerHTML += 
                   `<div id="project` + projectCount + `" class="project-container">
                   ` + project[i].name + `
