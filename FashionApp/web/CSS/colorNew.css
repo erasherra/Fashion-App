@@ -287,3 +287,7 @@ input[type="color"]{
     justify-content: space-between;
     margin-left: 3em;
 }
+
+.cardText{
+    text-align: center;
+}
