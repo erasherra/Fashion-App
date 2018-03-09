@@ -228,41 +228,20 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
         });
+        
+        
+        let saveCollection = document.querySelector(`#saveCollection${uniqueId}`);
+        saveCollection.addEventListener("click", function (){
+            console.log("Saving collections here" + `#saveCollection${uniqueId}`);
+            
+            
+        });
+        
     });
 
 
 
-    /*addColor.addEventListener("click", function () {
-     
-     const colorUrl = "http://10.114.32.54:8080/FashionApp/ws/model.colordb/";
-     
-     
-     
-     let code = document.getElementById("colorCode").value;
-     let name = document.getElementById("colorName").value;
-     
-     let color = {
-     colorCode: code,
-     colorName: name
-     };
-     
-     fetch(colorUrl, {
-     
-     headers: {"Content-type": "application/json"},
-     body: JSON.stringify(color),
-     method: "POST"
-     })
-     //.then(response => response.json())
-     .catch(error => console.error('Error: ' + error))
-     .then(response => console.log('Success:', response));
-     //.then(json => console.log(json));
-     colorCard.classList.add("hidden");
-     dark.classList.add("behind");
-     
-     
-     
-     
-     }); */
+
 
 
 
