@@ -97,8 +97,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     <select class="load" id="lb${newCard.id}">
                     </select>
                 </div>
-                <div class="saveButton" id="sb${newCard.id}">
-                    <div class="save buttons">Save</div>
+                <div class="saveButton" >
+                    <div class="save buttons" id="sb${newCard.id}">Save</div>
                 </div>
                 `;
 
