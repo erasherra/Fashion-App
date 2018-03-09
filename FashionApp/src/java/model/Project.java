@@ -31,7 +31,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Project.findAll", query = "SELECT p FROM Project p")
-    , @NamedQuery(name = "Project.findById", query = "SELECT p FROM Project p WHERE p.id = :id")})
+    , @NamedQuery(name = "Project.findById", query = "SELECT p FROM Project p WHERE p.id = :id")
+    , @NamedQuery(name= "Project.findByName", query = "SELECT p FROM Project p WHERE p.name = :name")})
 public class Project implements Serializable {
 
     private static final long serialVersionUID = 1L;
