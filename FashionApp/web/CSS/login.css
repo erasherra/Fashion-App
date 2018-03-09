@@ -1,5 +1,7 @@
 body {
-        background-image: url("../images/bg.jpg");
+        background-image: url("../images/try.jpg");
+        background-repeat:no-repeat;
+        background-size: cover;
 	background-color: #e9edf5;
 	font-size: 16px;
 	font-family: sans-serif;
