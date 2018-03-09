@@ -163,6 +163,13 @@ a{
 
 }
 
+#addProject{
+    margin-bottom: 15px;
+    border-radius: 8px;
+}
+
+
+
 li{list-style-type: none;
 
    padding-top: 10px;
@@ -175,12 +182,13 @@ li:hover{list-style-type: none;
 }
 
 .project-container{
-
+    padding: 10px;
     border: 2px solid ;
     border-radius: 2px; 
     background-color: whitesmoke;
     margin-top: 4px;
-    border-color: #ccc;
+    border-color: #black;
+    font-weight: bold;
 }
 
 /*/////////color*/
@@ -228,6 +236,9 @@ li:hover{list-style-type: none;
 #submit{
     background-color: #3186ff ;
     color:white;
+    margin-top: 50px;
+    width: 70%;
+    text-transform: uppercase;
 }
 
 #colorName{
@@ -237,11 +248,4 @@ li:hover{list-style-type: none;
 	font-size: .9em;
 	color: black;
     
-}
-#submit{
-    margin-top: 50px;
-    width: 70%;
-    
-    
-	text-transform: uppercase;
 }
