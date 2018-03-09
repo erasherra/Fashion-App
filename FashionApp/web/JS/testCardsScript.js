@@ -12,7 +12,6 @@ document.addEventListener("DOMContentLoaded", function () {
         window.location.href = "http://10.114.32.54:8080/FashionApp/home.html"
     });
     addButton.addEventListener("click", function () {
-
         let outfitNumber = document.querySelectorAll(".outfit").length;
         uniqueId++;
         outfitNumber++;
@@ -294,6 +293,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         "img": thisImg.value,
                         "colors": thisColors.value
                     };
+
                     console.log(JSON.stringify(card));
                     fetch("http://10.114.32.54:8080/FashionApp/ws/model.solutioncard/" + thisId.value, {
                         headers: {"Content-type": "application/json"},
