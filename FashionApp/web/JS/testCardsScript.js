@@ -220,6 +220,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         })
                                 .catch(error => console.error('Error: ' + error))
                                 .then(response => console.log('Success:', response));
+                        detailedCard.classList.add("hidden");
+                        dark.classList.add("behind");
                     });
                 });
 
