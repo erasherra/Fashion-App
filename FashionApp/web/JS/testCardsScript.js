@@ -11,7 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
     backHome.addEventListener("click", function () {
         window.location.href = "http://10.114.32.54:8080/FashionApp/home.html"
     });
-    let addOutfit = addButton.addEventListener("click", function () {
+    addButton.addEventListener("click", function () {
+
         let outfitNumber = document.querySelectorAll(".outfit").length;
         uniqueId++;
         outfitNumber++;
@@ -274,10 +275,10 @@ document.addEventListener("DOMContentLoaded", function () {
                         newCard.appendChild(cardText);
                     });
                 });
-                
+
                 //Update
                 let update = document.querySelector(`#ub${newCard.id}`);
-                update.addEventListener("click", function(){
+                update.addEventListener("click", function () {
 
                     let card = {
                         "id": thisId.value,
@@ -301,14 +302,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     })
                             .catch(error => console.error('Error: ' + error))
                             .then(response => console.log('Success:', response));
+                    alert("Updated succesfully.");
+                });
 
-                });
-                
-                let updateCard = document.querySelector(`#ub${newCard.id}`);
-                updateCard.addEventListener("click", function () {
-                    
-                });
-                
                 //closing detailed card
                 let closeDetailedCard = document.querySelector("#closeDetailedCard");
                 closeDetailedCard.addEventListener("click", function () {
@@ -341,6 +337,7 @@ document.addEventListener("DOMContentLoaded", function () {
             aRow.insertBefore(newCard, addCard);
             console.log("hai");
             let cardId = uniqueCardId;
+            
             //Listener for delete
             document.querySelector(`#dc${cardId}`).addEventListener("click", function (e) {
                 console.log("asd");
@@ -355,6 +352,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    //Adding themes
     let addTheme = document.querySelector(".plusImg");
     let themeAmount = document.querySelectorAll(".themeButton").length;
     addTheme.addEventListener("click", function () {
