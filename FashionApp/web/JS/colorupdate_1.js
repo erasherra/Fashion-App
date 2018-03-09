@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let dark = document.querySelector("#dark");
     let uniqueId = 0;
     let uniqueCardId = 0;
+    let exist = false;
+
+    const colorUrl = "http://10.114.32.54:8080/FashionApp/ws/model.colordb/";
 
     backHome.addEventListener("click", function () {
         window.location.href = "http://10.114.32.54:8080/FashionApp/home.html";
@@ -54,21 +57,21 @@ document.addEventListener("DOMContentLoaded", function () {
         let addCard = document.querySelector(`#addCard${num}`);
         addCard.addEventListener("click", function () {
             uniqueCardId++;
-            
+
             let fullBox = document.createElement("div");
             fullBox.classList.add("fullBox");
-            fullBox.id = `fullBox${uniqueCardId}`
-            
+            fullBox.id = `fullBox${uniqueCardId}`;
+
             let newCard = document.createElement("div");
             newCard.classList.add("addCard");
             newCard.id = `card${uniqueCardId}`;
             newCard.classList.add("simpleCard");
-            
+
             let cardText = document.createElement("div");
             cardText.classList.add("cardText");
             cardText.id = `cardText${uniqueCardId}`;
-            
-            
+
+
             fullBox.appendChild(newCard);
             fullBox.appendChild(cardText);
 
@@ -105,10 +108,36 @@ document.addEventListener("DOMContentLoaded", function () {
                                 <div class="buttons" id="colorButton${newCard.id}" > Add Color </div>
                                 
                                 
+                                
                             </div>
                         </form>
 
                     </div>`;
+                let colorName = document.querySelector(`#colorName${newCard.id}`);
+                let colorCode = document.querySelector(`#colorCode${newCard.id}`);
+                let colorMapCode = document.querySelector(`#colorMapCode${newCard.id}`);
+
+                if (cardText.textContent.length > 0) {
+                    colorName.value = cardText.textContent;
+                    // colorCode.value = colorCode.textContent;
+                    // colorMapCode.value = colorMap.value;
+                    const updateUrl = "http://10.114.32.54:8080/FashionApp/ws/model.colordb/name/" + cardText.textContent;
+                    const processJSON = (function (json) {
+                        colorName.value = json.colorName;
+                        colorCode.value = json.colorCode;
+                        colorMapCode.value = json.colorCode;
+
+                    });
+                    fetch(updateUrl)
+                            .then(response => response.json())
+                            .then(processJSON);
+
+                }
+
+
+
+
+
                 let colorMap = document.querySelector(`#colorMapCode${newCard.id}`);
 
                 // Update colorcodefield from colormap
@@ -118,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 });
 
-                // Save colorname and code, make box show changes
+                // Save colorname and -code, make box show changes
                 let saveColor = document.querySelector(`#colorButton${newCard.id}`);
                 saveColor.addEventListener("click", function () {
 
@@ -130,27 +159,22 @@ document.addEventListener("DOMContentLoaded", function () {
                     colorCard.classList.add("hidden");
                     dark.classList.add("behind");
 
-                 /*   let cardText = document.createElement("div");
-                    cardText.classList.add("simpleCardName");
-                    cardText.textContent = colorName;
-                    newCard.appendChild(cardText);*/
 
-                    const colorUrl = "http://10.114.32.54:8080/FashionApp/ws/model.colordb/";
-                    let color = {
-                        colorCode: colorCode,
-                        colorName: colorName
-                    };
+                        let color = {
+                            colorCode: colorCode,
+                            colorName: colorName
+                        };
 
-                    fetch(colorUrl, {
+                        fetch(colorUrl, {
 
-                        headers: {"Content-type": "application/json"},
-                        body: JSON.stringify(color),
-                        method: "POST"
-                    })
-                            //.then(response => response.json())
-                            .catch(error => console.error('Error: ' + error))
-                            .then(response => console.log('Success:', response));
-                    //.then(json => console.log(json));
+                            headers: {"Content-type": "application/json"},
+                            body: JSON.stringify(color),
+                            method: "POST"
+                        })
+                                //.then(response => response.json())
+                                .catch(error => console.error('Error: ' + error))
+                                .then(response => console.log('Success:', response));
+                        //.then(json => console.log(json));
 
                 });
 

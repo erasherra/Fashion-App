@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.Auth;
+import model.ColorDB;
 import model.Contact;
 
 /**
@@ -44,6 +45,10 @@ public class SessionBean {
          
              
              
+    }
+    
+    public ColorDB findColorByName(String colorName){
+        return (ColorDB) em.createNamedQuery("ColorDB.findByColorName").setParameter("colorName", colorName).getSingleResult();
     }
     
     public void update(Contact c) { 

@@ -5,7 +5,9 @@
  */
 package rest;
 
+import controller.SessionBean;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -27,6 +29,9 @@ import model.ColorDB;
 @Stateless
 @Path("model.colordb")
 public class ColorDBFacadeREST extends AbstractFacade<ColorDB> {
+    
+    @EJB
+    private SessionBean sb;
 
     @PersistenceContext(unitName = "FashionAppPU")
     private EntityManager em;
@@ -68,7 +73,15 @@ public class ColorDBFacadeREST extends AbstractFacade<ColorDB> {
     public List<ColorDB> findAll() {
         return super.findAll();
     }
-
+    
+    @GET
+    @Path("name/{colorName}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public ColorDB findName(@PathParam("colorName") String colorName){
+        ColorDB color = sb.findColorByName(colorName);
+        return color;
+    }
+    
     @GET
     @Path("{from}/{to}")
     @Produces({ MediaType.APPLICATION_JSON})
