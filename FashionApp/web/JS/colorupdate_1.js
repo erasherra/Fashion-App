@@ -9,9 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let uniqueId = 0;
     let uniqueCardId = 0;
 
-    backHome.addEventListener("click", function (){
-        window.location.href = "http://10.114.32.54:8080/FashionApp/home.html"
-    })
+    backHome.addEventListener("click", function () {
+        window.location.href = "http://10.114.32.54:8080/FashionApp/home.html";
+    });
 
     let addOutfit = addButton.addEventListener("click", function () {
         let outfitNumber = document.querySelectorAll(".outfit").length;
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
                 <div class="aRow" id="row${uniqueId}">
                     <div class="addCard aCard" id="addCard${uniqueId}">+</div>
-                </div>
+                    </div>
         <div class="commands">
         <div class="buttons" id="saveCollection${uniqueId}">Save collection</div>
         <div class="buttons" id="deleteCollection${uniqueId}">Delete collection</div>
@@ -54,10 +54,23 @@ document.addEventListener("DOMContentLoaded", function () {
         let addCard = document.querySelector(`#addCard${num}`);
         addCard.addEventListener("click", function () {
             uniqueCardId++;
+            
+            let fullBox = document.createElement("div");
+            fullBox.classList.add("fullBox");
+            fullBox.id = `fullBox${uniqueCardId}`
+            
             let newCard = document.createElement("div");
             newCard.classList.add("addCard");
             newCard.id = `card${uniqueCardId}`;
             newCard.classList.add("simpleCard");
+            
+            let cardText = document.createElement("div");
+            cardText.classList.add("cardText");
+            cardText.id = `cardText${uniqueCardId}`;
+            
+            
+            fullBox.appendChild(newCard);
+            fullBox.appendChild(cardText);
 
 
 
@@ -82,14 +95,14 @@ document.addEventListener("DOMContentLoaded", function () {
                                 </br>
                                 <div class="center">
                                     <label>Color code:</label>
-                                    <input type="text" id="colorCode${newCard.id}" placeholder="eg. FF0000">
+                                    <input type="text" id="colorCode${newCard.id}" placeholder="eg. #FF0000">
 
                                     </br>
                 
-                                    <input type="color" id="colorMapCode${newCard.id}">
+                                    <input type="color" id="colorMapCode${newCard.id}" value="#FF0000">
                                 </div>
 
-                                <div class="buttons" id="colorButton${newCard.id}"> Add Color </div>
+                                <div class="buttons" id="colorButton${newCard.id}" > Add Color </div>
                                 
                                 
                             </div>
@@ -113,13 +126,14 @@ document.addEventListener("DOMContentLoaded", function () {
                     let colorName = document.querySelector(`#colorName${newCard.id}`).value;
                     console.log(`colorbutton${newCard.id}`);
                     newCard.style.background = colorCode;
+                    cardText.textContent = colorName;
                     colorCard.classList.add("hidden");
                     dark.classList.add("behind");
 
-                    let cardText = document.createElement("div");
+                 /*   let cardText = document.createElement("div");
                     cardText.classList.add("simpleCardName");
                     cardText.textContent = colorName;
-                    newCard.appendChild(cardText);
+                    newCard.appendChild(cardText);*/
 
                     const colorUrl = "http://10.114.32.54:8080/FashionApp/ws/model.colordb/";
                     let color = {
@@ -175,7 +189,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             let aRow = document.querySelector(`#row${num}`);
-            aRow.insertBefore(newCard, addCard);
+            aRow.insertBefore(fullBox, addCard);
             console.log("hai");
             let cardId = uniqueCardId;
             //Listener for delete

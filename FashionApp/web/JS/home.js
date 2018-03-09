@@ -58,7 +58,36 @@ document.addEventListener("DOMContentLoaded", function () {
         return text;
 
     };
+    
+    
 
+let name = document.getElementById('addProject').value;
+ 
+let project = {
+
+"name" : name
+};
+
+
+fetch("http://10.114.32.54:8080/FashionApp/ws/model.project")
+.then(res => res.json())
+.then(function (project){
+ 
+ // console.log(project[0].name);
+  
+  for(let i=0; i<project.length; i++){
+     
+     let myProject = document.getElementById("project");
+     myProject.innerHTML += 
+                  `<div id="project` + projectCount + `" class="project-container">
+                  ` + project[i].name + `
+                    <a href="form.html">Budget</a>
+                    <a href="color_picker.html">Colors</a>
+                    <a href="testCards.html">Cards</a>
+                   </div>`;
+   }
+
+})
 
 
 });
