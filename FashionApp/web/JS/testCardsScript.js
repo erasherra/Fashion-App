@@ -134,7 +134,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const cardUrl = "http://10.114.32.54:8080/FashionApp/ws/model.solutioncard/";
 
-                fetch(cardUrl)
+                let loadDropdown = function(){
+
+                    fetch(cardUrl)
                         .then(
                                 function (response) {
                                     if (response.status !== 200) {
@@ -170,7 +172,8 @@ document.addEventListener("DOMContentLoaded", function () {
                                         });
                                     });
                                 });
-
+                            }
+                            loadDropdown();
                 //if card name not null, search from database by the name and set all the fields accordingly...
                 if (cardText.textContent.length > 0) {
                     fetch(cardUrl)
@@ -303,6 +306,12 @@ document.addEventListener("DOMContentLoaded", function () {
                             .catch(error => console.error('Error: ' + error))
                             .then(response => console.log('Success:', response));
                     alert("Updated succesfully.");
+
+                    //clear dropdown here
+                    while(dropdown.options.length > 0){
+                        dropdown.remove(0);
+                    }
+                    loadDropdown();
                 });
 
                 //closing detailed card
