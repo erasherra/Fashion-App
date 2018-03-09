@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     backHome.addEventListener("click", function () {
         window.location.href = "http://10.114.32.54:8080/FashionApp/home.html"
     });
-    let addOutfit = addButton.addEventListener("click", function () {
+    addButton.addEventListener("click", function () {
         let outfitNumber = document.querySelectorAll(".outfit").length;
         uniqueId++;
         outfitNumber++;
@@ -53,6 +53,8 @@ document.addEventListener("DOMContentLoaded", function () {
             newCard.classList.add("addCard");
             newCard.id = `card${uniqueCardId}`;
             newCard.classList.add("simpleCard");
+            let cardText = document.createElement("div");
+            cardText.classList.add("simpleCardName");
 
             //card on click
             newCard.addEventListener("click", function () {
@@ -60,49 +62,53 @@ document.addEventListener("DOMContentLoaded", function () {
                 detailedCard.classList.remove("hidden");
                 dark.classList.remove("behind");
 
-                //adding the content to detailed card
+                //adding the blank content to detailed card
                 detailedCardContent.innerHTML = `
+                <div class="hidden" id="id${newCard.id}"></div>
+
                 <input type="text" class="name" id="name${newCard.id}" placeholder="Product name">
                 <div id="deleteCardArea">
                     <button class="delete" id="closeDetailedCard">x</button>
                 </div>
                 <img src="images/cap.jpg" class="img" id="img${newCard.id}">
                 
-                <div class="article lineHight">Article: </div>
+                <div class="article lineHeight">Article: </div>
                 <input class="code" id="code${newCard.id}" placeholder="Article code">
                 
-                <div class="materials lineHight">Materials: </div>
+                <div class="materials lineHeight">Materials: </div>
                 <input type="text" class="materialNames" id="materials${newCard.id}" placeholder="Add...">
                 
-                <div class="colors lineHight">Colors: </div>
+                <div class="colors lineHeight">Colors: </div>
                 <input type="text" class="colorNames" id="colors${newCard.id}" placeholder="Add...">
                 
-                <div class="sizes lineHight">Sizes: </div>
+                <div class="sizes lineHeight">Sizes: </div>
                 <input type="text" class="sizeNames" id="sizes${newCard.id}" placeholder="Add...">
                 
-                <div class="amount lineHight">Amount: </div>
+                <div class="amount lineHeight">Amount: </div>
                 <input type="number" class="amountNumber" id="amount${newCard.id}">
                 
-                <div class="purchase lineHight">Purchase price</div>
+                <div class="purchase lineHeight">Purchase price</div>
                 <input type="number" class="purPrice" id="pur${newCard.id}">
                 
-                <div class="selling lineHight">Selling price</div>
+                <div class="selling lineHeight">Selling price</div>
                 <input type="number" class="selPrice" id="sel${newCard.id}">
                 
-                <div class="consumer lineHight">Consumer price</div>
+                <div class="consumer lineHeight">Consumer price</div>
                 <input type="number" class="conPrice" id="con${newCard.id}">
                 
                 <div class="empty"></div>
                 <div class="loadButton">
-                    <select class="load buttons" id="lb${newCard.id}">
+                    <select class="load" id="lb${newCard.id}">
                     </select>
                 </div>
-                <div class="saveButton" id="sb${newCard.id}">
-                    <div class="save buttons">Save</div>
+                <div class="saveButton">
+                    <div class="save buttons" id="sb${newCard.id}">Save</div>
+                    <div class="update buttons" id="ub${newCard.id}">Update</div>
                 </div>
                 `;
 
                 //setting the detailed card fields
+                let thisId = document.querySelector(`#id${newCard.id}`);
                 let thisName = document.querySelector(`#name${newCard.id}`);
                 let thisImg = document.querySelector(`#img${newCard.id}`);
                 let thisCode = document.querySelector(`#code${newCard.id}`);
@@ -113,6 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 let thisPurPrice = document.querySelector(`#pur${newCard.id}`);
                 let thisSelPrice = document.querySelector(`#sel${newCard.id}`);
                 let thisConPrice = document.querySelector(`#con${newCard.id}`);
+
 
 
                 //load button
@@ -127,7 +134,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const cardUrl = "http://10.114.32.54:8080/FashionApp/ws/model.solutioncard/";
 
-                fetch(cardUrl)
+                let loadDropdown = function(){
+
+                    fetch(cardUrl)
                         .then(
                                 function (response) {
                                     if (response.status !== 200) {
@@ -146,9 +155,10 @@ document.addEventListener("DOMContentLoaded", function () {
                                             dropdown.add(option);
                                         }
 
+                                        //puts all the info from database to detailed card 
                                         dropdown.addEventListener("change", function () {
-                                            console.log("jani");
                                             let theValue = dropdown.value - 1;
+                                            thisId.value = data[theValue].id;
                                             thisName.value = data[theValue].name;
                                             thisCode.value = data[theValue].articlecode;
                                             thisMaterials.value = data[theValue].materials;
@@ -162,8 +172,47 @@ document.addEventListener("DOMContentLoaded", function () {
                                         });
                                     });
                                 });
+                            }
+                            loadDropdown();
+                //if card name not null, search from database by the name and set all the fields accordingly...
+                if (cardText.textContent.length > 0) {
+                    fetch(cardUrl)
+                            .then(
+                                    function (response) {
+                                        if (response.status !== 200) {
+                                            console.warn('Looks like there was a problem. Status Code: ' +
+                                                    response.status);
+                                            return;
+                                        }
 
 
+                                        response.json().then(function (data) {
+                                            for (let i = 0; i < data.length; i++) {
+
+                                                if (data[i].name == cardText.textContent) {
+                                                    console.log("no nyt toimii");
+                                                    //puts all the info from database to detailed card
+                                                    thisId.value = data[i].id;
+                                                    thisName.value = data[i].name;
+                                                    thisCode.value = data[i].articlecode;
+                                                    thisMaterials.value = data[i].materials;
+                                                    thisColors.value = data[i].colors;
+                                                    thisSizes.value = data[i].sizes;
+                                                    thisAmount.value = data[i].amount;
+                                                    thisPurPrice.value = data[i].pprice;
+                                                    thisSelPrice.value = data[i].sprice;
+                                                    thisConPrice.value = data[i].conprice;
+                                                    break;
+                                                }
+                                            }
+
+
+
+
+                                        });
+                                    });
+
+                }
 
 
                 //save card button functionality
@@ -220,7 +269,49 @@ document.addEventListener("DOMContentLoaded", function () {
                         })
                                 .catch(error => console.error('Error: ' + error))
                                 .then(response => console.log('Success:', response));
+                        detailedCard.classList.add("hidden");
+                        dark.classList.add("behind");
+
+                        //add name to small card
+                        cardText.textContent = name;
+                        newCard.appendChild(cardText);
                     });
+                });
+
+                //Update
+                let update = document.querySelector(`#ub${newCard.id}`);
+                update.addEventListener("click", function () {
+
+                    let card = {
+                        "id": thisId.value,
+                        "name": thisName.value,
+                        "comment": thisName.value,
+                        "articlecode": thisCode.value,
+                        "amount": thisAmount.value,
+                        "pprice": thisPurPrice.value,
+                        "sprice": thisSelPrice.value,
+                        "conprice": thisConPrice.value,
+                        "materials": thisMaterials.value,
+                        "sizes": thisSizes.value,
+                        "img": thisImg.value,
+                        "colors": thisColors.value
+                    };
+
+                    console.log(JSON.stringify(card));
+                    fetch("http://10.114.32.54:8080/FashionApp/ws/model.solutioncard/" + thisId.value, {
+                        headers: {"Content-type": "application/json"},
+                        body: JSON.stringify(card),
+                        method: "PUT"
+                    })
+                            .catch(error => console.error('Error: ' + error))
+                            .then(response => console.log('Success:', response));
+                    alert("Updated succesfully.");
+
+                    //clear dropdown here
+                    while(dropdown.options.length > 0){
+                        dropdown.remove(0);
+                    }
+                    loadDropdown();
                 });
 
                 //closing detailed card
@@ -237,11 +328,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
             });
 
-            //ADD TEXT
-            let cardText = document.createElement("div");
-            cardText.classList.add("simpleCardName");
-            cardText.textContent = uniqueCardId;
-            newCard.appendChild(cardText);
+
 
             //ADD DELETE
             let deleteCard = document.createElement("button");
@@ -254,10 +341,12 @@ document.addEventListener("DOMContentLoaded", function () {
             //ADD IMAGE
             //let cardImg = document.createElement("div");
 
+
             let aRow = document.querySelector(`#row${num}`);
             aRow.insertBefore(newCard, addCard);
             console.log("hai");
             let cardId = uniqueCardId;
+            
             //Listener for delete
             document.querySelector(`#dc${cardId}`).addEventListener("click", function (e) {
                 console.log("asd");
@@ -272,6 +361,7 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    //Adding themes
     let addTheme = document.querySelector(".plusImg");
     let themeAmount = document.querySelectorAll(".themeButton").length;
     addTheme.addEventListener("click", function () {
