@@ -108,7 +108,9 @@ body {
     background-color: rgb(78, 152, 255);
 }
 
-
+.lineHeight { 
+    line-height: 3em; 
+} 
 
 /*@media (max-width: 1800px)*/
 #detailedCardArea {
@@ -189,7 +191,7 @@ body {
 #detailedCard {
     width: 100%;
     min-height: 550px;
-    background-color: rgb(255, 255, 255);
+    background-color: whitesmoke; 
     box-sizing: border-box;
     border-radius: 10px;
     padding: 10px;
@@ -201,7 +203,7 @@ body {
     grid-template-columns: 2fr 1fr 1fr;
     grid-template-rows: 2fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 2fr;
     grid-template-areas: 
-    "name           name            delete"
+    "name           none            delete" 
     "img            article         code"
     "img            materials       materialNames"
     "img            colors          colorNames"
@@ -212,6 +214,13 @@ body {
     "img            consumer        conPrice"
     "empty          loadButton      saveButton"
 }
+
+#detailedCardContent input { 
+    background-color: whitesmoke; 
+    border: 0; 
+    border-bottom: solid lightgray 1px; 
+} 
+
 /*delete button*/
 #deleteCardArea {
     grid-area: delete;
@@ -224,12 +233,16 @@ body {
 .name {
     grid-area: name;
     font-size: 30px;
+    margin-bottom: 0.5em; 
+    padding-left: 0.5em; 
 }
 
 /*image*/
 .img {
     grid-area: img;
     max-width: 50%;
+    max-width: 65%; 
+    padding-left: 0.5em; 
 }
 
 /*article*/

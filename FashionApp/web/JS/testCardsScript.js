@@ -68,33 +68,33 @@ document.addEventListener("DOMContentLoaded", function () {
                 </div>
                 <img src="images/cap.jpg" class="img" id="img${newCard.id}">
                 
-                <div class="article lineHight">Article: </div>
+                <div class="article lineHeight">Article: </div>
                 <input class="code" id="code${newCard.id}" placeholder="Article code">
                 
-                <div class="materials lineHight">Materials: </div>
+                <div class="materials lineHeight">Materials: </div>
                 <input type="text" class="materialNames" id="materials${newCard.id}" placeholder="Add...">
                 
-                <div class="colors lineHight">Colors: </div>
+                <div class="colors lineHeight">Colors: </div>
                 <input type="text" class="colorNames" id="colors${newCard.id}" placeholder="Add...">
                 
-                <div class="sizes lineHight">Sizes: </div>
+                <div class="sizes lineHeight">Sizes: </div>
                 <input type="text" class="sizeNames" id="sizes${newCard.id}" placeholder="Add...">
                 
-                <div class="amount lineHight">Amount: </div>
+                <div class="amount lineHeight">Amount: </div>
                 <input type="number" class="amountNumber" id="amount${newCard.id}">
                 
-                <div class="purchase lineHight">Purchase price</div>
+                <div class="purchase lineHeight">Purchase price</div>
                 <input type="number" class="purPrice" id="pur${newCard.id}">
                 
-                <div class="selling lineHight">Selling price</div>
+                <div class="selling lineHeight">Selling price</div>
                 <input type="number" class="selPrice" id="sel${newCard.id}">
                 
-                <div class="consumer lineHight">Consumer price</div>
+                <div class="consumer lineHeight">Consumer price</div>
                 <input type="number" class="conPrice" id="con${newCard.id}">
                 
                 <div class="empty"></div>
                 <div class="loadButton">
-                    <select class="load buttons" id="lb${newCard.id}">
+                    <select class="load" id="lb${newCard.id}">
                     </select>
                 </div>
                 <div class="saveButton" id="sb${newCard.id}">
@@ -146,6 +146,7 @@ document.addEventListener("DOMContentLoaded", function () {
                                             dropdown.add(option);
                                         }
 
+                                        //puts all the info from database to detailed card 
                                         dropdown.addEventListener("change", function () {
                                             console.log("jani");
                                             let theValue = dropdown.value - 1;
@@ -255,6 +256,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             //ADD IMAGE
             //let cardImg = document.createElement("div");
+
 
             let aRow = document.querySelector(`#row${num}`);
             aRow.insertBefore(newCard, addCard);
