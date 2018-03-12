@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
         outfitNumber++;
         console.log(`Outfit ${outfitNumber} added.`);
         theme.insertAdjacentHTML('beforeend',
-                `<div class="outfit" id="outfit${uniqueId}">
+            `<div class="outfit" id="outfit${uniqueId}">
                 <div class="spaceBetween">
                     <div class="title">Outfit ${outfitNumber}</div>
                     <button class="remove" id="ob${uniqueId}">x</button>
@@ -79,7 +79,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 <input type="text" class="materialNames" id="materials${newCard.id}" placeholder="Add...">
                 
                 <div class="colors lineHeight">Colors: </div>
-                <input type="text" class="colorNames" id="colors${newCard.id}" placeholder="Add...">
+                <select class="colorNames" id="colors${newCard.id}" ></select>
                 
                 <div class="sizes lineHeight">Sizes: </div>
                 <input type="text" class="sizeNames" id="sizes${newCard.id}" placeholder="Add...">
@@ -120,7 +120,41 @@ document.addEventListener("DOMContentLoaded", function () {
                 let thisSelPrice = document.querySelector(`#sel${newCard.id}`);
                 let thisConPrice = document.querySelector(`#con${newCard.id}`);
 
+                //colorfield
+                thisColors.length = 0;
 
+                let defaultColor = document.createElement("option");
+                defaultColor.text = "Choose color";
+
+                thisColors.add(defaultColor);
+                thisColors.selectedIndex = 0;
+
+                const colorUrl = "http://10.114.32.54:8080/FashionApp/ws/model.colordb/";
+
+                let loadColors = function () {
+                    fetch(colorUrl)
+                        .then(
+                            function (response) {
+                                if (response.status !== 200) {
+                                    console.warn('Looks like there was a problem. Status Code: ' +
+                                        response.status);
+                                    return;
+                                }
+
+                                response.json().then(function (data) {
+                                    let option;
+                                    for (let i = 0; i < data.length; i++) {
+                                        option = document.createElement('option');
+                                        option.text = data[i].colorName;
+                                        option.value = data[i].colorID;
+                                        thisColors.add(option);
+                                    }
+
+                                });
+                            });
+                }
+
+                loadColors();
 
                 //load button
                 let dropdown = document.querySelector(`#lb${newCard.id}`);
@@ -137,80 +171,80 @@ document.addEventListener("DOMContentLoaded", function () {
                 let loadDropdown = function () {
 
                     fetch(cardUrl)
-                            .then(
-                                    function (response) {
-                                        if (response.status !== 200) {
-                                            console.warn('Looks like there was a problem. Status Code: ' +
-                                                    response.status);
-                                            return;
-                                        }
+                        .then(
+                            function (response) {
+                                if (response.status !== 200) {
+                                    console.warn('Looks like there was a problem. Status Code: ' +
+                                        response.status);
+                                    return;
+                                }
 
-                                        response.json().then(function (data) {
-                                            let option;
-                                            for (let i = 0; i < data.length; i++) {
-                                                option = document.createElement('option');
-                                                option.text = data[i].name;
-                                                option.value = data[i].id;
+                                response.json().then(function (data) {
+                                    let option;
+                                    for (let i = 0; i < data.length; i++) {
+                                        option = document.createElement('option');
+                                        option.text = data[i].name;
+                                        option.value = data[i].id;
 
-                                                dropdown.add(option);
-                                            }
+                                        dropdown.add(option);
+                                    }
 
-                                            //puts all the info from database to detailed card 
-                                            dropdown.addEventListener("change", function () {
-                                                let theValue = dropdown.value - 1;
-                                                thisId.value = data[theValue].id;
-                                                thisName.value = data[theValue].name;
-                                                thisCode.value = data[theValue].articlecode;
-                                                thisMaterials.value = data[theValue].materials;
-                                                thisColors.value = data[theValue].colors;
-                                                thisSizes.value = data[theValue].sizes;
-                                                thisAmount.value = data[theValue].amount;
-                                                thisPurPrice.value = data[theValue].pprice;
-                                                thisSelPrice.value = data[theValue].sprice;
-                                                thisConPrice.value = data[theValue].conprice;
+                                    //puts all the info from database to detailed card 
+                                    dropdown.addEventListener("change", function () {
+                                        let theValue = dropdown.value - 1;
+                                        thisId.value = data[theValue].id;
+                                        thisName.value = data[theValue].name;
+                                        thisCode.value = data[theValue].articlecode;
+                                        thisMaterials.value = data[theValue].materials;
+                                        thisColors.value = data[theValue].colors;
+                                        thisSizes.value = data[theValue].sizes;
+                                        thisAmount.value = data[theValue].amount;
+                                        thisPurPrice.value = data[theValue].pprice;
+                                        thisSelPrice.value = data[theValue].sprice;
+                                        thisConPrice.value = data[theValue].conprice;
 
-                                            });
-                                        });
                                     });
+                                });
+                            });
                 };
                 loadDropdown();
                 //if card name not null, search from database by the name and set all the fields accordingly...
                 if (cardText.textContent.length > 0) {
                     fetch(cardUrl)
-                            .then(
-                                    function (response) {
-                                        if (response.status !== 200) {
-                                            console.warn('Looks like there was a problem. Status Code: ' +
-                                                    response.status);
-                                            return;
+                        .then(
+                            function (response) {
+                                if (response.status !== 200) {
+                                    console.warn('Looks like there was a problem. Status Code: ' +
+                                        response.status);
+                                    return;
+                                }
+
+
+                                response.json().then(function (data) {
+                                    for (let i = 0; i < data.length; i++) {
+
+                                        if (data[i].name == cardText.textContent) {
+                                            console.log("no nyt toimii");
+                                            //puts all the info from database to detailed card
+                                            thisId.value = data[i].id;
+                                            thisName.value = data[i].name;
+                                            thisCode.value = data[i].articlecode;
+                                            thisMaterials.value = data[i].materials;
+                                            thisColors.value = data[i].colors;
+                                            thisSizes.value = data[i].sizes;
+                                            thisAmount.value = data[i].amount;
+                                            thisPurPrice.value = data[i].pprice;
+                                            thisSelPrice.value = data[i].sprice;
+                                            thisConPrice.value = data[i].conprice;
+                                            break;
                                         }
-
-
-                                        response.json().then(function (data) {
-                                            for (let i = 0; i < data.length; i++) {
-
-                                                if (data[i].name == cardText.textContent) {
-                                                    console.log("no nyt toimii");
-                                                    //puts all the info from database to detailed card
-                                                    thisId.value = data[i].id;
-                                                    thisName.value = data[i].name;
-                                                    thisCode.value = data[i].articlecode;
-                                                    thisMaterials.value = data[i].materials;
-                                                    thisColors.value = data[i].colors;
-                                                    thisSizes.value = data[i].sizes;
-                                                    thisAmount.value = data[i].amount;
-                                                    thisPurPrice.value = data[i].pprice;
-                                                    thisSelPrice.value = data[i].sprice;
-                                                    thisConPrice.value = data[i].conprice;
-                                                    break;
-                                                }
-                                            }
+                                    }
 
 
 
 
-                                        });
-                                    });
+                                });
+                            });
 
                 }
 
@@ -259,12 +293,12 @@ document.addEventListener("DOMContentLoaded", function () {
                     };
 
                     fetch(cardUrl, {
-                        headers: {"Content-type": "application/json"},
+                        headers: { "Content-type": "application/json" },
                         body: JSON.stringify(card),
                         method: "POST"
                     })
-                            .catch(error => console.error('Error: ' + error))
-                            .then(response => console.log('Success:', response));
+                        .catch(error => console.error('Error: ' + error))
+                        .then(response => console.log('Success:', response));
                     detailedCard.classList.add("hidden");
                     dark.classList.add("behind");
 
@@ -295,12 +329,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     console.log(JSON.stringify(card));
                     fetch("http://10.114.32.54:8080/FashionApp/ws/model.solutioncard/" + thisId.value, {
-                        headers: {"Content-type": "application/json"},
+                        headers: { "Content-type": "application/json" },
                         body: JSON.stringify(card),
                         method: "PUT"
                     })
-                            .catch(error => console.error('Error: ' + error))
-                            .then(response => console.log('Success:', response));
+                        .catch(error => console.error('Error: ' + error))
+                        .then(response => console.log('Success:', response));
                     alert("Updated succesfully.");
                     //add name to small card
                     cardText.textContent = thisName.value;
@@ -377,9 +411,4 @@ document.addEventListener("DOMContentLoaded", function () {
         aThemeRow.insertBefore(newTheme, addTheme);
         console.log(`Theme ${themeAmount} added`);
     });
-
-
-
-
-
 });
