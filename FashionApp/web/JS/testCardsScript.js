@@ -147,12 +147,15 @@ document.addEventListener("DOMContentLoaded", function () {
                                         option = document.createElement('option');
                                         option.text = data[i].colorName;
                                         option.value = data[i].colorID;
+                                        option.setAttribute('data', `colorCode: ''`);
+                                        option.dataset.colorCode = data[i].colorCode;
+                                        console.log(option.dataset.colorCode);
                                         thisColors.add(option);
                                     }
 
                                 });
                             });
-                }
+                };
 
                 loadColors();
 
