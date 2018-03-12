@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     let uniqueId = 0;
     let uniqueCardId = 0;
     let exist = false;
+    let colorId = 0;
 
     const colorUrl = "http://10.114.32.54:8080/FashionApp/ws/model.colordb/";
 
@@ -24,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
         theme.insertAdjacentHTML('beforeend',
                 `<div class="outfit" id="outfit${uniqueId}">
                 <div class="spaceBetween">
-                    <div class="title"><input type="text" placeholder="Click to edit"></div>
+                    <div class="title"><input type="text" id="collectionName${uniqueId}" placeholder="Click to edit"></div>
                     <button class="remove" id="ob${uniqueId}">x</button>
                 </div>
                 <div class="aRow" id="row${uniqueId}">
@@ -72,6 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
             cardText.id = `cardText${uniqueCardId}`;
 
 
+
             fullBox.appendChild(newCard);
             fullBox.appendChild(cardText);
 
@@ -104,8 +106,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 
                                     <input type="color" id="colorMapCode${newCard.id}" value="#FF0000">
                                 </div>
-
+                                <div><select class="loadValues" id="dropDown${newCard.id}"></select></div>                                
                                 <div class="buttons" id="colorButton${newCard.id}" > Add Color </div>
+                                <div class="buttons" id="updateButton${newCard.id}" > Update Color </div>
                                 
                                 
                                 
@@ -116,9 +119,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 let colorName = document.querySelector(`#colorName${newCard.id}`);
                 let colorCode = document.querySelector(`#colorCode${newCard.id}`);
                 let colorMapCode = document.querySelector(`#colorMapCode${newCard.id}`);
+                let dropdown = document.querySelector(`#dropDown${newCard.id}`);
 
                 if (cardText.textContent.length > 0) {
                     colorName.value = cardText.textContent;
+
                     // colorCode.value = colorCode.textContent;
                     // colorMapCode.value = colorMap.value;
                     const updateUrl = "http://10.114.32.54:8080/FashionApp/ws/model.colordb/name/" + cardText.textContent;
@@ -126,6 +131,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         colorName.value = json.colorName;
                         colorCode.value = json.colorCode;
                         colorMapCode.value = json.colorCode;
+                        colorId = json.colorID;
 
                     });
                     fetch(updateUrl)
@@ -133,6 +139,55 @@ document.addEventListener("DOMContentLoaded", function () {
                             .then(processJSON);
 
                 }
+
+                dropdown.length = 0;
+                let defaultOption = document.createElement("option");
+                defaultOption.text = "Choose color";
+                dropdown.add(defaultOption);
+                dropdown.selectedIndex = 0;
+
+                let loadDropdown = function () {
+
+                    fetch(colorUrl)
+                            .then(
+                                    function (response) {
+                                        if (response.status !== 200) {
+                                            console.warn('Looks like there was a problem. Status Code: ' +
+                                                    response.status);
+                                            return;
+                                        }
+
+                                        response.json().then(function (data) {
+                                            let option;
+                                            for (let i = 0; i < data.length; i++) {
+                                                option = document.createElement('option');
+                                                option.text = data[i].colorName;
+                                                option.value = data[i].colorID;
+
+                                                dropdown.add(option);
+                                            }
+
+                                            //puts all the info from database to colorcard 
+                                            dropdown.addEventListener("change", function () {
+                                                let theValue = dropdown.value - 1;
+                                                colorId = data[theValue].colorID;
+                                                colorName.value = data[theValue].colorName;
+                                                colorCode.value = data[theValue].colorCode;
+                                                colorMapCode.value = data[theValue].colorCode;
+
+
+                                                colorName = colorName.value;
+                                                colorCode = colorCode.value;
+                                                console.log(colorId + ", " + colorName + ", " + colorCode)
+                                            });
+                                        });
+                                    });
+
+                };
+                loadDropdown();
+
+
+
 
 
 
@@ -160,22 +215,57 @@ document.addEventListener("DOMContentLoaded", function () {
                     dark.classList.add("behind");
 
 
-                        let color = {
-                            colorCode: colorCode,
-                            colorName: colorName
-                        };
+                    let color = {
+                        colorCode: colorCode,
+                        colorName: colorName
+                    };
 
-                        fetch(colorUrl, {
+                    fetch(colorUrl, {
 
-                            headers: {"Content-type": "application/json"},
-                            body: JSON.stringify(color),
-                            method: "POST"
-                        })
-                                //.then(response => response.json())
-                                .catch(error => console.error('Error: ' + error))
-                                .then(response => console.log('Success:', response));
-                        //.then(json => console.log(json));
+                        headers: {"Content-type": "application/json"},
+                        body: JSON.stringify(color),
+                        method: "POST"
+                    })
+                            //.then(response => response.json())
+                            .catch(error => console.error('Error: ' + error))
+                            .then(response => console.log('Success:', response));
+                    //.then(json => console.log(json));
 
+                });
+
+                // update existing color
+                let updateColor = document.querySelector(`#updateButton${newCard.id}`);
+                updateColor.addEventListener("click", function () {
+
+                    let colorCode = document.querySelector(`#colorCode${newCard.id}`).value;
+                    let colorName = document.querySelector(`#colorName${newCard.id}`).value;
+                    newCard.style.background = colorCode;
+
+                    console.log(" Tämä toivottavasti näkyisi: " + colorId);
+
+                    let color = {
+                        colorCode: colorCode,
+                        colorName: colorName,
+                        colorID: colorId
+                    };
+
+                    const updateUrl = "http://10.114.32.54:8080/FashionApp/ws/model.colordb/" + colorId;
+
+                    cardText.textContent = colorName;
+
+                    fetch(updateUrl, {
+
+                        headers: {"Content-type": "application/json"},
+                        body: JSON.stringify(color),
+                        method: "PUT"
+                    })
+                            //.then(response => response.json())
+                            .catch(error => console.error('Error: ' + error))
+                            .then(response => console.log('Success:', response));
+
+
+                    colorCard.classList.add("hidden");
+                    dark.classList.add("behind");
                 });
 
 
@@ -228,15 +318,34 @@ document.addEventListener("DOMContentLoaded", function () {
             });
 
         });
-        
-        
+
+
         let saveCollection = document.querySelector(`#saveCollection${uniqueId}`);
-        saveCollection.addEventListener("click", function (){
+        saveCollection.addEventListener("click", function () {
             console.log("Saving collections here" + `#saveCollection${uniqueId}`);
-            
-            
+            let collectionName = document.querySelector(`#collectionName${uniqueId}`);
+
+            let colorString = "";
+            let colorFinalString;
+            let x = document.querySelectorAll(`#outfit${uniqueId} .aRow .fullBox .cardText`);
+            for (let i = 1; i < x.length; i++) {
+
+                if (x[i].textContent.length > 0) {
+                    colorString = colorString + `"color${i}":` + `"` + x[i].textContent + `",`;
+                }
+                if (i == x.length - 1)
+                {
+                    colorFinalString = colorString.slice(0, -1);
+
+                }
+
+            }
+            console.log(colorFinalString);
+            let collection = {colorFinalString};
+            console.log(collection);
+
         });
-        
+
     });
 
 
