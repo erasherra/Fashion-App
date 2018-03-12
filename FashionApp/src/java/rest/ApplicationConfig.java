@@ -35,6 +35,8 @@ public class ApplicationConfig extends Application {
         resources.add(rest.AuthFacadeREST.class);
         resources.add(rest.BudgetFormFacadeREST.class);
         resources.add(rest.CardsFacadeREST.class);
+        resources.add(rest.CollectionFacadeREST.class);
+        resources.add(rest.CollectionholderFacadeREST.class);
         resources.add(rest.ColorDBFacadeREST.class);
         resources.add(rest.ContactFacadeREST.class);
         resources.add(rest.FormFacadeREST.class);

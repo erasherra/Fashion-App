@@ -5,7 +5,9 @@
  */
 package rest;
 
+import controller.SessionBean;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -19,14 +21,21 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import model.Cards;
+import model.Collection;
+import model.Collectionholder;
+import model.ColorDB;
+import model.Project;
 
 /**
  *
- * @author saritakhanal
+ * @author Amir Ingher
  */
 @Stateless
 @Path("model.cards")
 public class CardsFacadeREST extends AbstractFacade<Cards> {
+    
+    @EJB
+    private SessionBean sb;
 
     @PersistenceContext(unitName = "FashionAppPU")
     private EntityManager em;
@@ -37,14 +46,37 @@ public class CardsFacadeREST extends AbstractFacade<Cards> {
 
     @POST
     @Override
-    @Consumes({ MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
     public void create(Cards entity) {
         super.create(entity);
+    }
+    
+    @POST
+    @Path("{cname}")
+    @Consumes({MediaType.APPLICATION_JSON})
+    public void createAndLinkToCollection(@PathParam("cname") String cname,Cards entity) {
+        super.create(entity);
+        
+        Collection c = sb.SelectColllectionByName(cname);
+        
+        Project p = new Project();
+        p.setName("project-"+c.getName());
+        
+        p.setCardID(entity);
+        
+        sb.insertProject(p);
+        
+        Collectionholder ch = new Collectionholder();
+        ch.setCollectionID(c);
+        ch.setProjectID(p);
+        
+        sb.insertCollectionholder(ch);
+        
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({ MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Cards entity) {
         super.edit(entity);
     }
@@ -57,7 +89,7 @@ public class CardsFacadeREST extends AbstractFacade<Cards> {
 
     @GET
     @Path("{id}")
-    @Produces({ MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public Cards find(@PathParam("id") Integer id) {
         return super.find(id);
     }
@@ -71,7 +103,7 @@ public class CardsFacadeREST extends AbstractFacade<Cards> {
 
     @GET
     @Path("{from}/{to}")
-    @Produces({ MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public List<Cards> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }

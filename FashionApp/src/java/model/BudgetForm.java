@@ -39,15 +39,16 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "BudgetForm.findByAmount", query = "SELECT b FROM BudgetForm b WHERE b.amount = :amount")})
 public class BudgetForm implements Serializable {
 
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "amount")
+    private int amount;
+
     @Id()
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "amount")
-    private int amount;
     
     @JsonBackReference(value = "budget-project")
     @OneToMany(mappedBy = "budgetformID")
@@ -143,29 +144,6 @@ public class BudgetForm implements Serializable {
         return "model.BudgetForm[ id=" + id + " ]";
     }
 
-    /* public BudgetForm(Integer id) {
-        this.id = id;
-    }
-
-    public BudgetForm(Integer id, int amount) {
-        this.id = id;
-        this.amount = amount;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }*/
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
 
     @XmlTransient
     public Collection<Project> getProjectCollection() {
@@ -201,4 +179,12 @@ public class BudgetForm implements Serializable {
         return "model.BudgetForm[ id=" + id + " ]";
     }
      */
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
+    }
 }

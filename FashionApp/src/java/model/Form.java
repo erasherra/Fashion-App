@@ -44,6 +44,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Form implements Serializable {
     //@NotNull
     @Basic(optional = false)
+    @NotNull()
     @Size(min = 1, max = 50)
     @Column(name = "product")
     private String product;
@@ -161,13 +162,6 @@ public class Form implements Serializable {
         this.aAmountStyles = aAmountStyles;
     }
 
-    public String getProduct() {
-        return product;
-    }
-
-    public void setProduct(String product) {
-        this.product = product;
-    }
 
     public int getAmountStyles() {
         return amountStyles;
@@ -175,6 +169,14 @@ public class Form implements Serializable {
 
     public void setAmountStyles(int amountStyles) {
         this.amountStyles = amountStyles;
+    }
+
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
     }
 
 }

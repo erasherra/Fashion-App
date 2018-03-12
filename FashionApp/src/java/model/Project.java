@@ -5,8 +5,10 @@
  */
 package model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,9 +20,11 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -32,8 +36,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Project.findAll", query = "SELECT p FROM Project p")
     , @NamedQuery(name = "Project.findById", query = "SELECT p FROM Project p WHERE p.id = :id")
-    , @NamedQuery(name= "Project.findByName", query = "SELECT p FROM Project p WHERE p.name = :name")})
+    , @NamedQuery(name = "Project.findByName", query = "SELECT p FROM Project p WHERE p.name = :name")})
 public class Project implements Serializable {
+
+    @Lob
+    @Size(max = 65535)
+    @Column(name = "name")
+    private String name;
+    @JsonBackReference(value = "collection-holder")
+    @OneToMany(mappedBy = "projectID")
+    private Collection<Collectionholder> collectionholderCollection;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -41,10 +53,6 @@ public class Project implements Serializable {
     @Basic(optional = false)
     @Column(name = "ID")
     private Integer id;
-    @Lob
-    @Size(max = 65535)
-    @Column(name = "name")
-    private String name;
     //@JsonManagedReference(value = "card-project")
     @JoinColumn(name = "cardID", referencedColumnName = "ID")
     @ManyToOne
@@ -71,14 +79,6 @@ public class Project implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Cards getCardID() {
@@ -129,5 +129,22 @@ public class Project implements Serializable {
     public String toString() {
         return "model.Project[ id=" + id + " ]";
     }
-    
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @XmlTransient
+    public Collection<Collectionholder> getCollectionholderCollection() {
+        return collectionholderCollection;
+    }
+
+    public void setCollectionholderCollection(Collection<Collectionholder> collectionholderCollection) {
+        this.collectionholderCollection = collectionholderCollection;
+    }
+
 }

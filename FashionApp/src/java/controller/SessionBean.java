@@ -5,15 +5,20 @@
  */
 package controller;
 
+
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import model.Auth;
 import model.BudgetForm;
+import model.Collectionholder;
+import model.ColorDB;
 import model.Contact;
 import model.Form;
 import model.Project;
 import model.Themes;
+import model.Collection;
 
 /**
  *
@@ -33,10 +38,56 @@ public class SessionBean {
     
     
     
+    
+    ////////////////////////////////////////////collection
+    
+    
+    public Collection SelectColllectionByName(String name){
+        
+        return (Collection) em.createNamedQuery("Collection.findByName").setParameter("name", name).getSingleResult();
+        
+        
+    }
+    
+    public void insertCollection(Collection c) {
+        em.persist(c);
+        
+    }
+    
+    
+    //////////////////////////////////////////collectionholder
+    
+    
+    
+    public List<Collectionholder> getAllCollectionsWhatBelongsToCollection(int collectionID){
+        
+        return em.createNamedQuery("Collectionholder.findByCollectionID").setParameter("collectionID", collectionID).getResultList();
+    }
+    
+    
+    public void insertCollectionholder(Collectionholder c) {
+        em.persist(c);
+        
+    }
+    
+   
+    
     //////////////////////////////////////////project
     public Project SelectByPName(String name){
         
         return (Project) em.createNamedQuery("Project.findByName").setParameter("name", name).getSingleResult();
+    }
+    
+    public void insertProject(Project c) {
+        em.persist(c);
+        
+    }
+    
+    
+    
+    public Project getByProjectId(int id){
+        
+        return (Project) em.createNamedQuery("Project.findById").setParameter("id", id).getSingleResult();
     }
     
     
@@ -82,6 +133,11 @@ public class SessionBean {
         
         return (Auth) em.createNamedQuery("Auth.findById").setParameter("id", id).getSingleResult();
     }
+    
+    ///////////////////////////////////////////color
+    public ColorDB findColorByName(String colorName){
+        return (ColorDB) em.createNamedQuery("ColorDB.findByColorName").setParameter("colorName", colorName).getSingleResult();
+     }
     
     public void update(Contact c) { 
         em.merge(c);

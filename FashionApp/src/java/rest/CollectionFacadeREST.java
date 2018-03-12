@@ -18,34 +18,39 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import model.Themes;
+import model.Collection;
+import model.Collectionholder;
 
 /**
  *
  * @author Amir Ingher
  */
 @Stateless
-@Path("model.themes")
-public class ThemesFacadeREST extends AbstractFacade<Themes> {
+@Path("model.collection")
+public class CollectionFacadeREST extends AbstractFacade<Collection> {
 
     @PersistenceContext(unitName = "FashionAppPU")
     private EntityManager em;
 
-    public ThemesFacadeREST() {
-        super(Themes.class);
+    public CollectionFacadeREST() {
+        super(Collection.class);
     }
 
     @POST
     @Override
     @Consumes({MediaType.APPLICATION_JSON})
-    public void create(Themes entity) {
+    public void create(Collection entity) {
         super.create(entity);
+        
+        Collectionholder ch = new Collectionholder();
+        
+        
     }
 
     @PUT
     @Path("{id}")
     @Consumes({MediaType.APPLICATION_JSON})
-    public void edit(@PathParam("id") Integer id, Themes entity) {
+    public void edit(@PathParam("id") Integer id, Collection entity) {
         super.edit(entity);
     }
 
@@ -58,21 +63,21 @@ public class ThemesFacadeREST extends AbstractFacade<Themes> {
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON})
-    public Themes find(@PathParam("id") Integer id) {
+    public Collection find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Themes> findAll() {
+    public List<Collection> findAll() {
         return super.findAll();
     }
 
     @GET
     @Path("{from}/{to}")
     @Produces({MediaType.APPLICATION_JSON})
-    public List<Themes> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
+    public List<Collection> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }
 
