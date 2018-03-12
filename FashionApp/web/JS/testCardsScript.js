@@ -149,10 +149,12 @@ document.addEventListener("DOMContentLoaded", function () {
                                         option.value = data[i].colorID;
                                         option.setAttribute('data', `colorCode: ''`);
                                         option.dataset.colorCode = data[i].colorCode;
-                                        console.log(option.dataset.colorCode);
                                         thisColors.add(option);
                                     }
 
+                                    /*thisColors.addEventListener("change", function () {
+                                        thisColors.dataset.colorCode = data[thisColors.value].colorCode;
+                                    });*/
                                 });
                             });
                 };
@@ -227,7 +229,6 @@ document.addEventListener("DOMContentLoaded", function () {
                                     for (let i = 0; i < data.length; i++) {
 
                                         if (data[i].name == cardText.textContent) {
-                                            console.log("no nyt toimii");
                                             //puts all the info from database to detailed card
                                             thisId.value = data[i].id;
                                             thisName.value = data[i].name;
@@ -251,10 +252,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 }
 
+                //add name and bg to small card
+                let updateSmallCard = function(){
+                    let name = document.querySelector(".name").value;
+                    cardText.textContent = name;
+                    newCard.appendChild(cardText);
+                    function setBG() {
+                        fetch(colorUrl)
+                            .then(
+                                function (response) {
+                                    if (response.status !== 200) {
+                                        console.warn('Looks like there was a problem. Status Code: ' +
+                                            response.status);
+                                        return;
+                                    }
+    
+                                    response.json().then(function (data) {
+                                        newCard.style.background = data[thisColors.value-1].colorCode;
+                                        console.log(thisColors.value);
+                                        console.log('------------>' +  data[thisColors.value-1].colorCode);
+                                    });
+                                });
+                    };
+                    setBG();
+                    
+                }
+
                 //save everything into the database
                 let saveButton = document.querySelector(`#sb${newCard.id}`);
                 saveButton.addEventListener("click", function () {
                     console.log(`sb${newCard.id}`);
+                    
                     alert("Updated succesfully.");
                     let name = document.querySelector(".name").value;
                     let code = document.querySelector(".code").value;
@@ -267,7 +295,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     let conPrice = document.querySelector(".conPrice").value;
                     let comment = document.querySelector(".img").value;
                     let img = document.querySelector(".img").value;
-
+                    console.log(colorNames); 
                     const cardUrl = "http://10.114.32.54:8080/FashionApp/ws/model.solutioncard/";
                     let card = {
                         /*"name": name,
@@ -305,9 +333,10 @@ document.addEventListener("DOMContentLoaded", function () {
                     detailedCard.classList.add("hidden");
                     dark.classList.add("behind");
 
-                    //add name to small card
-                    cardText.textContent = name;
-                    newCard.appendChild(cardText);
+                    //add name and bg to small card
+                    updateSmallCard();
+                    
+
                 });
 
 
@@ -339,9 +368,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         .catch(error => console.error('Error: ' + error))
                         .then(response => console.log('Success:', response));
                     alert("Updated succesfully.");
-                    //add name to small card
-                    cardText.textContent = thisName.value;
-                    newCard.appendChild(cardText);
+
+                    updateSmallCard();
                     //clear dropdown here
                     while (dropdown.options.length > 0) {
                         dropdown.remove(0);
@@ -355,16 +383,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 closeDetailedCard.addEventListener("click", function () {
                     detailedCard.classList.add("hidden");
                     dark.classList.add("behind");
-                    cardText.textContent = thisName.value;
-                    newCard.appendChild(cardText);
+                    
+                    updateSmallCard();
                 });
                 //closing detailed card by clicking dark area
                 let closeDetailedCardAround = document.querySelector("#dark");
                 closeDetailedCardAround.addEventListener("click", function () {
                     detailedCard.classList.add("hidden");
                     dark.classList.add("behind");
-                    cardText.textContent = thisName.value;
-                    newCard.appendChild(cardText);
+                    
+                    updateSmallCard();
                 });
             });
 
