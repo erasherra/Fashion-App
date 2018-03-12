@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     background-color: #f0f0f0;
-   
+
 }
 
 .bg {
@@ -235,7 +235,7 @@ body {
     background-color: #3186FF;
     border-radius: 0.3em;
     width: 5em;
-    
+
 }
 .addColor:hover {
     background-color: rgb(78, 152, 255);
@@ -249,8 +249,8 @@ body {
     padding: 10px;
     position: fixed;
     left: 45%;
-        
-    
+
+
 }
 .buttons {
     display: inline-flex;
@@ -269,7 +269,7 @@ body {
 .commands{
     display:flex;
     justify-content: center;
-    
+
 }
 .commands .buttons{
     width: 7%;
@@ -293,5 +293,14 @@ input[type="color"]{
 
 .cardText{
     text-align: center;
+}
+
+.colorCard .buttons{
+    font-size: 0.9em;
+    margin: 0.2em;
+    padding: 0.2em
+}
+select{
+    width: 90%;
 }
 
