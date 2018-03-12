@@ -134,46 +134,46 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 const cardUrl = "http://10.114.32.54:8080/FashionApp/ws/model.solutioncard/";
 
-                let loadDropdown = function(){
+                let loadDropdown = function () {
 
                     fetch(cardUrl)
-                        .then(
-                                function (response) {
-                                    if (response.status !== 200) {
-                                        console.warn('Looks like there was a problem. Status Code: ' +
-                                                response.status);
-                                        return;
-                                    }
-
-                                    response.json().then(function (data) {
-                                        let option;
-                                        for (let i = 0; i < data.length; i++) {
-                                            option = document.createElement('option');
-                                            option.text = data[i].name;
-                                            option.value = data[i].id;
-
-                                            dropdown.add(option);
+                            .then(
+                                    function (response) {
+                                        if (response.status !== 200) {
+                                            console.warn('Looks like there was a problem. Status Code: ' +
+                                                    response.status);
+                                            return;
                                         }
 
-                                        //puts all the info from database to detailed card 
-                                        dropdown.addEventListener("change", function () {
-                                            let theValue = dropdown.value - 1;
-                                            thisId.value = data[theValue].id;
-                                            thisName.value = data[theValue].name;
-                                            thisCode.value = data[theValue].articlecode;
-                                            thisMaterials.value = data[theValue].materials;
-                                            thisColors.value = data[theValue].colors;
-                                            thisSizes.value = data[theValue].sizes;
-                                            thisAmount.value = data[theValue].amount;
-                                            thisPurPrice.value = data[theValue].pprice;
-                                            thisSelPrice.value = data[theValue].sprice;
-                                            thisConPrice.value = data[theValue].conprice;
+                                        response.json().then(function (data) {
+                                            let option;
+                                            for (let i = 0; i < data.length; i++) {
+                                                option = document.createElement('option');
+                                                option.text = data[i].name;
+                                                option.value = data[i].id;
 
+                                                dropdown.add(option);
+                                            }
+
+                                            //puts all the info from database to detailed card 
+                                            dropdown.addEventListener("change", function () {
+                                                let theValue = dropdown.value - 1;
+                                                thisId.value = data[theValue].id;
+                                                thisName.value = data[theValue].name;
+                                                thisCode.value = data[theValue].articlecode;
+                                                thisMaterials.value = data[theValue].materials;
+                                                thisColors.value = data[theValue].colors;
+                                                thisSizes.value = data[theValue].sizes;
+                                                thisAmount.value = data[theValue].amount;
+                                                thisPurPrice.value = data[theValue].pprice;
+                                                thisSelPrice.value = data[theValue].sprice;
+                                                thisConPrice.value = data[theValue].conprice;
+
+                                            });
                                         });
                                     });
-                                });
-                            }
-                            loadDropdown();
+                };
+                loadDropdown();
                 //if card name not null, search from database by the name and set all the fields accordingly...
                 if (cardText.textContent.length > 0) {
                     fetch(cardUrl)
@@ -214,69 +214,65 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 }
 
-
-                //save card button functionality
-                let saveCard = document.querySelector(`#sb${newCard.id}`);
-                saveCard.addEventListener("click", function () {
-                    //save everything into the database
+                //save everything into the database
+                let saveButton = document.querySelector(`#sb${newCard.id}`);
+                saveButton.addEventListener("click", function () {
                     console.log(`sb${newCard.id}`);
-                    let saveButton = document.querySelector(`#sb${newCard.id}`);
-                    saveButton.addEventListener("click", function () {
+                    alert("Updated succesfully.");
+                    let name = document.querySelector(".name").value;
+                    let code = document.querySelector(".code").value;
+                    let materialNames = document.querySelector(".materialNames").value;
+                    let colorNames = document.querySelector(".colorNames").value;
+                    let sizeNames = document.querySelector(".sizeNames").value;
+                    let amountNumber = document.querySelector(".amountNumber").value;
+                    let purPrice = document.querySelector(".purPrice").value;
+                    let selPrice = document.querySelector(".selPrice").value;
+                    let conPrice = document.querySelector(".conPrice").value;
+                    let comment = document.querySelector(".img").value;
+                    let img = document.querySelector(".img").value;
 
-                        let name = document.querySelector(".name").value;
-                        let code = document.querySelector(".code").value;
-                        let materialNames = document.querySelector(".materialNames").value;
-                        let colorNames = document.querySelector(".colorNames").value;
-                        let sizeNames = document.querySelector(".sizeNames").value;
-                        let amountNumber = document.querySelector(".amountNumber").value;
-                        let purPrice = document.querySelector(".purPrice").value;
-                        let selPrice = document.querySelector(".selPrice").value;
-                        let conPrice = document.querySelector(".conPrice").value;
-                        let comment = document.querySelector(".img").value;
-                        let img = document.querySelector(".img").value;
+                    const cardUrl = "http://10.114.32.54:8080/FashionApp/ws/model.solutioncard/";
+                    let card = {
+                        /*"name": name,
+                         "articlecode": code,
+                         "amount": amountNumber,
+                         "pprice": purPrice,
+                         "sprice": selPrice,
+                         "conprice": conPrice,
+                         "materials": materialNames,
+                         "sizes": sizeNames,
+                         "img": img,
+                         "comment": comment,
+                         "colors": colorNames
+                         */
+                        "name": name,
+                        "comment": comment,
+                        "articlecode": code,
+                        "amount": amountNumber,
+                        "pprice": purPrice,
+                        "sprice": selPrice,
+                        "conprice": conPrice,
+                        "materials": materialNames,
+                        "sizes": sizeNames,
+                        "img": img,
+                        "colors": colorNames
+                    };
 
-                        const cardUrl = "http://10.114.32.54:8080/FashionApp/ws/model.solutioncard/";
-                        let card = {
-                            /*"name": name,
-                             "articlecode": code,
-                             "amount": amountNumber,
-                             "pprice": purPrice,
-                             "sprice": selPrice,
-                             "conprice": conPrice,
-                             "materials": materialNames,
-                             "sizes": sizeNames,
-                             "img": img,
-                             "comment": comment,
-                             "colors": colorNames
-                             */
-                            "name": name,
-                            "comment": comment,
-                            "articlecode": code,
-                            "amount": amountNumber,
-                            "pprice": purPrice,
-                            "sprice": selPrice,
-                            "conprice": conPrice,
-                            "materials": materialNames,
-                            "sizes": sizeNames,
-                            "img": img,
-                            "colors": colorNames
-                        };
+                    fetch(cardUrl, {
+                        headers: {"Content-type": "application/json"},
+                        body: JSON.stringify(card),
+                        method: "POST"
+                    })
+                            .catch(error => console.error('Error: ' + error))
+                            .then(response => console.log('Success:', response));
+                    detailedCard.classList.add("hidden");
+                    dark.classList.add("behind");
 
-                        fetch(cardUrl, {
-                            headers: {"Content-type": "application/json"},
-                            body: JSON.stringify(card),
-                            method: "POST"
-                        })
-                                .catch(error => console.error('Error: ' + error))
-                                .then(response => console.log('Success:', response));
-                        detailedCard.classList.add("hidden");
-                        dark.classList.add("behind");
-
-                        //add name to small card
-                        cardText.textContent = name;
-                        newCard.appendChild(cardText);
-                    });
+                    //add name to small card
+                    cardText.textContent = name;
+                    newCard.appendChild(cardText);
                 });
+
 
                 //Update
                 let update = document.querySelector(`#ub${newCard.id}`);
@@ -306,12 +302,15 @@ document.addEventListener("DOMContentLoaded", function () {
                             .catch(error => console.error('Error: ' + error))
                             .then(response => console.log('Success:', response));
                     alert("Updated succesfully.");
-
+                    //add name to small card
+                    cardText.textContent = thisName.value;
+                    newCard.appendChild(cardText);
                     //clear dropdown here
-                    while(dropdown.options.length > 0){
+                    while (dropdown.options.length > 0) {
                         dropdown.remove(0);
                     }
                     loadDropdown();
+
                 });
 
                 //closing detailed card
@@ -319,12 +318,16 @@ document.addEventListener("DOMContentLoaded", function () {
                 closeDetailedCard.addEventListener("click", function () {
                     detailedCard.classList.add("hidden");
                     dark.classList.add("behind");
+                    cardText.textContent = thisName.value;
+                    newCard.appendChild(cardText);
                 });
                 //closing detailed card by clicking dark area
                 let closeDetailedCardAround = document.querySelector("#dark");
                 closeDetailedCardAround.addEventListener("click", function () {
                     detailedCard.classList.add("hidden");
                     dark.classList.add("behind");
+                    cardText.textContent = thisName.value;
+                    newCard.appendChild(cardText);
                 });
             });
 
@@ -346,7 +349,7 @@ document.addEventListener("DOMContentLoaded", function () {
             aRow.insertBefore(newCard, addCard);
             console.log("hai");
             let cardId = uniqueCardId;
-            
+
             //Listener for delete
             document.querySelector(`#dc${cardId}`).addEventListener("click", function (e) {
                 console.log("asd");
