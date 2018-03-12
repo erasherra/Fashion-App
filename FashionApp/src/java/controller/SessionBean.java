@@ -36,7 +36,7 @@ public class SessionBean {
         return c; 
     }
     
-    
+     
     
     
     ////////////////////////////////////////////collection
@@ -61,7 +61,7 @@ public class SessionBean {
     
     public List<Collectionholder> getAllCollectionsWhatBelongsToCollection(int collectionID){
         
-        return em.createNamedQuery("Collectionholder.findByCollectionID").setParameter("collectionID", collectionID).getResultList();
+        return (List<Collectionholder>)em.createNamedQuery("Collectionholder.findByCollectionID").setParameter("collectionID", collectionID).getResultList();
     }
     
     
