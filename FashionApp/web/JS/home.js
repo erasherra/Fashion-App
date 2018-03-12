@@ -60,7 +60,9 @@ document.addEventListener("DOMContentLoaded", function () {
     };
     
     
-
+    
+  // Added functionality for the project 
+  
 let name = document.getElementById('addProject').value;
  
 let project = {
@@ -69,15 +71,13 @@ let project = {
 };
 
 
-fetch("http://10.114.32.54:8080/FashionApp/ws/model.project")
+fetch("http://10.114.32.54:8080/FashionApp/ws/model.project") // fetching the data from project database 
 .then(res => res.json())
 .then(function (project){
- 
- // console.log(project[0].name);
-  
   for(let i=0; i<project.length; i++){
      
-     let myProject = document.getElementById("projectbox");
+     // get the projectbox of the html and get the projects of the database in certain format
+    let myProject = document.getElementById("projectbox"); 
      myProject.innerHTML += 
                   `<div id="project` + projectCount + `" class="project-container">
                   ` + project[i].name + `

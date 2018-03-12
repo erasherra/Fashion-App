@@ -2,29 +2,22 @@
 
 body{
    /* background-image: url("../images/bg.jpg");*/
-    
     background-color: #e9edf5;
     background-image: url("../images/bg.jpg");
-    font-size: 16px;
-	font-family: 'Lato', sans-serif;
-	font-weight: 300;
-	margin: 0;
-	color: #888;
-    
-    
+    font-size: 16px; 
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    margin: 0;
+    color: #888;  
 
 }
 
 #page {
-
-    /*color: whitesmoke;*/
-
     display: grid;
     grid-gap: 5px;
     grid-template-columns: 0.8fr 4fr;
     grid-template-rows: 1fr 5fr 0.5fr;
     height: 100vh;
-    /*grid-auto-rows: minmax(100%, 100%); */
     grid-template-areas: 
         "navigation  header"
         "navigation  main"
@@ -32,10 +25,7 @@ body{
 }
 
 header, main, footer{
-
     padding: 1em;
-
-
 }
 
 header, footer,nav{
@@ -45,45 +35,42 @@ header, footer,nav{
 
 }
 
-
 header {
     grid-area: header;
     font-size: 50px;
-
 }
-
 
 nav {
     grid-area: navigation;
     border-radius: 5px;
     background-color: whitesmoke;
-	box-shadow: 0 5px 50px rgba(0,0,0,0.4);
-	text-align: center;
+    box-shadow: 0 5px 50px rgba(0,0,0,0.4);
+    text-align: center;
 }
+
 main {
     grid-area: main;
-    /*color:darkslategray;*/
     border-radius: 5px;
-    background-color: rgba(255,255,255,0.6);
-    
+    background-color: rgba(255,255,255,0.6);   
 }
+
 aside {
     grid-area: sidebar;
 }
+
 footer {
     grid-area: footer;
     text-align: center;
 }
-span{
 
+span{
     margin-right: 10px;
 }
 
 #profilepic{
-
     font-size: 50px;
-
 }
+
 .profile{
     text-align: center;
     display: block; 
@@ -205,6 +192,7 @@ li:hover{list-style-type: none;
     background-color: rgba(0,0,0,0.5);
 }
 
+
 .form-container{
     
    /* margin:  5% auto 15% auto;
@@ -216,8 +204,8 @@ li:hover{list-style-type: none;
 }
 
 .form-container{
-    
-         z-index: 2;
+       background-color: whitesmoke;
+        z-index: 2;
 	max-width: 340px;
 	margin: 0 auto;
 	position: relative;
@@ -228,11 +216,6 @@ li:hover{list-style-type: none;
 	text-align: center;
 }
 
-
-
-.form-container{
-    background-color: whitesmoke;
-}
 #submit{
     background-color: #3186ff ;
     color:white;
