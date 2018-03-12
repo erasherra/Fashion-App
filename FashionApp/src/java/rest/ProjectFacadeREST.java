@@ -5,10 +5,7 @@
  */
 package rest;
 
-import controller.LinkManager;
-import controller.SessionBean;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,53 +19,31 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import model.BudgetForm;
-import model.Form;
 import model.Project;
 
 /**
  *
- * @author saritakhanal
+ * @author Amir Ingher
  */
 @Stateless
 @Path("model.project")
 public class ProjectFacadeREST extends AbstractFacade<Project> {
-    
-    @EJB
-    private SessionBean sb;////turha
 
     @PersistenceContext(unitName = "FashionAppPU")
     private EntityManager em;
-    
-    private LinkManager lm;
-    
+
     public ProjectFacadeREST() {
         super(Project.class);
-        
-        lm = new LinkManager();
     }
 
     @POST
     @Override
-    @Consumes({ MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
     public void create(Project entity) {
         super.create(entity);
-        
-       /* Project p = sb.SelectByPName(entity.getName());
-        
-        BudgetForm bf = new BudgetForm();
-        
-        
-        
-        
-        sb.insertBF(bf);*/
-        
-       // p.setBudgetformID(bf);
-        
-        
-        //lm.CreateProject(entity.getName());
     }
     
-    @POST
+        @POST
     @Path("{id}")
     @Consumes({ MediaType.APPLICATION_JSON})
     public void addBudget(@PathParam("id") Integer id, BudgetForm entity) {
@@ -81,9 +56,10 @@ public class ProjectFacadeREST extends AbstractFacade<Project> {
         //super.create(entity);
     }
 
+
     @PUT
     @Path("{id}")
-    @Consumes({ MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Project entity) {
         super.edit(entity);
     }
@@ -96,14 +72,14 @@ public class ProjectFacadeREST extends AbstractFacade<Project> {
 
     @GET
     @Path("{id}")
-    @Produces({ MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public Project find(@PathParam("id") Integer id) {
         return super.find(id);
     }
 
     @GET
     @Override
-    @Produces({ MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public List<Project> findAll() {
         return super.findAll();
     }

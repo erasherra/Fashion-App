@@ -22,7 +22,7 @@ import model.Form;
 
 /**
  *
- * @author saritakhanal
+ * @author Amir Ingher
  */
 @Stateless
 @Path("model.form")
@@ -39,15 +39,12 @@ public class FormFacadeREST extends AbstractFacade<Form> {
     @Override
     @Consumes({MediaType.APPLICATION_JSON})
     public void create(Form entity) {
-        
         super.create(entity);
     }
-    
-    
 
     @PUT
     @Path("{id}")
-    @Consumes({MediaType.APPLICATION_JSON})
+    @Consumes({ MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, Form entity) {
         super.edit(entity);
     }
@@ -60,7 +57,7 @@ public class FormFacadeREST extends AbstractFacade<Form> {
 
     @GET
     @Path("{id}")
-    @Produces({MediaType.APPLICATION_JSON})
+    @Produces({ MediaType.APPLICATION_JSON})
     public Form find(@PathParam("id") Integer id) {
         return super.find(id);
     }

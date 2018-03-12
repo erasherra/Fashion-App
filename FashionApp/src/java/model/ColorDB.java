@@ -114,6 +114,16 @@ public class ColorDB implements Serializable {
         return "model.ColorDB[ colorID=" + colorID + " ]";
     }
 
+
+    @XmlTransient
+    public Collection<Project> getProjectCollection() {
+        return projectCollection;
+    }
+
+    public void setProjectCollection(Collection<Project> projectCollection) {
+        this.projectCollection = projectCollection;
+    }
+
     public String getColorName() {
         return colorName;
     }
@@ -128,15 +138,6 @@ public class ColorDB implements Serializable {
 
     public void setColorCode(String colorCode) {
         this.colorCode = colorCode;
-    }
-
-    @XmlTransient
-    public Collection<Project> getProjectCollection() {
-        return projectCollection;
-    }
-
-    public void setProjectCollection(Collection<Project> projectCollection) {
-        this.projectCollection = projectCollection;
     }
 
 }

@@ -20,18 +20,22 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import model.Collection;
+import model.Collectionholder;
 import model.ColorDB;
+import model.Project;
 
 /**
  *
- * @author saritakhanal
+ * @author Amir Ingher
  */
 @Stateless
 @Path("model.colordb")
 public class ColorDBFacadeREST extends AbstractFacade<ColorDB> {
     
-    @EJB
+        @EJB
     private SessionBean sb;
+
 
     @PersistenceContext(unitName = "FashionAppPU")
     private EntityManager em;
@@ -42,16 +46,41 @@ public class ColorDBFacadeREST extends AbstractFacade<ColorDB> {
 
     @POST
     @Override
-    @Consumes({ MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
     public void create(ColorDB entity) {
         super.create(entity);
+        
+        
+    }
+    
+    @POST
+    @Path("{cname}")
+    @Consumes({MediaType.APPLICATION_JSON})
+    public void createAndLinkToCollection(@PathParam("cname") String cname,ColorDB entity) {
+        super.create(entity);
+        
+        Collection c = sb.SelectColllectionByName(cname);
+        
+        Project p = new Project();
+        p.setName("project-"+c.getName());
+        p.setColorId(entity);
+        sb.insertProject(p);
+        
+        Collectionholder ch = new Collectionholder();
+        ch.setCollectionID(c);
+        ch.setProjectID(p);
+        
+        sb.insertCollectionholder(ch);
+        
     }
 
     @PUT
     @Path("{id}")
-    @Consumes({ MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
     public void edit(@PathParam("id") Integer id, ColorDB entity) {
         super.edit(entity);
+        
+        
     }
 
     @DELETE
@@ -62,29 +91,30 @@ public class ColorDBFacadeREST extends AbstractFacade<ColorDB> {
 
     @GET
     @Path("{id}")
-    @Produces({ MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public ColorDB find(@PathParam("id") Integer id) {
         return super.find(id);
     }
-
-    @GET
-    @Override
-    @Produces({ MediaType.APPLICATION_JSON})
-    public List<ColorDB> findAll() {
-        return super.findAll();
-    }
     
-    @GET
+        @GET
     @Path("name/{colorName}")
     @Produces(MediaType.APPLICATION_JSON)
     public ColorDB findName(@PathParam("colorName") String colorName){
         ColorDB color = sb.findColorByName(colorName);
         return color;
     }
-    
+
+
+    @GET
+    @Override
+    @Produces({MediaType.APPLICATION_JSON})
+    public List<ColorDB> findAll() {
+        return super.findAll();
+    }
+
     @GET
     @Path("{from}/{to}")
-    @Produces({ MediaType.APPLICATION_JSON})
+    @Produces({MediaType.APPLICATION_JSON})
     public List<ColorDB> findRange(@PathParam("from") Integer from, @PathParam("to") Integer to) {
         return super.findRange(new int[]{from, to});
     }

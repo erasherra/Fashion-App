@@ -212,13 +212,6 @@ public class Cards implements Serializable {
         return "model.Cards[ id=" + id + " ]";
     }
 
-    public String getComments() {
-        return comments;
-    }
-
-    public void setComments(String comments) {
-        this.comments = comments;
-    }
 
     @XmlTransient
     public Collection<Project> getProjectCollection() {
@@ -227,6 +220,14 @@ public class Cards implements Serializable {
 
     public void setProjectCollection(Collection<Project> projectCollection) {
         this.projectCollection = projectCollection;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
     
 }

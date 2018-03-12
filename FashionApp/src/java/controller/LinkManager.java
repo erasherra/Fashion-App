@@ -5,9 +5,11 @@
  */
 package controller;
 
+import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import model.BudgetForm;
+import model.Collectionholder;
 import model.Form;
 import model.Project;
 import model.Themes;
@@ -18,42 +20,24 @@ import model.Themes;
  */
 
 public class LinkManager {
-    @EJB
-    private SessionBean sb;
+    
     
     public LinkManager(){
         
         
     }
     
-    public void LinkBudgetToThemeAndForm(Integer budget,Integer form, Integer theme){
-        BudgetForm bf = new BudgetForm();
+    /*public boolean setBudgetIfNotContainInCollection(BudgetForm bf, List<Collectionholder> ch_list){
         
-        bf.setFormID(sb.SelectFormById(form));
-        bf.setThemeID(sb.SelectThemesById(theme));
-        
-        
-        
-    }
-    
-    public void CreateProject(String projectName){
-       
-        
-        Project p = sb.SelectByPName(projectName);
+        for(Collectionholder ch : ch_list){
+            
+            if(bf.getId() == )
+            
+        }
         
         
-        
-        /*
-        BudgetForm bf = new BudgetForm();
-        
-        sb.insertBF(bf);
-        
-        p.setBudgetformID(bf);
-        */
-        
-        
-        
-    }
+        return false;
+    }*/
     
     
 }
