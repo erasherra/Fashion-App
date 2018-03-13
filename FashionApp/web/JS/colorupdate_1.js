@@ -313,7 +313,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (!confirm("Do you really want to delete this?")) {
                     e.preventDefault(); //Cancel deleting
                 } else {
-                    document.querySelector(`#card${cardId}`).remove();
+                    document.querySelector(`#fullBox${cardId}`).remove();
                 }
             });
 
