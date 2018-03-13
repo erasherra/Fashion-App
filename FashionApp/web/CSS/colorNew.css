@@ -242,7 +242,7 @@ body {
 }
 
 .colorCard{
-    min-width:200px;
+    width:200px;
     background-color: rgb(255,255,255);
     box-sizing: border-box;
     border-radius: 10px;
@@ -303,7 +303,7 @@ input[type="color"]{
 select{
     width: 90%;
 }
-.center input{
+.center input[text]{
     width:90%;
 }
 .form-container{
