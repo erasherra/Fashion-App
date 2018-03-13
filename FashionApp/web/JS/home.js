@@ -70,13 +70,13 @@ let project = {
 };
 
 // fetching the data from project database 
-fetch("http://10.114.32.54:8080/FashionApp/ws/model.project",{
+fetch("http://10.114.32.54:8080/FashionApp/ws/model.project")/*,{
     method:'POST',
     body: JSON.stringify(project),
     headers: new Headers({
         'Content-Type': 'application/json'
     })
-}) 
+}) */
 .then(res => res.json())
 .then(function (project){
   for(let i=0; i<project.length; i++){
@@ -92,7 +92,7 @@ fetch("http://10.114.32.54:8080/FashionApp/ws/model.project",{
                    </div>`;
    }
 
-})
+});
 
 
 });
